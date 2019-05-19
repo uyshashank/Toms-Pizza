@@ -1,5 +1,5 @@
 function HPDriver(req,res){
-    res.send("Welcome to Toms Pizza");
+    res.render('homepage/home')
 }
 
 module.exports = {
