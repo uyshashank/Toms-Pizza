@@ -5,8 +5,30 @@
 
     <div class="pizza mt-3">
         <h4 class="text-center">
-            <img src="../../images/pzIcon.png" alt="" class="img-fluid" style="width: 30px;">
+            <img src="../../images/pzIcon.png" alt="" class="img-fluid"
+                style="width: 30px;">
             <span class="deliciousPizza">Delicious Pizza</span>
         </h4>
+    
+        <% for(let i = 0; i <= data.length-1; i++) {%>
+
+        <div class="card">
+            <img class="card-img-top" src="../../products/images/pizza/<%= data[i].pr_img %>">
+            <div class="card-body">
+                <h5 class="card-title"><%= data[i].pr_name %></h5>
+                <p class="card-text"><%= data[i].pr_info %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">R: <%= data[i].pr_price.size_reg %></li>
+                <li class="list-group-item">M: <%= data[i].pr_price.size_med %></li>
+                <li class="list-group-item">L: <%= data[i].pr_price.size_lrg %></li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">
+                    Add to cart
+                </a>                
+            </div>
+        </div>
     </div>
+    <%}%>
 </div>
