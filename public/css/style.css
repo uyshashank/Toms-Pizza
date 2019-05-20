@@ -3,3 +3,15 @@
     height: 40px;
     box-shadow: 0pt 3pt 3pt 0pt lightgray;
 }
+.hero{
+    box-shadow: 0pt 1pt 11pt 1pt rgba(128, 128, 128, 0.829);        
+    border-radius: 13px;
+}
+.hero:hover{
+    transform: scale(1.01);
+    transition: 0.1s;
+    cursor: pointer;    
+}
+.deliciousPizza{    
+    border-bottom: 2px solid orange;
+}
