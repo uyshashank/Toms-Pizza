@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Google fonts -->
 
     <!-- Fontawesome icons -->
@@ -23,9 +25,48 @@
 </head>
 
 <body>
-    <!-- Image and text -->
-    <nav class="navbar navbar-light bg-success">
-        <a class="navbar-brand" href="#">
-            <img src="../../images/tomspizza_logo_dual.jpg" width="250" class="d-inline-block align-top img-fluid ml-4" alt="TomsPizza">
+    <!-- Navbar for >md -->
+    <nav class="d-none d-md-flex navbar navbar-light" style="border-bottom: 2px solid orange">
+        <a class="navbar-brand" href="/">
+            <img src="../../images/tomspizza_logo_dual.jpg" width="250" class="d-inline-block align-top img-fluid ml-4"
+                alt="TomsPizza">
         </a>
+        <div class="accounts mr-3">
+            <a href="/login" class="btn text-white" style="background-color: orange">
+                Login
+            </a>
+            <a href="/signup" class="btn text-white" style="background-color: orange">
+                Signup
+            </a>
+        </div>
+    </nav>
+    <!-- Navbar for <md -->
+    <nav class="d-md-none justify-content-center navbar navbar-light" style="border-bottom: 2px solid orange">
+        <a class="navbar-brand" href="/">
+            <img src="../../images/tomspizza_logo_dual.jpg" width="250" class="d-inline-block align-top img-fluid"
+                alt="TomsPizza">
+        </a>
+    </nav>
+    <!-- Secondary navbar -->
+    <nav class="d-md-none justify-content-center navbar navbar-light text-white nav2">
+        <div class="accounts">
+            <a href="/" class="mx-2 text-white">
+                <i class="fas fa-home text-white"></i>
+            </a>
+            <a href="/pizza" class="mx-2 text-white">
+                Pizza
+            </a>
+            <a href="/burgers" class="mx-2 text-white">
+                Burgers
+            </a>
+            <a href="/beverages" class="mx-2 text-white">
+                Beverages
+            </a>
+            <a href="/login" class="mx-2 text-white">
+                Login
+            </a>
+            <a href="/signup" class="mx-2 text-white">
+                Signup
+            </a>
+        </div>
     </nav>
