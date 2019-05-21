@@ -1,5 +1,4 @@
 const db = require('../model/db');
-let localclient;
 
 function HPDriver(req, res) {
     db.connect()
@@ -7,11 +6,12 @@ function HPDriver(req, res) {
             db.loadData(localclient)
                 .then((data) => {
                     res.render('homepage/home', {data});
+                    localclient.close();                    
                 })
                 .catch((err) => {
                     res.send("Something went wrong!");
                 })
-        })
+        })    
 }
 
 module.exports = {

@@ -15,3 +15,18 @@
 .deliciousPizza{    
     border-bottom: 2px solid orange;
 }
+.cardImg0:hover,
+.cardImg1:hover,
+.cardImg2:hover,
+.cardImg3:hover,
+.cardImg4:hover,
+.cardImg5:hover,
+.cardImg6:hover,
+.cardImg7:hover,
+.cardImg8:hover,
+.cardImg9:hover
+{
+    transform: scale(1.05);    
+    transition: 0.1s;
+    cursor: pointer;    
+}
