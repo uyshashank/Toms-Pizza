@@ -27,9 +27,10 @@ let color = [
             <% for(let i = 0; i <= data.length-3; i+=2) {%>
             <span class="text-center col-lg-6">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 py-2">
                         <span class="text-center">
-                            <img class="my-2 cardImg<%=i%> img-fluid" src="../../products/images/pizza/<%= data[i].pr_img %>" style="width: 140px">
+                            <img class="my-2 cardImg<%=i%> img-fluid"
+                                src="../../products/images/pizza/<%= data[i].pr_img %>" style="width: 140px">
                             <h6 class="" style="height: 30px"><%= data[i].pr_name %></h6>
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i].pr_info %></p>
                             <span>
@@ -37,11 +38,15 @@ let color = [
                                 <strong>M:</strong> ₹<%= data[i].pr_price.size_med %></li>
                                 <strong>L:</strong> ₹<%= data[i].pr_price.size_lrg %></li>
                             </span>
+                            <button class="mt-1 w-100 btn addToCartBtn">
+                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </span>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 py-2">
                         <span class="text-center">
-                            <img class="my-2 cardImg<%=i%>" src="../../products/images/pizza/<%= data[i+1].pr_img %>" style="width: 140px">
+                            <img class="my-2 cardImg<%=i%>" src="../../products/images/pizza/<%= data[i+1].pr_img %>"
+                                style="width: 140px">
                             <h6 class="" style="height: 30px"><%= data[i+1].pr_name %></h6>
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i+1].pr_info %></p>
                             <span>
@@ -49,6 +54,9 @@ let color = [
                                 <strong>M:</strong> ₹<%= data[i+1].pr_price.size_med %></li>
                                 <strong>L:</strong> ₹<%= data[i+1].pr_price.size_lrg %></li>
                             </span>
+                            <button class="mt-1 w-100 btn addToCartBtn">
+                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </span>
                     </div>
                 </div>
