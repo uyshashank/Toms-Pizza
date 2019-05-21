@@ -8,18 +8,20 @@ function connect() {
 
 function loadData(localclient) {
     client = localclient;
-    let db = client.db('products');    
+    let db = client.db('products');        
     return db.collection('pizza').find().toArray();
 }
-
-
-function closeDB(){
-   client.close()
-   .catch((err) => console.log("Err -> " + err))
+function loadBurgers() {    
+    let db = client.db('products');        
+    return db.collection('burger').find().toArray();
 }
-
+function loadBeverages() {    
+    let db = client.db('products');        
+    return db.collection('beverages').find().toArray();
+}
 module.exports = {
     loadData,
-    closeDB,
-    connect
+    connect,
+    loadBurgers,
+    loadBeverages
 }

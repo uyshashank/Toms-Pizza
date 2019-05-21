@@ -38,7 +38,8 @@ let color = [
                                 <strong>M:</strong> ₹<%= data[i].pr_price.size_med %></li>
                                 <strong>L:</strong> ₹<%= data[i].pr_price.size_lrg %></li>
                             </span>
-                            <button class="mt-1 w-100 btn addToCartBtn">
+                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=data[i].pr_id%>"
+                                onclick="addToCart(this)">
                                 Add to Cart <i class="fas fa-shopping-cart"></i>
                             </button>
                         </span>
@@ -54,7 +55,8 @@ let color = [
                                 <strong>M:</strong> ₹<%= data[i+1].pr_price.size_med %></li>
                                 <strong>L:</strong> ₹<%= data[i+1].pr_price.size_lrg %></li>
                             </span>
-                            <button class="mt-1 w-100 btn addToCartBtn">
+                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=data[i+1].pr_id%>"
+                                onclick="addToCart(this)">
                                 Add to Cart <i class="fas fa-shopping-cart"></i>
                             </button>
                         </span>
@@ -64,5 +66,48 @@ let color = [
             <%}%>    
     </div>
     </div>
-    
+    <!-- Burgers -->
+
+    <div class="burgers mt-3">
+        <h4 class="text-center">
+            <img src="../../images/bgrIcon.png" alt="" class="img-fluid" style="width: 30px;">
+            <span class="deliciousPizza">Crispy Burgers</span>
+        </h4>
+        <div class="row">
+            <% for(let i = 0; i <= data.length-3; i+=2) {%>
+            <span class="text-center col-lg-6">
+                <div class="row">
+                    <div class="col-6 py-2">
+                        <span class="text-center">
+                            <img class="my-2 cardImg<%=i%> img-fluid"
+                                src="../../products/images/burgers/<%= burgers[i].pr_img %>" style="width: 140px">
+                            <h6 class="" style="height: 30px"><%= burgers[i].pr_name %></h6>                            
+                            <span>                                
+                                <strong>Price: </strong> ₹<%= burgers[i].pr_price %></li>
+                            </span>
+                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=burgers[i].pr_id%>"
+                                onclick="addToCart(this)">
+                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="col-6 py-2">
+                        <span class="text-center">
+                            <img class="my-2 cardImg<%=i%>" src="../../products/images/burgers/<%= burgers[i+1].pr_img %>"
+                                style="width: 140px">
+                            <h6 class="" style="height: 30px"><%= burgers[i+1].pr_name %></h6>                            
+                            <span>
+                                <strong>Price: </strong> ₹<%= burgers[i+1].pr_price %></li>
+                            </span>
+                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=burgers[i+1].pr_id%>"
+                                onclick="addToCart(this)">
+                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </span>
+            <%}%>    
+    </div>
+    </div>
 </div>

@@ -24,9 +24,8 @@
 .cardImg6:hover,
 .cardImg7:hover,
 .cardImg8:hover,
-.cardImg9:hover
-{
-    transform: scale(1.05);    
+.cardImg9:hover{
+    transform: scale(1.05);
     transition: 0.1s;
     cursor: pointer;    
 }
