@@ -25,7 +25,7 @@ let color = [
                 <!-- Pizza panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
-                        <span class="text-center" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                        <div class="text-center border" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
                             <img class="my-2 cardImg cardImg<%=i%>"
                                 src="../../products/images/pizza/<%= data[i].pr_img %>">
 
@@ -33,24 +33,37 @@ let color = [
 
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i].pr_info %></p>
 
-                            <span>
-                                <strong>R:</strong> ₹<%= data[i].pr_price.size_reg %></li>
-                                <strong>M:</strong> ₹<%= data[i].pr_price.size_med %></li>
-                                <strong>L:</strong> ₹<%= data[i].pr_price.size_lrg %></li>
-                            </span>
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Reg</th>
+                                        <th>Med</th>
+                                        <th>Lrg</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>₹<%= data[i].pr_price.size_reg %></td>
+                                        <td>₹<%= data[i].pr_price.size_med %></td>
+                                        <td>₹<%= data[i].pr_price.size_lrg %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            <button class="mt-1 w-100 btn" name="<%=data[i].pr_id%>" onclick="addToCart(this)"
+
+                            <button class="mt-1 w-100 btn btn-danger" name="<%=data[i].pr_id%>" onclick="addToCart(this)"
                                 style="visibility: hidden;" id="addToCartBtn<%=i%>">
                                 Add to Cart
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
-                        </span>
+                        </div>
                     </div>
                     <!-- Pizza panel first row end -->
 
                     <!-- Pizza panel second row start -->
                     <div class="col-6 py-2">
-                        <span class="text-center" name="<%=i+1%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                        <div class="text-center border" name="<%=i+1%>" onmouseover="showBTN(this)"
+                            onmouseout="hideBTN(this)">
                             <img class="my-2 cardImg cardImg<%=i+1%>"
                                 src="../../products/images/pizza/<%= data[i+1].pr_img %>">
 
@@ -58,18 +71,29 @@ let color = [
 
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i+1].pr_info %></p>
 
-                            <span>
-                                <strong>R:</strong> ₹<%= data[i+1].pr_price.size_reg %></li>
-                                <strong>M:</strong> ₹<%= data[i+1].pr_price.size_med %></li>
-                                <strong>L:</strong> ₹<%= data[i+1].pr_price.size_lrg %></li>
-                            </span>
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Reg</th>
+                                        <th>Med</th>
+                                        <th>Lrg</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>₹<%= data[i+1].pr_price.size_reg %></td>
+                                        <td>₹<%= data[i+1].pr_price.size_med %></td>
+                                        <td>₹<%= data[i+1].pr_price.size_lrg %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            <button class="mt-1 w-100 btn" name="<%=data[i+1].pr_id%>" onclick="addToCart(this)"
+                            <button class="mt-1 w-100 btn btn-danger" name="<%=data[i+1].pr_id%>" onclick="addToCart(this)"
                                 style="visibility: hidden;" id="addToCartBtn<%=i+1%>">
                                 Add to Cart
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
-                        </span>
+                        </div>
                     </div>
                     <!-- Pizza panel second row end -->
                 </div>
