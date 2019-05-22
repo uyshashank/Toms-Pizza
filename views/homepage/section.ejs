@@ -25,7 +25,8 @@ let color = [
                 <!-- Pizza panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
-                        <div class="text-center border" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                        <div class="text-center" name="<%=i%>" onmouseover="showBTN(this)"
+                            onmouseout="hideBTN(this)">
                             <img class="my-2 cardImg cardImg<%=i%>"
                                 src="../../products/images/pizza/<%= data[i].pr_img %>">
 
@@ -51,8 +52,8 @@ let color = [
                             </table>
 
 
-                            <button class="mt-1 w-100 btn btn-danger" name="<%=data[i].pr_id%>" onclick="addToCart(this)"
-                                style="visibility: hidden;" id="addToCartBtn<%=i%>">
+                            <button class="mt-1 w-100 btn btn-danger" name="<%=data[i].pr_id%>"
+                                onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=i%>">
                                 Add to Cart
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
@@ -62,7 +63,7 @@ let color = [
 
                     <!-- Pizza panel second row start -->
                     <div class="col-6 py-2">
-                        <div class="text-center border" name="<%=i+1%>" onmouseover="showBTN(this)"
+                        <div class="text-center" name="<%=i+1%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
                             <img class="my-2 cardImg cardImg<%=i+1%>"
                                 src="../../products/images/pizza/<%= data[i+1].pr_img %>">
@@ -88,8 +89,8 @@ let color = [
                                 </tbody>
                             </table>
 
-                            <button class="mt-1 w-100 btn btn-danger" name="<%=data[i+1].pr_id%>" onclick="addToCart(this)"
-                                style="visibility: hidden;" id="addToCartBtn<%=i+1%>">
+                            <button class="mt-1 w-100 btn btn-danger" name="<%=data[i+1].pr_id%>"
+                                onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=i+1%>">
                                 Add to Cart
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
@@ -102,5 +103,82 @@ let color = [
     </div>
     <!-- Pizza panel end-->
     </div>
-    <!-- Burgers -->    
+    <!-- Burgers panel start--> 
+    <div class="burgers mt-3">
+        <h4 class="text-center">
+            <img src="../../images/bgrIcon.png" class="img-fluid" style="width: 30px;">
+            <span class="crispyBurgers">Crispy Burgers</span>
+        </h4>
+        <!-- Crispy Burgers Heading END -->
+
+        <!-- Burgers panel start -->
+        <div class="row">
+            <% for(let i = 0,j=1; i <= 3; i+=2,j+=2) {%>
+            <span class="text-center col-lg-6">
+                <!-- Burgers panel first row start -->
+                <div class="row">
+                    <div class="col-6 py-2">
+                        <div class="text-center" name="<%=4*(j)%>" onmouseover="showBTN(this)"
+                            onmouseout="hideBTN(this)">
+                            <img class="my-2 cardImg cardImg<%=i%>"
+                                src="../../products/images/burgers/<%= burgers[i].pr_img %>">
+
+                            <h6 style="height: 30px"><%= burgers[i].pr_name %></h6>
+
+                            <p class="text-muted" style="font-size: 12px; height: 60px"><%= burgers[i].pr_info %></p>
+
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Price</th>
+                                        <td>₹<%= burgers[i].pr_price %></td>
+                                    </tr>
+                                </thead>
+                            </table>
+
+
+                            <button class="mt-1 w-100 btn btn-danger" name="<%=burgers[i].pr_id%>"
+                                onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j)%>">
+                                Add to Cart
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- burgers panel first row end -->
+
+                    <!-- burgers panel second row start -->
+                    <div class="col-6 py-2">
+                        <div class="text-center" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
+                            onmouseout="hideBTN(this)">
+                            <img class="my-2 cardImg cardImg<%=i%>"
+                                src="../../products/images/burgers/<%= burgers[i+1].pr_img %>">
+
+                            <h6 style="height: 30px"><%= burgers[i+1].pr_name %></h6>
+
+                            <p class="text-muted" style="font-size: 12px; height: 60px"><%= burgers[i+1].pr_info %></p>
+
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Price</th>
+                                        <td>₹<%= burgers[i+1].pr_price %></td>
+                                    </tr>
+                                </thead>
+                            </table>
+
+
+                            <button class="mt-1 w-100 btn btn-danger" name="<%=burgers[i+1].pr_id%>"
+                                onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j+1)%>">
+                                Add to Cart
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Burgers panel second row end -->
+                </div>
+            </span>
+            <%}%>    
+    </div>
+    <!-- Burgers panel end-->
+    </div>   
 </div>
