@@ -11,9 +11,13 @@
     transform: scale(1.01);
     transition: 0.1s;
     cursor: pointer;    
+    
 }
 .deliciousPizza{    
     border-bottom: 2px solid orange;
+}
+.cardImg{
+    width: 140px;
 }
 .cardImg0:hover,
 .cardImg1:hover,

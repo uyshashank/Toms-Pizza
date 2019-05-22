@@ -1,113 +1,82 @@
 <%
 let color = [
-'info',
-'primary',
-'warning',
-'secondary',
-'danger',
-'dark',
-'info',
-'primary',
-'warning',
-'secondary'
+'info','primary','warning','secondary','danger','dark','info','primary','warning','secondary'
 ]
 %>
 
 <div class="container">
+    <!-- HERO -->
     <div class="heroDiv">
         <img src="../../images/2.png" alt="" class="img-fluid mt-3 hero">
     </div>
 
+    <!-- Delicious Pizza Heading START -->
     <div class="pizza mt-3">
         <h4 class="text-center">
             <img src="../../images/pzIcon.png" alt="" class="img-fluid" style="width: 30px;">
             <span class="deliciousPizza">Delicious Pizza</span>
         </h4>
+        <!-- Delicious Pizza Heading END -->
+
+        <!-- Pizza panel start -->
         <div class="row">
-            <% for(let i = 0; i <= data.length-3; i+=2) {%>
+            <% for(let i = 0; i <= 3; i+=2) {%>
             <span class="text-center col-lg-6">
+                <!-- Pizza panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
-                        <span class="text-center">
-                            <img class="my-2 cardImg<%=i%> img-fluid"
-                                src="../../products/images/pizza/<%= data[i].pr_img %>" style="width: 140px">
-                            <h6 class="" style="height: 30px"><%= data[i].pr_name %></h6>
+                        <span class="text-center" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                            <img class="my-2 cardImg cardImg<%=i%>"
+                                src="../../products/images/pizza/<%= data[i].pr_img %>">
+
+                            <h6 style="height: 30px"><%= data[i].pr_name %></h6>
+
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i].pr_info %></p>
+
                             <span>
                                 <strong>R:</strong> ₹<%= data[i].pr_price.size_reg %></li>
                                 <strong>M:</strong> ₹<%= data[i].pr_price.size_med %></li>
                                 <strong>L:</strong> ₹<%= data[i].pr_price.size_lrg %></li>
                             </span>
-                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=data[i].pr_id%>"
-                                onclick="addToCart(this)">
-                                Add to Cart <i class="fas fa-shopping-cart"></i>
+
+                            <button class="mt-1 w-100 btn" name="<%=data[i].pr_id%>" onclick="addToCart(this)"
+                                style="visibility: hidden;" id="addToCartBtn<%=i%>">
+                                Add to Cart
+                                <i class="fas fa-shopping-cart"></i>
                             </button>
                         </span>
                     </div>
+                    <!-- Pizza panel first row end -->
+
+                    <!-- Pizza panel second row start -->
                     <div class="col-6 py-2">
-                        <span class="text-center">
-                            <img class="my-2 cardImg<%=i%>" src="../../products/images/pizza/<%= data[i+1].pr_img %>"
-                                style="width: 140px">
-                            <h6 class="" style="height: 30px"><%= data[i+1].pr_name %></h6>
+                        <span class="text-center" name="<%=i+1%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                            <img class="my-2 cardImg cardImg<%=i+1%>"
+                                src="../../products/images/pizza/<%= data[i+1].pr_img %>">
+
+                            <h6 style="height: 30px"><%= data[i+1].pr_name %></h6>
+
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i+1].pr_info %></p>
+
                             <span>
                                 <strong>R:</strong> ₹<%= data[i+1].pr_price.size_reg %></li>
                                 <strong>M:</strong> ₹<%= data[i+1].pr_price.size_med %></li>
                                 <strong>L:</strong> ₹<%= data[i+1].pr_price.size_lrg %></li>
                             </span>
-                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=data[i+1].pr_id%>"
-                                onclick="addToCart(this)">
-                                Add to Cart <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </span>
-            <%}%>    
-    </div>
-    </div>
-    <!-- Burgers -->
 
-    <div class="burgers mt-3">
-        <h4 class="text-center">
-            <img src="../../images/bgrIcon.png" alt="" class="img-fluid" style="width: 30px;">
-            <span class="deliciousPizza">Crispy Burgers</span>
-        </h4>
-        <div class="row">
-            <% for(let i = 0; i <= data.length-3; i+=2) {%>
-            <span class="text-center col-lg-6">
-                <div class="row">
-                    <div class="col-6 py-2">
-                        <span class="text-center">
-                            <img class="my-2 cardImg<%=i%> img-fluid"
-                                src="../../products/images/burgers/<%= burgers[i].pr_img %>" style="width: 140px">
-                            <h6 class="" style="height: 30px"><%= burgers[i].pr_name %></h6>                            
-                            <span>                                
-                                <strong>Price: </strong> ₹<%= burgers[i].pr_price %></li>
-                            </span>
-                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=burgers[i].pr_id%>"
-                                onclick="addToCart(this)">
-                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            <button class="mt-1 w-100 btn" name="<%=data[i+1].pr_id%>" onclick="addToCart(this)"
+                                style="visibility: hidden;" id="addToCartBtn<%=i+1%>">
+                                Add to Cart
+                                <i class="fas fa-shopping-cart"></i>
                             </button>
                         </span>
                     </div>
-                    <div class="col-6 py-2">
-                        <span class="text-center">
-                            <img class="my-2 cardImg<%=i%>" src="../../products/images/burgers/<%= burgers[i+1].pr_img %>"
-                                style="width: 140px">
-                            <h6 class="" style="height: 30px"><%= burgers[i+1].pr_name %></h6>                            
-                            <span>
-                                <strong>Price: </strong> ₹<%= burgers[i+1].pr_price %></li>
-                            </span>
-                            <button class="mt-1 w-100 btn addToCartBtn" name="<%=burgers[i+1].pr_id%>"
-                                onclick="addToCart(this)">
-                                Add to Cart <i class="fas fa-shopping-cart"></i>
-                            </button>
-                        </span>
-                    </div>
+                    <!-- Pizza panel second row end -->
                 </div>
             </span>
             <%}%>    
     </div>
+    <!-- Pizza panel end-->
     </div>
+    <!-- Burgers -->    
 </div>
