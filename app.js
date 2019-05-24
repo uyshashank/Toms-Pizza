@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000;
 // Custom modules
 const HP = require('./controller/homepage');
 
-
+ 
 // Middlewares
 app.use(bodyParser.urlencoded({
     extended: true
