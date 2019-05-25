@@ -13,10 +13,8 @@
     cursor: pointer;    
     
 }
-.deliciousPizza{    
-    border-bottom: 2px solid orange;
-}
-.crispyBurgers{    
+
+.heading{    
     border-bottom: 2px solid orange;
 }
 .cardImg{

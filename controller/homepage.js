@@ -1,6 +1,6 @@
 const db = require('../model/db');
 
-function HPDriver(req, res) {
+exports.HPDriver = (req, res) => {
     db.connect()
         .then((localclient) => {
             db.loadData(localclient)
@@ -25,6 +25,3 @@ function HPDriver(req, res) {
         })
 }
 
-module.exports = {
-    HPDriver
-}

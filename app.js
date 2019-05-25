@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
  
 // Custom modules
 const HP = require('./controller/homepage');
-
+const IP = require('./controller/itempage');
  
 // Middlewares
 app.use(bodyParser.urlencoded({
@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 
 // Get Routes
 app.get('/', HP.HPDriver);
-
+app.get('/find/:item', IP.IPDriver);
 // Post Routes
 
 // Starting server
