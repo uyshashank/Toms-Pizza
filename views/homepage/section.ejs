@@ -26,9 +26,10 @@ let color = [
                 <div class="row">
                     <div class="col-6 py-2">
                         <div class="text-center" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
-                            <img class="my-2 cardImg cardImg<%=i%>"
-                                src="../../products/images/pizza/<%= data[i].pr_img %>">
-
+                            <a href="/find/<%= data[i].pr_id %>">
+                                <img class="my-2 cardImg cardImg<%=i%>"
+                                    src="../../products/images/pizza/<%= data[i].pr_img %>">
+                            </a>
                             <h6 style="height: 30px"><%= data[i].pr_name %></h6>
 
                             <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[i].pr_info %></p>
@@ -63,8 +64,10 @@ let color = [
                     <!-- Pizza panel second row start -->
                     <div class="col-6 py-2">
                         <div class="text-center" name="<%=i+1%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
-                            <img class="my-2 cardImg cardImg<%=i+1%>"
-                                src="../../products/images/pizza/<%= data[i+1].pr_img %>">
+                            <a href="/find/<%= data[i+1].pr_id %>">
+                                <img class="my-2 cardImg cardImg<%=i+1%>"
+                                    src="../../products/images/pizza/<%= data[i+1].pr_img %>">
+                            </a>
 
                             <h6 style="height: 30px"><%= data[i+1].pr_name %></h6>
 
@@ -103,26 +106,27 @@ let color = [
     </div>
     <!-- Burgers panel start--> 
     <div class="burgers mt-3">
-        <h4 class="text-center">
+        <h4 class="text-center">                
             <img src="../../images/bgrIcon.png" class="img-fluid" style="width: 30px;">
             <span class="heading">Crispy Burgers</span>
-        </h4>
-        <!-- Crispy Burgers Heading END -->
+            </h4>
+            <!-- Crispy Burgers Heading END -->
 
-        <!-- Burgers panel start -->
-        <div class="row">
-            <% for(let i = 0,j=1; i <= 3; i+=2,j+=2) {%>
+            <!-- Burgers panel start -->
+            <div class="row">
+                <% for(let i = 0,j=1; i <= 3; i+=2,j+=2) {%>
             <span class="text-center col-lg-6">
                 <!-- Burgers panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
                         <div class="text-center" name="<%=4*(j)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
-                            <img class="my-2 cardImg cardImg<%=i%>"
-                                src="../../products/images/burgers/<%= burgers[i].pr_img %>">
-
+                            <a href="/find/<%= burgers[i].pr_id %>">
+                                <img class="my-2 cardImg cardImg<%=i%>"
+                                    src="../../products/images/burgers/<%= burgers[i].pr_img %>">
+                            </a>
                             <h6 style="height: 30px"><%= burgers[i].pr_name %></h6>
-                            <p> <strong>Price: </strong>₹<%= burgers[i].pr_price%> </p>                            
+                            <p> <strong>Price: </strong>₹<%= burgers[i].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=burgers[i].pr_id%>"
                                 onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j)%>">
                                 Add to Cart
@@ -136,9 +140,10 @@ let color = [
                     <div class="col-6 py-2">
                         <div class="text-center" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
-                            <img class="my-2 cardImg cardImg<%=i%>"
-                                src="../../products/images/burgers/<%= burgers[i+1].pr_img %>">
-
+                            <a href="/find/<%= burgers[i+1].pr_id %>">
+                                <img class="my-2 cardImg cardImg<%=i%>"
+                                    src="../../products/images/burgers/<%= burgers[i+1].pr_img %>">
+                            </a>
                             <h6 style="height: 30px"><%= burgers[i+1].pr_name %></h6>
                             <p> <strong>Price: </strong>₹<%= burgers[i+1].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=burgers[i+1].pr_id%>"
@@ -173,12 +178,14 @@ let color = [
                     <div class="col-6 py-2">
                         <div class="text-center" name="<%=4*(j)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
-                            <img class="my-2 cardImg cardImg<%=i%>"
-                                src="../../products/images/beverages/<%= beverages[i].pr_img %>">
-
+                            <a href="/find/<%= beverages[i].pr_id %>">
+                                <img class="my-2 cardImg cardImg<%=i%>"
+                                    src="../../products/images/beverages/<%= beverages[i].pr_img %>">
+                            </a>
                             <h6 style="height: 30px"><%= beverages[i].pr_name %></h6>
-                            <p class="text-muted" style="font-size: 12px; height: 60px"><%= beverages[i].pr_info %></p>
-                            <p> <strong>Price: </strong>₹<%= beverages[i].pr_price%> </p>                            
+                            <p class="text-muted" style="font-size: 12px; height: 60px"><%= beverages[i].pr_info %>
+                            </p>
+                            <p> <strong>Price: </strong>₹<%= beverages[i].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=beverages[i].pr_id%>"
                                 onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j)%>">
                                 Add to Cart
@@ -192,11 +199,13 @@ let color = [
                     <div class="col-6 py-2">
                         <div class="text-center" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
-                            <img class="my-2 cardImg cardImg<%=i%>"
-                                src="../../products/images/beverages/<%= beverages[i+1].pr_img %>">
-
+                            <a href="/find/<%= beverages[i+1].pr_id %>">
+                                <img class="my-2 cardImg cardImg<%=i%>"
+                                    src="../../products/images/beverages/<%= beverages[i+1].pr_img %>">
+                            </a>
                             <h6 style="height: 30px"><%= beverages[i+1].pr_name %></h6>
-                            <p class="text-muted" style="font-size: 12px; height: 60px"><%= beverages[i+1].pr_info %></p>
+                            <p class="text-muted" style="font-size: 12px; height: 60px">
+                                <%= beverages[i+1].pr_info %></p>
                             <p> <strong>Price: </strong>₹<%= beverages[i+1].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=beverages[i+1].pr_id%>"
                                 onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j+1)%>">
