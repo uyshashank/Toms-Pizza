@@ -1,7 +1,7 @@
 {
   "name": "tomspizza",
   "version": "1.0.0",
-  "description": "Pizza ordering website.",
+  "description": "Toms pizza delivers the delicious pizza, crispy burgers and cool beverages fast to you.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
