@@ -1,0 +1,71 @@
+[{
+    "_id": "5ce118227e42351d18994f23",
+    "pr_id": "bgr001",
+    "pr_name": "Crispy Veg",
+    "pr_price": "45",
+    "pr_img": "bgr001.png",
+    "pr_category": "veg"
+}, {
+    "_id": "5ce1196f13deb31d18df7ffc",
+    "pr_id": "bgr002",
+    "pr_name": "Crispy Veg Supreme",
+    "pr_price": "65",
+    "pr_img": "bgr002.png",
+    "pr_category": "veg"
+}, {
+    "_id": "5ce119a013deb31d18df7ffd",
+    "pr_id": "bgr003",
+    "pr_name": "Crispy Chicken",
+    "pr_price": "65",
+    "pr_img": "bgr003.png",
+    "pr_category": "non-veg"
+}, {
+    "_id": "5ce119c713deb31d18df7ffe",
+    "pr_id": "bgr004",
+    "pr_name": "Toms Pizza Special",
+    "pr_price": "79",
+    "pr_img": "bgr004.png",
+    "pr_category": "veg"
+}, {
+    "_id": "5ce119e513deb31d18df7fff",
+    "pr_id": "bgr005",
+    "pr_name": "Crispy Chicken Supreme",
+    "pr_price": "85",
+    "pr_img": "bgr005.png",
+    "pr_category": "non-veg"
+}, {
+    "_id": "5ce11a0b13deb31d18df8000",
+    "pr_id": "bgr006",
+    "pr_name": "Grill Chicken",
+    "pr_price": "89",
+    "pr_img": "bgr006.png",
+    "pr_category": "non-veg"
+}, {
+    "_id": "5ce11a2113deb31d18df8001",
+    "pr_id": "bgr007",
+    "pr_name": "Veg Surprise",
+    "pr_price": "99",
+    "pr_img": "bgr007.png",
+    "pr_category": "veg"
+}, {
+    "_id": "5ce11a3913deb31d18df8002",
+    "pr_id": "bgr008",
+    "pr_name": "Veg Chilli Cheese Melt",
+    "pr_price": "109",
+    "pr_img": "bgr008.png",
+    "pr_category": "veg"
+}, {
+    "_id": "5ce11a5513deb31d18df8003",
+    "pr_id": "bgr009",
+    "pr_name": "Chicken Chilli Cheese Melt",
+    "pr_price": "119",
+    "pr_img": "bgr009.png",
+    "pr_category": "non-veg"
+}, {
+    "_id": "5ce11a6d13deb31d18df8004",
+    "pr_id": "bgr010",
+    "pr_name": "Paneer King Melt",
+    "pr_price": "129",
+    "pr_img": "bgr010.png",
+    "pr_category": "veg"
+}]

@@ -1,14 +1,13 @@
 const db = require('../model/db');
-
 exports.HPDriver = (req, res) => {
     db.connect()
         .then((localclient) => {
             db.loadData(localclient)
-                .then((data) => {
+                .then((data) => {                    
                     db.loadBurgers()
-                        .then((burgers) => {
+                        .then((burgers) => {                            
                             db.loadBeverages()
-                                .then((beverages) => {
+                                .then((beverages) => {                                    
                                     res.render('homepage/home', {
                                         data,
                                         burgers,

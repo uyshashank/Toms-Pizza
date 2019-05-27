@@ -1,5 +1,5 @@
 const {MongoClient, ObjectID} = require('mongodb');
-const url = 'mongodb+srv://shashank:admin@tomspizza-5i4uk.mongodb.net/';
+const url = 'mongodb+srv://shashank:pass1997@tomspizza-5i4uk.mongodb.net/';
 let client;
 
 function connect() {    
