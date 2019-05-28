@@ -98,7 +98,7 @@
     </div>
     <!-- Pizza panel end-->
     </div>
-    Burgers panel start 
+    <!-- Burgers panel start  -->
     <div class="burgers mt-3">
         <h4 class="text-center">                
             <img src="../../images/bgrIcon.png" class="img-fluid" style="width: 30px;">
@@ -119,7 +119,8 @@
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/burgers/<%= data[1].burgers[i].pr_img %>">
                             </a>
-                            <h6 style="height: 30px"><%= data[1].burgers[i].pr_name %></h6>
+                            <h6 style="height: 20px"><%= data[1].burgers[i].pr_name %></h6>
+                            <p class="text-muted" style="font-size: 12px; height: 30px"><%= data[1].burgers[i].pr_info %></p>
                             <p> <strong>Price: </strong>₹<%= data[1].burgers[i].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=data[1].burgers[i].pr_id%>"
                                 onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j)%>">
@@ -138,7 +139,8 @@
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/burgers/<%= data[1].burgers[i+1].pr_img %>">
                             </a>
-                            <h6 style="height: 30px"><%= data[1].burgers[i+1].pr_name %></h6>
+                            <h6 style="height: 20px"><%= data[1].burgers[i+1].pr_name %></h6>
+                                <p class="text-muted" style="font-size: 12px; height: 30px"><%= data[1].burgers[i+1].pr_info %></p>
                             <p> <strong>Price: </strong>₹<%= data[1].burgers[i+1].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=data[1].burgers[i+1].pr_id%>"
                                 onclick="addToCart(this)" style="visibility: hidden;" id="addToCartBtn<%=4*(j+1)%>">
@@ -176,8 +178,8 @@
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/beverages/<%= data[2].beverages[i].pr_img %>">
                             </a>
-                            <h6 style="height: 30px"><%= data[2].beverages[i].pr_name %></h6>
-                            <p class="text-muted" style="font-size: 12px; height: 60px"><%= data[2].beverages[i].pr_info %>
+                            <h6 style="height: 20px"><%= data[2].beverages[i].pr_name %></h6>
+                            <p class="text-muted" style="font-size: 12px; height: 40px"><%= data[2].beverages[i].pr_info %>
                             </p>
                             <p> <strong>Price: </strong>₹<%= data[2].beverages[i].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=data[2].beverages[i].pr_id%>"
@@ -197,8 +199,8 @@
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/beverages/<%= data[2].beverages[i+1].pr_img %>">
                             </a>
-                            <h6 style="height: 30px"><%= data[2].beverages[i+1].pr_name %></h6>
-                            <p class="text-muted" style="font-size: 12px; height: 60px">
+                            <h6 style="height: 20px"><%= data[2].beverages[i+1].pr_name %></h6>
+                            <p class="text-muted" style="font-size: 12px; height: 40px">
                                 <%= data[2].beverages[i+1].pr_info %></p>
                             <p> <strong>Price: </strong>₹<%= data[2].beverages[i+1].pr_price%> </p>
                             <button class="mt-1 w-100 btn btn-danger" name="<%=data[2].beverages[i+1].pr_id%>"
