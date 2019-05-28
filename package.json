@@ -4,7 +4,8 @@
   "description": "Toms pizza delivers the delicious pizza, crispy burgers and cool beverages fast to you.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "upgit":"git push -u origin master"
   },
   "repository": {
     "type": "git",
