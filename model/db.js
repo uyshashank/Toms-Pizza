@@ -24,21 +24,31 @@ exports.loadItem = (item) => {
         let index = parseInt(item.split('pza00')[1]);
         return db.collection('foodItems').find().toArray()
             .then((data) => {
-                return data[0].pizza[index - 1];
+                let doc = {"pr_cat":"pizza"};
+                doc.item = data[0].pizza[index - 1]
+                return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
-    } else if (category == 'bgr') {
+    } 
+    
+    else if (category == 'bgr') {
         let index = parseInt(item.split('bgr00')[1]);
         return db.collection('foodItems').find().toArray()
             .then((data) => {
-                return data[1].burgers[index - 1];
+                let doc = {"pr_cat":"burgers"};
+                doc.item = data[1].burgers[index - 1]                
+                return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
-    } else if (category == 'bvg') {
+    } 
+    
+    else if (category == 'bvg') {
         let index = parseInt(item.split('bvg00')[1]);
         return db.collection('foodItems').find().toArray()
             .then((data) => {
-                return data[2].beverages[index - 1];
+                let doc = {"pr_cat":"beverages"};
+                doc.item = data[2].beverages[index - 1]
+                return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
     }

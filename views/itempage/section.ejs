@@ -1,3 +1,46 @@
+<% 
+let path = "../../products/images/" + itemDoc.pr_cat + "/" + itemDoc.item.pr_img;
+let itemTitle = itemDoc.item.pr_name;
+let itemInfo = itemDoc.item.pr_info;
+
+let pzaReg = itemDoc.item.pr_price.size_reg;
+let pzaMed = itemDoc.item.pr_price.size_med;
+let pzaLrg = itemDoc.item.pr_price.size_lrg;
+let itemPrice = itemDoc.item.pr_price;
+%>
+
 <div class="container">
-    hi
+    <!-- A row for item image and its features -->
+    <div class="row">
+        <!-- Item image -->
+        <div class="col-md-6 bg-info">
+            <img class="my-2 cardImg " src="<%= path %>">
+        </div>
+        <!-- Item features -->
+
+        <div class="col-md-6 bg-warning">
+            <h6 style="height: 30px"><%= itemTitle %></h6>
+            <p class="text-muted" style="font-size: 12px; height: 60px"><%= itemInfo %></p>
+            <% if(itemDoc.pr_cat == 'pizza'){ %>
+            <table class="w-100">
+                <thead>
+                    <tr>
+                        <th>Reg</th>
+                        <th>Med</th>
+                        <th>Lrg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>₹<%= pzaReg %></td>
+                        <td>₹<%= pzaMed %></td>
+                        <td>₹<%= pzaLrg %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <% } else {%>
+                <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
+            <% }%>
+        </div>
+    </div>
 </div>
