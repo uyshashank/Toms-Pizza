@@ -5,7 +5,7 @@ exports.HPDriver = (req, res) => {
             db.loadData(localclient)
                 .then((data) => {
                     res.render('homepage/home', { data });
-                    localclient.close();
+                    // localclient.close();
                 })
                 .catch((err) => {
                     res.send("Something went wrong!");

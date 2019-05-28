@@ -1,5 +1,11 @@
-exports.IPDriver = (req,res) => {
+const db = require('../model/db');
+
+exports.IPDriver = (req, res) => {
     let item = req.params.item;
-    
-    res.render('brandpage/home');
+    db.loadItem(item)
+    .then((itemDoc) => {
+        // res.render('itempage/home', {itemDoc});
+        res.send(itemDoc);
+    })
+    .catch(err => console.log(err)); 
 }
