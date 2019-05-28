@@ -9,19 +9,9 @@ function connect() {
 function loadData(localclient) {
     client = localclient;
     let db = client.db('products');        
-    return db.collection('pizza').find().toArray();
-}
-function loadBurgers() {    
-    let db = client.db('products');        
-    return db.collection('burger').find().toArray();
-}
-function loadBeverages() {    
-    let db = client.db('products');        
-    return db.collection('beverages').find().toArray();
+    return db.collection('foodItems').find().toArray();
 }
 module.exports = {
     loadData,
-    connect,
-    loadBurgers,
-    loadBeverages
+    connect
 }

@@ -3,24 +3,12 @@ exports.HPDriver = (req, res) => {
     db.connect()
         .then((localclient) => {
             db.loadData(localclient)
-                .then((data) => {                    
-                    db.loadBurgers()
-                        .then((burgers) => {                            
-                            db.loadBeverages()
-                                .then((beverages) => {                                    
-                                    res.render('homepage/home', {
-                                        data,
-                                        burgers,
-                                        beverages
-                                    });
-                                    //  localclient.close();
-                                })
-                        })
-                   
+                .then((data) => {
+                    res.render('homepage/home', { data });
+                    // res.send(data[0].pizza[0]);
                 })
                 .catch((err) => {
                     res.send("Something went wrong!");
                 })
         })
 }
-
