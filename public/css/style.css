@@ -21,6 +21,12 @@
 .itemImg{
     width: 200px;
 }
+.imgDiv{    
+    height: 120px;
+}
+.recImg{
+    width: 120px;
+}
 .cardImg0:hover,
 .cardImg1:hover,
 .cardImg2:hover,
