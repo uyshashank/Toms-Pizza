@@ -24,8 +24,13 @@ exports.loadItem = (item) => {
         let index = parseInt(item.split('pza00')[1]);
         return db.collection('foodItems').find().toArray()
             .then((data) => {
-                let doc = {"pr_cat":"pizza"};
-                doc.item = data[0].pizza[index - 1]
+                let doc = {"pr_cat":"pizza"};                
+                let randomIndex = Math.floor((Math.random()*100)%10);
+                doc.recommended = [];
+                doc.recommended.push(data[1].burgers[randomIndex]);
+                doc.recommended.push(data[2].beverages[randomIndex]);
+                doc.item = data[0].pizza[index - 1];                
+                console.log(doc);
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
@@ -36,18 +41,25 @@ exports.loadItem = (item) => {
         return db.collection('foodItems').find().toArray()
             .then((data) => {
                 let doc = {"pr_cat":"burgers"};
+                let randomIndex = Math.floor((Math.random()*100)%10);
+                doc.recommended = [];
+                doc.recommended.push(data[0].pizza[randomIndex]);
+                doc.recommended.push(data[2].beverages[randomIndex]);
                 doc.item = data[1].burgers[index - 1]                
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
-    } 
-    
+    }    
     else if (category == 'bvg') {
         let index = parseInt(item.split('bvg00')[1]);
         return db.collection('foodItems').find().toArray()
             .then((data) => {
                 let doc = {"pr_cat":"beverages"};
-                doc.item = data[2].beverages[index - 1]
+                let randomIndex = Math.floor((Math.random()*100)%10);
+                doc.recommended = [];
+                doc.recommended.push(data[0].pizza[randomIndex]);
+                doc.recommended.push(data[1].burgers[randomIndex]);
+                doc.item = data[2].beverages[index - 1];
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));

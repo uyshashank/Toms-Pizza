@@ -13,34 +13,34 @@ let itemPrice = itemDoc.item.pr_price;
     <!-- A row for item image and its features -->
     <div class="row">
         <!-- Item image -->
-        <div class="col-md-6 bg-info">
-            <img class="my-2 cardImg " src="<%= path %>">
-        </div>
-        <!-- Item features -->
-
-        <div class="col-md-6 bg-warning">
-            <h6 style="height: 30px"><%= itemTitle %></h6>
-            <p class="text-muted" style="font-size: 12px; height: 60px"><%= itemInfo %></p>
+        <div class="col-md-6 pb-3 text-center border-bottom">
+            <img class="my-2 itemImg" src="<%= path %>">
+            <!-- Item features -->
+            <h4 style="height: 30px"><%= itemTitle %></h4>
+            <p class="text-muted" style="font-size: 12px;"><%= itemInfo %></p>
             <% if(itemDoc.pr_cat == 'pizza'){ %>
-            <table class="w-100">
-                <thead>
-                    <tr>
-                        <th>Reg</th>
-                        <th>Med</th>
-                        <th>Lrg</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>₹<%= pzaReg %></td>
-                        <td>₹<%= pzaMed %></td>
-                        <td>₹<%= pzaLrg %></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-4">
+                    <button class="btn btn-outline-warning active" id="reg" onclick="activate('reg','med','lrg')">
+                        Reg: ₹<%= pzaReg %>
+                    </button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-outline-warning" id="med" onclick="activate('med','reg','lrg')">
+                        Med: ₹<%= pzaMed %>
+                    </button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-outline-warning" id="lrg" onclick="activate('lrg','reg','med')">
+                        Lrg: ₹<%= pzaLrg %>
+                    </button>
+                </div>
+            </div>
             <% } else {%>
-                <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
+            <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
             <% }%>
         </div>
+        <div class="col-md-6" style="margin-top:40px;">
+            
+        </div>
     </div>
-</div>
