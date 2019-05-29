@@ -29,8 +29,7 @@ exports.loadItem = (item) => {
                 doc.recommended = [];
                 doc.recommended.push(data[1].burgers[randomIndex]);
                 doc.recommended.push(data[2].beverages[randomIndex]);
-                doc.item = data[0].pizza[index - 1];                
-                console.log(doc);
+                doc.item = data[0].pizza[index - 1];
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));

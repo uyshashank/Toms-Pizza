@@ -1,5 +1,17 @@
 <% 
 let path = "../../products/images/" + itemDoc.pr_cat + "/" + itemDoc.item.pr_img;
+let path1,path2;
+if(itemDoc.pr_cat == 'pizza'){    
+    path1 = "../../products/images/burgers/" + itemDoc.recommended[0].pr_img;
+    path2 = "../../products/images/beverages/" + itemDoc.recommended[1].pr_img;    
+}else if(itemDoc.pr_cat == 'burgers'){
+    path1 = "../../products/images/pizza/" + itemDoc.recommended[0].pr_img;
+    path2 = "../../products/images/beverages/" + itemDoc.recommended[1].pr_img;
+}else if(itemDoc.pr_cat == 'beverages'){
+    path1 = "../../products/images/pizza/" + itemDoc.recommended[0].pr_img;
+    path2 = "../../products/images/burgers/" + itemDoc.recommended[1].pr_img;
+}
+
 let itemTitle = itemDoc.item.pr_name;
 let itemInfo = itemDoc.item.pr_info;
 
@@ -7,6 +19,9 @@ let pzaReg = itemDoc.item.pr_price.size_reg;
 let pzaMed = itemDoc.item.pr_price.size_med;
 let pzaLrg = itemDoc.item.pr_price.size_lrg;
 let itemPrice = itemDoc.item.pr_price;
+
+let type1 = typeof itemDoc.recommended[0].pr_price;
+let type2 = typeof itemDoc.recommended[1].pr_price;
 %>
 
 <div class="container">
@@ -40,7 +55,78 @@ let itemPrice = itemDoc.item.pr_price;
             <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
             <% }%>
         </div>
-        <div class="col-md-6" style="margin-top:40px;">
-            
+
+        <!-- Recommended items -->
+        <div class="col-md-6">
+            <div class="row">
+                <!-- First recommended item -->
+                <div class="col-6">
+                    <div class="text-center">
+                        <a href="/find/<%= itemDoc.recommended[0].pr_id %>">
+                            <img class="my-2 cardImg" src="<%= path1 %>">
+                        </a>
+                        <h6 style="height: 20px"><%= itemDoc.recommended[0].pr_name %></h6>
+                        <p class="text-muted" style="font-size: 12px; height: 30px">
+                            <%= itemDoc.recommended[0].pr_info %>
+                        </p>
+
+                        <% if(type1 == 'string'){%>
+                        <p> <strong>Price: </strong>₹<%= itemDoc.recommended[0].pr_price %> </p>
+                        <% } else {%>
+                        <table class="w-100">
+                            <thead>
+                                <tr>
+                                    <th>Reg</th>
+                                    <th>Med</th>
+                                    <th>Lrg</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>₹<%= itemDoc.recommended[0].pr_price.size_reg %></td>
+                                    <td>₹<%= itemDoc.recommended[0].pr_price.size_med %></td>
+                                    <td>₹<%= itemDoc.recommended[0].pr_price.size_lrg %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <% }%>
+                    </div>
+                </div>
+
+                <!-- Second recommended item -->
+                <div class="col-6">
+                    <div class="text-center">
+                        <a href="/find/<%= itemDoc.recommended[1].pr_id %>">
+                            <img class="my-2 cardImg" src="<%= path2 %>">
+                        </a>
+                        <h6 style="height: 20px"><%= itemDoc.recommended[1].pr_name %></h6>
+                        <p class="text-muted" style="font-size: 12px; height: 30px">
+                            <%= itemDoc.recommended[1].pr_info %>
+                        </p>
+
+                        <% if(type2 == 'string'){%>
+                        <p> <strong>Price: </strong>₹<%= itemDoc.recommended[1].pr_price %> </p>
+                        <% } else {%>
+                        <table class="w-100">
+                            <thead>
+                                <tr>
+                                    <th>Reg</th>
+                                    <th>Med</th>
+                                    <th>Lrg</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>₹<%= itemDoc.recommended[1].pr_price.size_reg %></td>
+                                    <td>₹<%= itemDoc.recommended[1].pr_price.size_med %></td>
+                                    <td>₹<%= itemDoc.recommended[1].pr_price.size_lrg %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <% }%>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
