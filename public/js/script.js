@@ -1,5 +1,6 @@
 function addToCart(id){
-    let pizza = id.name; 
+    let item = id.name; 
+    console.log(item);
 }
 
 function showBTN(spanThis){
