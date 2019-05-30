@@ -1,27 +1,21 @@
 <% 
+//console.log(itemDoc);
 let path = "../../products/images/" + itemDoc.pr_cat + "/" + itemDoc.item.pr_img;
-let path1,path2;
-if(itemDoc.pr_cat == 'pizza'){    
-    path1 = "../../products/images/burgers/" + itemDoc.recommended[0].pr_img;
-    path2 = "../../products/images/beverages/" + itemDoc.recommended[1].pr_img;    
-}else if(itemDoc.pr_cat == 'burgers'){
-    path1 = "../../products/images/pizza/" + itemDoc.recommended[0].pr_img;
-    path2 = "../../products/images/beverages/" + itemDoc.recommended[1].pr_img;
-}else if(itemDoc.pr_cat == 'beverages'){
-    path1 = "../../products/images/pizza/" + itemDoc.recommended[0].pr_img;
-    path2 = "../../products/images/burgers/" + itemDoc.recommended[1].pr_img;
-}
-
 let itemTitle = itemDoc.item.pr_name;
 let itemInfo = itemDoc.item.pr_info;
-
+let itemPrice = itemDoc.item.pr_price;
 let pzaReg = itemDoc.item.pr_price.size_reg;
 let pzaMed = itemDoc.item.pr_price.size_med;
 let pzaLrg = itemDoc.item.pr_price.size_lrg;
-let itemPrice = itemDoc.item.pr_price;
+
+let imgPath=[];   
+imgPath.push("../../products/images/" + itemDoc.pr_category[0] + "/" + itemDoc.recommended[0].pr_img);
+imgPath.push("../../products/images/" + itemDoc.pr_category[0] + "/" + itemDoc.recommended[1].pr_img);
+imgPath.push("../../products/images/" + itemDoc.pr_category[1] + "/" + itemDoc.recommended[2].pr_img);
+imgPath.push("../../products/images/" + itemDoc.pr_category[1] + "/" + itemDoc.recommended[3].pr_img);
 
 let type1 = typeof itemDoc.recommended[0].pr_price;
-let type2 = typeof itemDoc.recommended[1].pr_price;
+let type2 = typeof itemDoc.recommended[2].pr_price;
 %>
 
 <div class="container">
@@ -55,8 +49,29 @@ let type2 = typeof itemDoc.recommended[1].pr_price;
             <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
             <% }%>
         </div>
-
-        <!-- Recommended items -->
-        
+    </div>
+    <!-- Recommended items -->
+    <!-- Full screen row -->
+    <div class="row justify-content-center">
+        <!-- Complete item group in middle -->
+        <div class="col-md-6">
+            <% for(let i=0;i <= itemDoc.recommended.length - 1;i++){ %>
+            <!-- Individual item row start -->
+            <a href="<%= itemDoc.recommended[i].pr_id %>" style="text-decoration: none; color: black;">
+                <div class="row border my-3">
+                    <div class="col-4 bg-info">
+                        <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid">
+                    </div>
+                    <div class="col-8 bg-secondary" style="height: 100px;">
+                        <div class="bg-primary">
+                            <h6> <%= (itemDoc.recommended[i].pr_name).toUpperCase() %> </h6>
+                            <p> <%= itemDoc.recommended[i].pr_info %> </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <!-- Individual item row end -->
+            <% }%>
+        </div>
     </div>
 </div>
