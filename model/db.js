@@ -23,7 +23,7 @@ function random() {
 exports.loadItem = (item) => {
     let db = client.db('products');
     let category = item.split('0')[0];
-
+    
     if (category == 'pza') {
         let index = parseInt(item.split('pza00')[1]);
         return db.collection('foodItems').find().toArray()
