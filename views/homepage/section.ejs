@@ -19,7 +19,7 @@
                 <!-- Pizza panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
-                        <div class="text-center" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                        <div class="text-center itemCard" name="<%=i%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
                             <a href="/find/<%= data[0].pizza[i].pr_id %>">
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/pizza/<%= data[0].pizza[i].pr_img %>">
@@ -57,7 +57,7 @@
 
                     <!-- Pizza panel second row start -->
                     <div class="col-6 py-2">
-                        <div class="text-center" name="<%=i+1%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
+                        <div class="text-center itemCard" name="<%=i+1%>" onmouseover="showBTN(this)" onmouseout="hideBTN(this)">
                             <a href="/find/<%= data[0].pizza[i+1].pr_id %>">
                                  <img class="my-2 cardImg cardImg<%=i+1%>"
                                     src="../../products/images/pizza/<%= data[0].pizza[i+1].pr_img %>">
@@ -111,7 +111,7 @@
                 <!-- Burgers panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
-                        <div class="text-center" name="<%=4*(j)%>" onmouseover="showBTN(this)"
+                        <div class="text-center itemCard" name="<%=4*(j)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
                             <a href="/find/<%= data[1].burgers[i].pr_id %>">
                                 <img class="my-2 cardImg cardImg<%=i%>"
@@ -131,7 +131,7 @@
 
                     <!-- burgers panel second row start -->
                     <div class="col-6 py-2">
-                        <div class="text-center" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
+                        <div class="text-center itemCard" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
                             <a href="/find/<%= data[1].burgers[i+1].pr_id %>">
                                 <img class="my-2 cardImg cardImg<%=i%>"
@@ -170,7 +170,7 @@
                 <!-- beverages panel first row start -->
                 <div class="row">
                     <div class="col-6 py-2">
-                        <div class="text-center" name="<%=4*(j)%>" onmouseover="showBTN(this)"
+                        <div class="text-center itemCard" name="<%=4*(j)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
                             <a href="/find/<%= data[2].beverages[i].pr_id %>">
                                 <img class="my-2 cardImg cardImg<%=i%>"
@@ -191,7 +191,7 @@
 
                     <!-- Beverages panel second row start -->
                     <div class="col-6 py-2">
-                        <div class="text-center" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
+                        <div class="text-center itemCard" name="<%=4*(j+1)%>" onmouseover="showBTN(this)"
                             onmouseout="hideBTN(this)">
                             <a href="/find/<%= data[2].beverages[i+1].pr_id %>">
                                 <img class="my-2 cardImg cardImg<%=i%>"

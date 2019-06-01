@@ -1,30 +1,58 @@
-.nav2{
+body{
+    /* background-color: #f1f3f6; */
+}
+.nav2 {
     background-color: orange;
     height: 40px;
     box-shadow: 0pt 3pt 3pt 0pt lightgray;
 }
-.hero{
-    box-shadow: 0pt 1pt 11pt 1pt rgba(128, 128, 128, 0.829);        
+
+.hero {
+    box-shadow: 0pt 1pt 11pt 1pt rgba(128, 128, 128, 0.829);
     border-radius: 13px;
 }
-.hero:hover{
+
+.hero:hover {
     transform: scale(1.01);
     transition: 0.1s;
-    cursor: pointer;  
+    cursor: pointer;
 }
-.heading{    
+
+.heading {
     border-bottom: 2px solid orange;
 }
-.cardImg{
+
+.cardImg {
     width: 140px;
 }
-.itemImg{
+
+.itemImg {
     width: 200px;
 }
-.imgDiv{    
+
+.imgDiv {
     height: 120px;
 }
+
 .recImg{
+    display: inline-block;    
+    height: 100%;
+    vertical-align: middle;
+}
+.itemCard{
+    background-color: white;
+    border:2px solid #f0f0f0;
+    box-shadow: 0pt 1pt 1pt 0pt lightgray;
+}
+.para {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    color: gray;
+}
+
+.imgDiv {
     width: 120px;
 }
 
@@ -37,8 +65,8 @@
 .cardImg6:hover,
 .cardImg7:hover,
 .cardImg8:hover,
-.cardImg9:hover{
+.cardImg9:hover {
     transform: scale(1.05);
     transition: 0.1s;
-    cursor: pointer;    
+    cursor: pointer;
 }

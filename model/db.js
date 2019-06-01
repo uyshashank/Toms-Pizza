@@ -17,32 +17,38 @@ exports.loadData = (localclient) => {
 }
 
 function random() {
-    return Math.floor(Math.random() * 100) % 10;
+    let sum =0;
+    for(let j=0;j<50;j++){
+        sum += Math.floor(Math.random() * 100);
+    }    
+    return sum%8;
 }
 // Loading items for itempage
 exports.loadItem = (item) => {
     let db = client.db('products');
     let category = item.split('0')[0];
-    
+
     if (category == 'pza') {
         let index = parseInt(item.split('pza00')[1]);
         return db.collection('foodItems').find().toArray()
             .then((data) => {
                 let doc = {
                     pr_cat: "pizza",
-                    pr_category:["burgers", "beverages"],
+                    pr_category: ["burgers", "beverages"],
                     recommended: []
                 };
                 // Sellecting main item
                 doc.item = data[0].pizza[index - 1];
 
-                for (let i = 1; i <= 2; i++)
-                    doc.recommended.push(data[1].burgers[random()]);
-
-                for (let i = 1; i <= 2; i++)
-                    doc.recommended.push(data[2].beverages[random()]);
-
-                console.log(doc);
+                let t1, t2;
+                for (let i = 1; i <= 2; i++) {
+                    t1 = random()+i;
+                    doc.recommended.push(data[1].burgers[t1]);
+                }
+                for (let i = 1; i <= 2; i++) {
+                    t2 = random()+i;
+                    doc.recommended.push(data[2].beverages[t2]);
+                }
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
@@ -52,19 +58,21 @@ exports.loadItem = (item) => {
             .then((data) => {
                 let doc = {
                     pr_cat: "burgers",
-                    pr_category:["pizza", "beverages"],
+                    pr_category: ["pizza", "beverages"],
                     recommended: []
                 };
                 // Sellecting main item
                 doc.item = data[1].burgers[index - 1];
 
-                for (let i = 1; i <= 2; i++)
-                    doc.recommended.push(data[0].pizza[random()]);
-                
-                for (let i = 1; i <= 2; i++)
-                    doc.recommended.push(data[2].beverages[random()]);
-                
-                console.log(doc);
+                let t1, t2;
+                for (let i = 1; i <= 2; i++) {
+                    t1 = random()+i;
+                    doc.recommended.push(data[0].pizza[t1]);
+                }
+                for (let i = 1; i <= 2; i++) {
+                    t2 = random()+i;
+                    doc.recommended.push(data[2].beverages[t2]);
+                }
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));
@@ -74,19 +82,21 @@ exports.loadItem = (item) => {
             .then((data) => {
                 let doc = {
                     pr_cat: "beverages",
-                    pr_category:["pizza", "burgers"],
+                    pr_category: ["pizza", "burgers"],
                     recommended: []
                 };
+                let t1, t2;
                 // Sellecting main item
                 doc.item = data[2].beverages[index - 1];
 
-                for (let i = 1; i <= 2; i++)
-                    doc.recommended.push(data[0].pizza[random()]);
-                
-                for (let i = 1; i <= 2; i++)
-                    doc.recommended.push(data[1].burgers[random()]);
-                
-                console.log(doc);
+                for (let i = 1; i <= 2; i++) {
+                    t1 = random()+i;
+                    doc.recommended.push(data[0].pizza[t1]);
+                }
+                for (let i = 1; i <= 2; i++) {
+                    t2 = random()+i;
+                    doc.recommended.push(data[1].burgers[t2]);
+                }
                 return doc;
             })
             .catch((err) => console.log("Something went wrong! \n" + err));

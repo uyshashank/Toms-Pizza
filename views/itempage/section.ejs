@@ -16,14 +16,15 @@ imgPath.push("../../products/images/" + itemDoc.pr_category[1] + "/" + itemDoc.r
 
 let type1 = typeof itemDoc.recommended[0].pr_price;
 let type2 = typeof itemDoc.recommended[2].pr_price;
+console.log()
 %>
 
 <div class="container">
     <!-- A row for item image and its features -->
     <div class="row justify-content-center mt-3">
         <!-- Item image -->
-        <div class="col-md-6 pb-3 text-center border-left border-right border-bottom itemBox">
-            <img class="my-2 itemImg" src="<%= path %>">
+        <div class="col-md-6 py-2 bg-white text-center border itemBox">
+            <img class="itemImg" src="<%= path %>">
             <!-- Item features -->
             <h4 style="height: 30px"><%= itemTitle %></h4>
             <p class="text-muted" style="font-size: 12px;"><%= itemInfo %></p>
@@ -52,20 +53,46 @@ let type2 = typeof itemDoc.recommended[2].pr_price;
     </div>
     <!-- Recommended items -->
     <!-- Full screen row -->
+    <h4 class="text-center mt-3">
+        <img src="../../images/foodIcon.png" class="img-fluid" style="width: 30px;">
+        <span class="heading">Recommended</span>
+    </h4>
     <div class="row justify-content-center">
         <!-- Complete item group in middle -->
         <div class="col-md-6">
             <% for(let i=0;i <= itemDoc.recommended.length - 1;i++){ %>
             <!-- Individual item row start -->
             <a href="<%= itemDoc.recommended[i].pr_id %>" style="text-decoration: none; color: black;">
-                <div class="row border my-3">
-                    <div class="col-4 bg-info">
-                        <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid">
+                <div class="row border my-3 bg-white">
+                    <div class="col-4 border-right imgDiv text-center">
+                        <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid recImg">
                     </div>
-                    <div class="col-8 bg-secondary" style="height: 100px;">
-                        <div class="bg-primary">
+                    <div class="col-8 mt-3">
+                        <div>
                             <h6> <%= (itemDoc.recommended[i].pr_name).toUpperCase() %> </h6>
-                            <p> <%= itemDoc.recommended[i].pr_info %> </p>
+                            <p class="para"> <%= itemDoc.recommended[i].pr_info %> </p>
+
+
+                            <% if(typeof itemDoc.recommended[i].pr_price == 'object'){ %>
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Reg</th>
+                                        <th>Med</th>
+                                        <th>Lrg</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>₹<%= itemDoc.recommended[i].pr_price.size_reg %></td>
+                                        <td>₹<%= itemDoc.recommended[i].pr_price.size_med %></td>
+                                        <td>₹<%= itemDoc.recommended[i].pr_price.size_lrg %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <% } else {%>
+                            <p> <strong>Price: </strong>₹<%= itemDoc.recommended[i].pr_price %> </p>
+                            <% }%>
                         </div>
                     </div>
                 </div>
