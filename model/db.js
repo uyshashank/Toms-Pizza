@@ -16,9 +16,29 @@ exports.loadData = (localclient) => {
     return db.collection('foodItems').find().toArray();
 }
 
-function random() {
-    return Math.floor(Math.random() * 100)%8;
+function random(i) {
+    if (i == 1) {
+        return Math.floor(Math.random(i) * 100) % 9;
+    } else if (i == 2) {
+        return Math.floor((Math.random(Math.random()) + 2321) * 100) % 9;
+    }
 }
+// function checkRandom(i, t) {
+//     let temp1, temp2;
+//     if (i == 1)
+//         temp1 = t;
+//     else if (i == 2)
+//         temp2 = t;
+
+//     if (temp1 == temp2) {
+//         if (temp2 != 0)
+//             t -= 1;
+//         else
+//             t += 1;
+//     }
+//     return t;
+// }
+
 // Loading items for itempage
 exports.loadItem = (item) => {
     let db = client.db('products');
@@ -36,13 +56,36 @@ exports.loadItem = (item) => {
                 // Sellecting main item
                 doc.item = data[0].pizza[index - 1];
 
-                let t1, t2;
+                let temp1, temp2;
                 for (let i = 1; i <= 2; i++) {
-                    t1 = random();
+                    let t1 = random(i);
+                    // Preventing same number algo
+                    if (i == 1)
+                        temp1 = t1;
+                    else if (i == 2)
+                        temp2 = t1;
+
+                    if (temp1 == temp2) {
+                        if (temp2 != 0)
+                            t1 -= 1;
+                        else
+                            t1 += 1;
+                    }
                     doc.recommended.push(data[1].burgers[t1]);
                 }
                 for (let i = 1; i <= 2; i++) {
-                    t2 = random();
+                    let t2 = random(i);
+                    if (i == 1)
+                        temp1 = t2;
+                    else if (i == 2)
+                        temp2 = t2;
+
+                    if (temp1 == temp2) {
+                        if (temp2 != 0)
+                            t2 -= 1;
+                        else
+                            t2 += 1;
+                    }
                     doc.recommended.push(data[2].beverages[t2]);
                 }
                 return doc;
@@ -57,16 +100,39 @@ exports.loadItem = (item) => {
                     pr_category: ["pizza", "beverages"],
                     recommended: []
                 };
+                let temp1, temp2;
                 // Sellecting main item
                 doc.item = data[1].burgers[index - 1];
-
-                let t1, t2;
                 for (let i = 1; i <= 2; i++) {
-                    t1 = random();
+                    let t1 = random(i);
+                    // Preventing same number algo
+                    if (i == 1)
+                        temp1 = t1;
+                    else if (i == 2)
+                        temp2 = t1;
+
+                    if (temp1 == temp2) {
+                        if (temp2 != 0)
+                            t1 -= 1;
+                        else
+                            t1 += 1;
+                    }
                     doc.recommended.push(data[0].pizza[t1]);
                 }
                 for (let i = 1; i <= 2; i++) {
-                    t2 = random();
+                    let t2 = random(i);
+                    // Preventing same number algo
+                    if (i == 1)
+                        temp1 = t2;
+                    else if (i == 2)
+                        temp2 = t2;
+
+                    if (temp1 == temp2) {
+                        if (temp2 != 0)
+                            t2 -= 1;
+                        else
+                            t2 += 1;
+                    }
                     doc.recommended.push(data[2].beverages[t2]);
                 }
                 return doc;
@@ -81,16 +147,38 @@ exports.loadItem = (item) => {
                     pr_category: ["pizza", "burgers"],
                     recommended: []
                 };
-                let t1, t2;
+                let temp1, temp2;
                 // Sellecting main item
                 doc.item = data[2].beverages[index - 1];
 
                 for (let i = 1; i <= 2; i++) {
-                    t1 = random();
+                    let t1 = random(i);
+                    if (i == 1)
+                        temp1 = t1;
+                    else if (i == 2)
+                        temp2 = t1;
+
+                    if (temp1 == temp2) {
+                        if (temp2 != 0)
+                            t1 -= 1;
+                        else
+                            t1 += 1;
+                    }
                     doc.recommended.push(data[0].pizza[t1]);
                 }
                 for (let i = 1; i <= 2; i++) {
-                    t2 = random();
+                    let t2 = random(i);
+                    if (i == 1)
+                        temp1 = t2;
+                    else if (i == 2)
+                        temp2 = t2;
+
+                    if (temp1 == temp2) {
+                        if (temp2 != 0)
+                            t2 -= 1;
+                        else
+                            t2 += 1;
+                    }
                     doc.recommended.push(data[1].burgers[t2]);
                 }
                 return doc;
