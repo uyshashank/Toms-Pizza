@@ -17,11 +17,7 @@ exports.loadData = (localclient) => {
 }
 
 function random() {
-    let sum =0;
-    for(let j=0;j<50;j++){
-        sum += Math.floor(Math.random() * 100);
-    }    
-    return sum%8;
+    return Math.floor(Math.random() * 100)%8;
 }
 // Loading items for itempage
 exports.loadItem = (item) => {
@@ -42,11 +38,11 @@ exports.loadItem = (item) => {
 
                 let t1, t2;
                 for (let i = 1; i <= 2; i++) {
-                    t1 = random()+i;
+                    t1 = random();
                     doc.recommended.push(data[1].burgers[t1]);
                 }
                 for (let i = 1; i <= 2; i++) {
-                    t2 = random()+i;
+                    t2 = random();
                     doc.recommended.push(data[2].beverages[t2]);
                 }
                 return doc;
@@ -66,11 +62,11 @@ exports.loadItem = (item) => {
 
                 let t1, t2;
                 for (let i = 1; i <= 2; i++) {
-                    t1 = random()+i;
+                    t1 = random();
                     doc.recommended.push(data[0].pizza[t1]);
                 }
                 for (let i = 1; i <= 2; i++) {
-                    t2 = random()+i;
+                    t2 = random();
                     doc.recommended.push(data[2].beverages[t2]);
                 }
                 return doc;
@@ -90,11 +86,11 @@ exports.loadItem = (item) => {
                 doc.item = data[2].beverages[index - 1];
 
                 for (let i = 1; i <= 2; i++) {
-                    t1 = random()+i;
+                    t1 = random();
                     doc.recommended.push(data[0].pizza[t1]);
                 }
                 for (let i = 1; i <= 2; i++) {
-                    t2 = random()+i;
+                    t2 = random();
                     doc.recommended.push(data[1].burgers[t2]);
                 }
                 return doc;

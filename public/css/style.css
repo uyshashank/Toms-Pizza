@@ -1,5 +1,10 @@
-body{
-    /* background-color: #f1f3f6; */
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    text-decoration: none;
+    color: black;
 }
 .nav2 {
     background-color: orange;

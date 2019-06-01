@@ -2,6 +2,7 @@
 //console.log(itemDoc);
 let path = "../../products/images/" + itemDoc.pr_cat + "/" + itemDoc.item.pr_img;
 let itemTitle = itemDoc.item.pr_name;
+let itemId = itemDoc.item.pr_id;
 let itemInfo = itemDoc.item.pr_info;
 let itemPrice = itemDoc.item.pr_price;
 let pzaReg = itemDoc.item.pr_price.size_reg;
@@ -49,6 +50,11 @@ console.log()
             <% } else {%>
             <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
             <% }%>
+            <button class="mt-3 text-white w-50 btn btn-warning" onclick="addToCart(this)"
+                id="itemId">
+                Add to Cart
+                <i class="fas fa-shopping-cart"></i>
+            </button>
         </div>
     </div>
     <!-- Recommended items -->
