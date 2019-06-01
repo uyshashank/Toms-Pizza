@@ -30,7 +30,7 @@ console.log()
             <h4 style="height: 30px"><%= itemTitle %></h4>
             <p class="text-muted" style="font-size: 12px;"><%= itemInfo %></p>
             <% if(itemDoc.pr_cat == 'pizza'){ %>
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col-4">
                     <button class="btn btn-outline-warning active" id="reg" onclick="activate('reg','med','lrg')">
                         Reg: ₹<%= pzaReg %>
@@ -50,8 +50,8 @@ console.log()
             <% } else {%>
             <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
             <% }%>
-            <button class="mt-3 text-white w-50 btn btn-warning" onclick="addToCart(this)"
-                id="itemId">
+            <button class="mt-1 text-white w-50 btn btn-warning" onclick="addToCart(this)"
+                id="<%=itemId%>">
                 Add to Cart
                 <i class="fas fa-shopping-cart"></i>
             </button>
@@ -77,7 +77,6 @@ console.log()
                         <div>
                             <h6> <%= (itemDoc.recommended[i].pr_name).toUpperCase() %> </h6>
                             <p class="para"> <%= itemDoc.recommended[i].pr_info %> </p>
-
 
                             <% if(typeof itemDoc.recommended[i].pr_price == 'object'){ %>
                             <table class="w-100">
