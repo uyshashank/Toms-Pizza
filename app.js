@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session');
-const bodyParser = require('body-parser');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const PORT = process.env.PORT || 3000;
 const store = new MongoDBStore({
     uri: 'mongodb+srv://shashank:pass1997@tomspizza-5i4uk.mongodb.net/sessions',
