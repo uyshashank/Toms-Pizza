@@ -32,14 +32,14 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin" action="/createUser" method="POST">
+  <form class="form-signin" action="/signup" method="POST">
     <img class="mb-4" src="../../images/tomspizza_login_logo.jpg" alt="" width="200px" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
     <input name="fname" type="text" class="my-2 form-control" placeholder="First Name" required autofocus>
     <input name="lname" type="text" class="my-2 form-control" placeholder="Last Name" required>
     <input name="email" type="email" class="my-2 form-control" placeholder="Email" required>    
-    <input name="pass" type="password" class="my-2 form-control" id="pass" placeholder="Password" required>
-    <input name="cpass" type="password" class="my-2 form-control" id="cpass" placeholder="Confirm Password" required>
+    <input name="password" type="password" class="my-2 form-control" id="pass" placeholder="Password" required>
+    <input type="password" class="my-2 form-control" id="cpass" placeholder="Confirm Password" required>
     <div class="warningInactive" id="warningMessage">
       <i class="float-left mt-2 text-warning fas fa-exclamation-circle"></i>
       <i class="ml-2 my-1 float-left">Password Mismatch!</i>

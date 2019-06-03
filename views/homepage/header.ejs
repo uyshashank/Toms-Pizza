@@ -35,8 +35,10 @@
 
         <%if(logStatus == 'true'){%>
         <div class="accounts mr-3">
-            <a href="/logout" class="btn text-white" style="background-color: orange">
-                Logout
+            <img src="../../images/accountImg.png" width="48px">
+            <p class="d-inline-block text-danger">Hi, <%=userName%></p>
+            <a href="/logout" class="text-danger">
+                | Logout
             </a>
         </div>
         <%} else {%>

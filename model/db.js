@@ -170,3 +170,13 @@ exports.loadItem = (item) => {
             .catch((err) => console.log("Something went wrong! \n" + err));
     }
 }
+
+exports.authenticateUser = (userInfo) => {
+    let db = client.db('accounts');
+    return db.collection('users').find({"user_email":userInfo.email}).toArray();
+}
+// Inserting new user
+exports.insertUser = (userInfo) => {
+    let db = client.db('accounts');
+    return db.collection('users').insertOne(userInfo);
+}
