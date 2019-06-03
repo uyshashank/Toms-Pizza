@@ -37,7 +37,11 @@ app.get('/', HP.HPDriver);
 app.get('/find/:item', IP.IPDriver);
 app.get('/login',HP.getLogin);
 app.get('/logout',HP.logout);
+app.get('/signup',HP.getSignup);
+
 // Post Routes
 app.post('/login',HP.postLogin);
+app.post('/signup',HP.postSignup);
+
 // Starting server
 app.listen(PORT, () => console.log(`Server is up at ${PORT}`));
