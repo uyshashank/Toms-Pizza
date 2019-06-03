@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session');
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
+const store = new MongoDBStore({
+    uri: 'mongodb+srv://shashank:pass1997@tomspizza-5i4uk.mongodb.net/sessions',
+    collection:'sessions'
+});
 
 // Custom modules
 const HP = require('./controller/homepage');
@@ -18,12 +25,19 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(express.static(__dirname + '/public'));
+app.use(session({
+    secret: 'Jai Hind',
+    resave: false,
+    saveUninitialized: false,
+    store: store
+}));
 app.set('view engine', 'ejs');
 
 // Get Routes
 app.get('/', HP.HPDriver);
 app.get('/find/:item', IP.IPDriver);
+app.get('/login',HP.getLogin);
 // Post Routes
-
+app.post('/login',HP.postLogin);
 // Starting server
 app.listen(PORT, () => console.log(`Server is up at ${PORT}`));
