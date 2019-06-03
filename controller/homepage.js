@@ -21,7 +21,9 @@ exports.HPDriver = (req, res) => {
 // Rendering login page
 exports.getLogin = (req, res) => {
     referer = req.headers.referer;
-    if (referer == null || undefined) {
+    let host = req.headers.host;
+    let route = referer.split(host)[1];
+    if (referer == null || undefined || route == '/signup' || route == '/login') {
         referer = '/';
     }
     res.render('userAccounts/loginPage');
@@ -67,16 +69,27 @@ exports.postSignup = (req, res) => {
     userInfo.user_fname = req.body.fname;
     userInfo.user_lname = req.body.lname;
     userInfo.user_email = req.body.email;
-    userInfo.user_password = req.body.password;    
-    
-    db.insertUser(userInfo)
-        .then(() => {            
-            req.session.logStatus = 'true';
-            req.session.userName = userInfo.user_fname;
-            res.redirect('/');
+    userInfo.user_password = req.body.password;
+    // Checking whether user with this email exist or not
+    db.checkUserExistence(userInfo)
+        .then((userData) => {
+            if (userData.length == 0) {
+                db.insertUser(userInfo)
+                    .then(() => {
+                        req.session.logStatus = 'true';
+                        req.session.userName = userInfo.user_fname;
+                        res.redirect('/');
+                    })
+                    .catch((err) => {
+                        res.send("Sorry! It's not you, it's us. Something went wrong on our side. Please try after sometime!");
+                        console.log("Something went wrong in postSignup function in homepage.js file\n" + err);
+                    });
+            } else {
+                res.send("An account with this email id already exist!");
+            }
         })
         .catch((err) => {
             res.send("Sorry! It's not you, it's us. Something went wrong on our side. Please try after sometime!");
             console.log("Something went wrong in postSignup function in homepage.js file\n" + err);
-        });    
+        })
 }

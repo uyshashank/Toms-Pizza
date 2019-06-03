@@ -175,6 +175,11 @@ exports.authenticateUser = (userInfo) => {
     let db = client.db('accounts');
     return db.collection('users').find({"user_email":userInfo.email}).toArray();
 }
+// Checking whether user with this email exist or not
+exports.checkUserExistence = (userInfo) => {
+    let db = client.db('accounts');
+    return db.collection('users').find({"user_email":userInfo.user_email}).toArray();
+}
 // Inserting new user
 exports.insertUser = (userInfo) => {
     let db = client.db('accounts');
