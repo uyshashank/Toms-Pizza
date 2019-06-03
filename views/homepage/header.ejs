@@ -31,6 +31,15 @@
             <img src="../../images/tomspizza_logo_dual.jpg" width="250" class="d-inline-block align-top img-fluid ml-4"
                 alt="TomsPizza">
         </a>
+
+
+        <%if(logStatus == 'true'){%>
+        <div class="accounts mr-3">
+            <a href="/logout" class="btn text-white" style="background-color: orange">
+                Logout
+            </a>
+        </div>
+        <%} else {%>
         <div class="accounts mr-3">
             <a href="/login" class="btn text-white" style="background-color: orange">
                 Login
@@ -39,6 +48,9 @@
                 Signup
             </a>
         </div>
+        <%}%>
+
+
     </nav>
     <!-- Navbar for <md -->
     <nav class="d-md-none justify-content-center navbar navbar-light" style="border-bottom: 2px solid orange">

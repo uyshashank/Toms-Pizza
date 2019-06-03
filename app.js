@@ -36,6 +36,7 @@ app.set('view engine', 'ejs');
 app.get('/', HP.HPDriver);
 app.get('/find/:item', IP.IPDriver);
 app.get('/login',HP.getLogin);
+app.get('/logout',HP.logout);
 // Post Routes
 app.post('/login',HP.postLogin);
 // Starting server

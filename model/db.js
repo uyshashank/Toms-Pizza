@@ -23,22 +23,6 @@ function random(i) {
         return Math.floor((Math.random(Math.random()) + 2321) * 100) % 9;
     }
 }
-// function checkRandom(i, t) {
-//     let temp1, temp2;
-//     if (i == 1)
-//         temp1 = t;
-//     else if (i == 2)
-//         temp2 = t;
-
-//     if (temp1 == temp2) {
-//         if (temp2 != 0)
-//             t -= 1;
-//         else
-//             t += 1;
-//     }
-//     return t;
-// }
-
 // Loading items for itempage
 exports.loadItem = (item) => {
     let db = client.db('products');
