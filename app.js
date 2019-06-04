@@ -40,9 +40,10 @@ app.get('/logout',HP.logout);
 app.get('/signup',HP.getSignup);
 app.get('/logStatus',HP.whatIsLogStatus);
 
+
 // Post Routes
 app.post('/login',HP.postLogin);
 app.post('/signup',HP.postSignup);
-
+app.post('/atc',HP.ATC_Handler);
 // Starting server
 app.listen(PORT, () => console.log(`Server is up at ${PORT}`));

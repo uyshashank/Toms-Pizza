@@ -40,6 +40,7 @@ exports.postLogin = (req, res) => {
                     if (userInfo.password == userData[0].user_password) {
                         req.session.logStatus = "true";
                         req.session.userName = userData[0].user_fname;
+                        req.session.userEmail = userData[0].user_email;
                         res.redirect(referer);
                     } else {
                         res.send("Invalid password");
@@ -94,6 +95,16 @@ exports.postSignup = (req, res) => {
         })
 }
 
-exports.whatIsLogStatus = (req, res) => {    
-    res.send(req.session.logStatus); 
+exports.whatIsLogStatus = (req, res) => {
+    res.send(req.session.logStatus);
+}
+
+exports.ATC_Handler = (req, res) => {    
+    const keys = Object.keys(req.body);
+    const data = JSON.parse(keys[0]);
+    const user_email = req.session.userEmail;
+
+    // Inserting data into cart is left
+    
+
 }
