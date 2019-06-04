@@ -6,7 +6,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const PORT = process.env.PORT || 3000;
 const store = new MongoDBStore({
     uri: 'mongodb+srv://shashank:pass1997@tomspizza-5i4uk.mongodb.net/sessions',
-    collection:'sessions'
+    collection: 'sessions'
 });
 
 // Custom modules
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");    
     next();
 });
 app.use(express.static(__dirname + '/public'));
@@ -30,20 +30,22 @@ app.use(session({
     saveUninitialized: false,
     store: store
 }));
+
+
 app.set('view engine', 'ejs');
 
 // Get Routes
 app.get('/', HP.HPDriver);
 app.get('/find/:item', IP.IPDriver);
-app.get('/login',HP.getLogin);
-app.get('/logout',HP.logout);
-app.get('/signup',HP.getSignup);
-app.get('/logStatus',HP.whatIsLogStatus);
+app.get('/login', HP.getLogin);
+app.get('/logout', HP.logout);
+app.get('/signup', HP.getSignup);
+app.get('/logStatus', HP.whatIsLogStatus);
 
 
 // Post Routes
-app.post('/login',HP.postLogin);
-app.post('/signup',HP.postSignup);
-app.post('/atc',HP.ATC_Handler);
+app.post('/login', HP.postLogin);
+app.post('/signup', HP.postSignup);
+app.post('/atc', HP.ATC_Handler);
 // Starting server
 app.listen(PORT, () => console.log(`Server is up at ${PORT}`));

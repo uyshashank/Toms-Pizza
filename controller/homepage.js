@@ -30,6 +30,8 @@ exports.getLogin = (req, res) => {
 }
 // Handling login page data // Authenticating user
 exports.postLogin = (req, res) => {
+    console.log("Post login request\n");
+    console.log(req);
     let userInfo = req.body;
     db.authenticateUser(userInfo)
         .then((userData) => {
@@ -54,6 +56,7 @@ exports.postLogin = (req, res) => {
             res.send("Sorry! It's not you, it's us. Something went wrong on our side. Please try after sometime!");
             console.log("Something went wrong in postLogin function in homepage.js file\n" + err);
         })
+        // console.log(req);
 }
 // Logging out
 exports.logout = (req, res) => {
@@ -66,6 +69,7 @@ exports.getSignup = (req, res) => {
 }
 // Handling signup page data 
 exports.postSignup = (req, res) => {
+    
     let userInfo = {};
     userInfo.user_fname = req.body.fname;
     userInfo.user_lname = req.body.lname;
@@ -99,12 +103,56 @@ exports.whatIsLogStatus = (req, res) => {
     res.send(req.session.logStatus);
 }
 
-exports.ATC_Handler = (req, res) => {    
-    const keys = Object.keys(req.body);
-    const data = JSON.parse(keys[0]);
-    const user_email = req.session.userEmail;
-
-    // Inserting data into cart is left
+exports.ATC_Handler = (req, res) => {
+    // console.log("Before setting = ");
+    console.log(req.session.NickName);
+req.session.NickName = 'Harry';
+// console.log(req);
+    // console.log("After setting = ");
+    // console.log(req.session.NickName);
     
+    //     const keys = Object.keys(req.body);
+    //     const data = JSON.parse(keys[0]);
+    //     const sessionCart = req.session.cart;
+    // console.log("sessionCart = " + sessionCart + "\n");
+    //     if (req.session.cart == undefined) {
+    //         console.log("Inside if undefined");
+    //         let cart = {
+    //             pizza: [],
+    //             burgers: [],
+    //             beverages: []
+    //         };
+    //         if (typeof data == 'object') {
+    //             cart.pizza.push({
+    //                 id: data.itemID,
+    //                 size: data.pzaNum
+    //             });            
+    //             req.session.cart = cart;
+    //         } else {
+    //             let category = data.split('0')[0];
+    //             if (category == 'bgr') {
+    //                 cart.burgers.push({
+    //                     id: data
+    //                 })
+    //                 req.session.cart = cart;
+    //             } else {
+    //                 cart.beverages.push({
+    //                     id: data
+    //                 })
+    //                 req.session.cart = cart;
+    //             }
+    //         }        
+    //         console.log("Inside if => ");
+    //         console.log(cart);
+    //     }else{
+    //         let cart = req.session.cart;
+    //         console.log("Inside else = " + cart);
+    //     }
 
+    // Inserting data into cart
+    // console.log(cart);
+
+    // req.session.cartItem = {
+
+    // }
 }

@@ -49,17 +49,21 @@ function sendATCrequest(itemID, pzaNum = 0) {
     }
     fetch('/atc', {
             method: "POST",
+            credentials: 'same-origin',
             headers: {
-                'Accept': 'application/json',                
-                'Content-Type': 'text/html; charset=utf-8',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body:JSON.stringify(data)
+            },            
+            body: JSON.stringify(data)
         }).then(function (response) {
+            // console.log("text = ", response.text());
             return response.text();
+            
         })
         .then((text) => {
-            return text;
+            // return text;
+            // console.log("text = ", text);
         })
 }
 
