@@ -1,11 +1,13 @@
-a{
+a {
     text-decoration: none;
     color: black;
 }
-a:hover{
+
+a:hover {
     text-decoration: none;
     color: black;
 }
+
 .nav2 {
     background-color: orange;
     height: 40px;
@@ -39,16 +41,18 @@ a:hover{
     height: 120px;
 }
 
-.recImg{
-    display: inline-block;    
+.recImg {
+    display: inline-block;
     height: 100%;
     vertical-align: middle;
 }
-.itemCard{
+
+.itemCard {
     background-color: white;
-    border:2px solid #f0f0f0;
+    border: 2px solid #f0f0f0;
     box-shadow: 0pt 1pt 1pt 0pt lightgray;
 }
+
 .para {
     white-space: nowrap;
     overflow: hidden;
@@ -74,4 +78,20 @@ a:hover{
     transform: scale(1.05);
     transition: 0.1s;
     cursor: pointer;
+}
+
+.cartBadge {
+    font-size: 10px;
+    position: absolute;
+    left: 25px;
+    top: -8px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.cartBadgeLrg {
+    font-size: 10px;
+    position: absolute;    
+    right: 85px;
+    top: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

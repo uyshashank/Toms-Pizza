@@ -38,6 +38,7 @@ app.get('/find/:item', IP.IPDriver);
 app.get('/login',HP.getLogin);
 app.get('/logout',HP.logout);
 app.get('/signup',HP.getSignup);
+app.get('/logStatus',HP.whatIsLogStatus);
 
 // Post Routes
 app.post('/login',HP.postLogin);

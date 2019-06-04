@@ -1,3 +1,5 @@
+<% let cartLength = 0%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +40,9 @@
             <p class="d-inline text-danger">Hi, <%=userName%></p>
             <a href="/cart">
                 | <i class="fas fa-shopping-cart text-primary"></i>
+                <span class="badge badge-danger cartBadgeLrg">
+                    <%= cartLength %>
+                </span>
             </a>
             <a href="/logout" class="text-danger">
                 | Logout
@@ -79,32 +84,35 @@
                     Beverages
                 </a>
                 <%if(logStatus == 'true'){%>
-                    <span class="dropdown">
-                            <a href="/beverages" class="mx-2 text-white dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../images/accountImg.png" width="48px" class="d-none d-lg-flex"> 
-                                Hi, <%=userName%>
-                            </a>
-                            <ul class="dropdown-menu pl-3">
-                            <a href="/cart" class="">
-                                <li>                                   
-                                    <i class="fas fa-shopping-cart"></i>                                    
-                                </li>
-                            </a>
-                            <a href="/logout" class="">
-                                <li>                           
-                                    Logout                            
-                                </li>
-                            </a>
-                            </ul>
-                        </span>
-                    <%} else {%>            
-                        <a href="/login" class="mx-2 text-white">
-                            <i class="fas fa-sign-in-alt"></i>
-                        </a>
-                        <a href="/signup" class="mx-2 text-white">
-                            <i class="fas fa-user-plus"></i>
-                        </a>            
-                    <%}%>    
+        <span class="dropdown">
+            <a href="/beverages" class="mx-2 text-white dropdown-toggle" data-toggle="dropdown">
+                <img src="../../images/accountImg.png" width="48px" class="d-none d-lg-flex">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-danger cartBadge">
+                    <%= cartLength %>
+                </span>
+            </a>
+            <ul class="dropdown-menu pl-3">
+                <a href="/cart" class="">
+                    <li>
+                        View Cart
+                    </li>
+                </a>
+                <a href="/logout" class="">
+                    <li>
+                        Logout
+                    </li>
+                </a>
+            </ul>
+        </span>
+        <%} else {%>
+        <a href="/login" class="mx-2 text-white">
+            <i class="fas fa-sign-in-alt"></i>
+        </a>
+        <a href="/signup" class="mx-2 text-white">
+            <i class="fas fa-user-plus"></i>
+        </a>
+        <%}%>    
             
                 
             </div>

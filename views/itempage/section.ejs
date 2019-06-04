@@ -31,17 +31,17 @@ let type2 = typeof itemDoc.recommended[2].pr_price;
             <% if(itemDoc.pr_cat == 'pizza'){ %>
             <div class="row mb-2">
                 <div class="col-4">
-                    <button class="btn btn-outline-warning active" id="reg" onclick="activate('reg','med','lrg')">
+                    <button class="btn btn-outline-warning price_button" id="reg" onclick="activate('reg','med','lrg')">
                         Reg: ₹<%= pzaReg %>
                     </button>
         </div>
                 <div class="col-4">
-                    <button class="btn btn-outline-warning" id="med" onclick="activate('med','reg','lrg')">
+                    <button class="btn btn-outline-warning price_button" id="med" onclick="activate('med','reg','lrg')">
                         Med: ₹<%= pzaMed %>
                     </button>
                 </div>
                 <div class="col-4">
-                    <button class="btn btn-outline-warning" id="lrg" onclick="activate('lrg','reg','med')">
+                    <button class="btn btn-outline-warning price_button" id="lrg" onclick="activate('lrg','reg','med')">
                         Lrg: ₹<%= pzaLrg %>
                     </button>
                 </div>

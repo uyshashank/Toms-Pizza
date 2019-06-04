@@ -93,3 +93,7 @@ exports.postSignup = (req, res) => {
             console.log("Something went wrong in postSignup function in homepage.js file\n" + err);
         })
 }
+
+exports.whatIsLogStatus = (req, res) => {    
+    res.send(req.session.logStatus); 
+}
