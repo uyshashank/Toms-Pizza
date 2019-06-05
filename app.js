@@ -41,6 +41,9 @@ app.get('/logout', HP.logout);
 app.get('/signup', HP.getSignup);
 app.get('/logStatus', HP.whatIsLogStatus);
 app.get('/cart', HP.loadCart);
+app.get('/pizza', HP.loadPizza);
+app.get('/burgers', HP.loadBurgers);
+app.get('/beverages', HP.loadBeverages);
 
 
 // Post Routes

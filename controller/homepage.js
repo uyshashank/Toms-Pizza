@@ -222,3 +222,15 @@ exports.loadCart = (req, response) => {
 
         })
 }
+
+exports.loadPizza = (req, res) => {
+    res.send("loadPizza");
+}
+
+exports.loadBurgers = (req, res) => {
+    res.send("loadBurgers");
+}
+
+exports.loadBeverages = (req, res) => {
+    res.send("loadBeverages");
+}
