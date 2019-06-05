@@ -1,43 +1,62 @@
-<!-- <style>
-html{ height:97%; }
-body{ min-height:100%; padding:0; margin:0; position:relative; }
+<style>
+    html {
+        height: 97%;
+    }
 
-/* Trick: */
-body {
-  position: relative;
-}
-body::after {
-  content: '';
-  display: block;
-  height: 90px; /* Set same as footer's height */
-}
+    body {
+        min-height: 100%;
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 90px;  
-}
+    /* Trick: */
+    body {
+        position: relative;
+    }
+
+    body::after {
+        content: '';
+        display: block;
+        height: 90px;
+        /* Set same as footer's height */
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 90px;
+        background-color: rgba(0, 0, 0, 0.801);
+        border-bottom: 2px solid lavender;
+        border-top: 2px solid lavender;
+    }
+    .color{
+        color:lavender;
+    }
+    .fb, .li, .gb{
+        color:lavender;
+    }
 </style>
-<footer class="footer pt-3 border">
+<footer class="footer pt-3">
     <div class="text-center">
         <p class="text-muted">
-            <i class="fas fa-code"></i>
-            Developed by Shashank Yenurkar
+            <i class="fas fa-code text-info"></i>
+            <span class="color">Developed by Shashank Yenurkar</span>
         </p>
         <div class="text-center" style="margin-top:-10px;">
             <a href="https://www.facebook.com/uyshashank" class="text-dark mx-1" target="_blank">
-                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-facebook-square fb"></i>
             </a>
             <a href="https://www.linkedin.com/in/uyshashank" class="text-dark mx-1" target="_blank">
-                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-linkedin li"></i>
             </a>
             <a href="https://github.com/uyshashank" class="text-dark mx-1" target="_blank">
-                <i class="fab fa-github"></i>
+                <i class="fab fa-github gb"></i>
             </a>
         </div>
     </div>
-</footer> -->
+</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">

@@ -16,12 +16,12 @@ for(let i=0;i<=data.length-2;i++)
     </h4>
     <div class="row justify-content-center">
         <!-- Complete item group in middle -->
-        <div class="col-md-6">
+        <div class="col-md-9">
             <% for(let i=0;i <= data.length - 2;i++){ %>
             <!-- Individual item row start -->
             <a href="/find/<%= data[i].pr_id %>" style="text-decoration: none; color: black;">
                 <div class="row border my-3 bg-white">
-                    <div class="col-4 border-right imgDiv text-center">
+                    <div class="col-3 border-right imgDiv text-center">
                         <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid recImg">
                     </div>
                     <div class="col-8 mt-3">
