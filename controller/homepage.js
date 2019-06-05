@@ -224,13 +224,31 @@ exports.loadCart = (req, response) => {
 }
 
 exports.loadPizza = (req, res) => {
-    res.send("loadPizza");
+    const logStatus = req.session.logStatus;
+    const userName = req.session.userName;
+
+    res.render('categorypage/pizza/home', {
+        logStatus,
+        userName
+    });
 }
 
 exports.loadBurgers = (req, res) => {
-    res.send("loadBurgers");
+    const logStatus = req.session.logStatus;
+    const userName = req.session.userName;
+
+    res.render('categorypage/burgers/home', {
+        logStatus,
+        userName
+    });
 }
 
 exports.loadBeverages = (req, res) => {
-    res.send("loadBeverages");
+    const logStatus = req.session.logStatus;
+    const userName = req.session.userName;
+
+    res.render('categorypage/beverages/home', {
+        logStatus,
+        userName
+    });
 }
