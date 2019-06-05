@@ -54,16 +54,16 @@ function sendATCrequest(itemID, pzaNum = 0) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
-            },            
+            },
             body: JSON.stringify(data)
         }).then(function (response) {
             console.log("Response text = ", response.text());
             return response.text();
-            
+
         })
         .then((text) => {
             console.log("text = ", text);
-            return text;            
+            return text;
         })
 }
 

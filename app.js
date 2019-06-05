@@ -41,6 +41,7 @@ app.get('/login', HP.getLogin);
 app.get('/logout', HP.logout);
 app.get('/signup', HP.getSignup);
 app.get('/logStatus', HP.whatIsLogStatus);
+app.get('/cart', HP.loadCart);
 
 
 // Post Routes

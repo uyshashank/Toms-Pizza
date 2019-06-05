@@ -216,6 +216,29 @@ exports.fillCart = (data, itemNum, userID) => {
 
                         db.collection(collection_name).insertOne(array)
                             .then((rsp) => {
+                                // console.log(rsp)
+                            })
+                            .catch((rsp) => {
+                                // console.log(rsp)
+                            })
+                    })
+                    .catch((rsp) => {
+                        // console.log(rsp);
+                    })
+            })
+    } else if (itemNum == 2) {
+        db.collection(collection_name).find().toArray()
+            .then((dbCart) => {
+                let array = dbCart[0];
+                let id = dbCart[0]._id;
+
+                db.collection(collection_name).deleteOne({
+                        _id: id
+                    })
+                    .then(() => {
+                        array.burgers.push(data.burgers[0]);
+                        db.collection(collection_name).insertOne(array)
+                            .then((rsp) => {
                                 // console.log(rsp);
                             })
                             .catch((rsp) => {
@@ -226,52 +249,35 @@ exports.fillCart = (data, itemNum, userID) => {
                         // console.log(rsp);
                     })
             })
-    } else if (itemNum == 2) {
-        db.collection(collection_name).find().toArray()
-        .then((dbCart) => {
-            let array = dbCart[0];
-            let id = dbCart[0]._id;
-
-            db.collection(collection_name).deleteOne({
-                    _id: id
-                })
-                .then(() => {
-                    array.burgers.push(data.burgers[0]);
-                    db.collection(collection_name).insertOne(array)
-                        .then((rsp) => {
-                            // console.log(rsp);
-                        })
-                        .catch((rsp) => {
-                            // console.log(rsp);
-                        })
-                })
-                .catch((rsp) => {
-                    // console.log(rsp);
-                })
-        })
     } else if (itemNum == 3) {
         db.collection(collection_name).find().toArray()
-        .then((dbCart) => {
-            let array = dbCart[0];
-            let id = dbCart[0]._id;
+            .then((dbCart) => {
+                let array = dbCart[0];
+                let id = dbCart[0]._id;
 
-            db.collection(collection_name).deleteOne({
-                    _id: id
-                })
-                .then(() => {
-                    array.beverages.push(data.beverages[0]);
+                db.collection(collection_name).deleteOne({
+                        _id: id
+                    })
+                    .then(() => {
+                        array.beverages.push(data.beverages[0]);
 
-                    db.collection(collection_name).insertOne(array)
-                        .then((rsp) => {
-                            // console.log(rsp);
-                        })
-                        .catch((rsp) => {
-                            // console.log(rsp);
-                        })
-                })
-                .catch((rsp) => {
-                    // console.log(rsp);
-                })
-        })
+                        db.collection(collection_name).insertOne(array)
+                            .then((rsp) => {
+                                // console.log(rsp);
+                            })
+                            .catch((rsp) => {
+                                // console.log(rsp);
+                            })
+                    })
+                    .catch((rsp) => {
+                        // console.log(rsp);
+                    })
+            })
     }
+}
+
+exports.loadCartData = (userID)=>{
+    let db = client.db('cart');
+    let collection_name = String(userID);
+    return db.collection(collection_name).find().toArray();   
 }

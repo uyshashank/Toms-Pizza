@@ -66,7 +66,7 @@ exports.getSignup = (req, res) => {
     res.render('userAccounts/signupPage');
 }
 // Handling signup page data 
-exports.postSignup = (req, res) => {    
+exports.postSignup = (req, res) => {
     let userInfo = {};
     userInfo.user_fname = req.body.fname;
     userInfo.user_lname = req.body.lname;
@@ -133,5 +133,92 @@ exports.ATC_Handler = (req, res) => {
             db.fillCart(cart, 3, userID);
         }
     }
-    // res.send('Working!');
+}
+// Loading price for any one selected size of pizza
+function loadPrice(pza, price, i) {
+    if (pza[i].size == 1) {
+        return price.size_reg;
+    } else if (pza[i].size == 2) {
+        return price.size_med;
+    } else if (pza[i].size == 3) {
+        return price.size_lrg;
+    }
+}
+
+exports.loadCart = (req, response) => {
+    const logStatus = req.session.logStatus;
+    const userName = req.session.userName;
+    const user_email = String(req.session.userEmail.split('@')[0]);
+
+    let cart = [];
+
+    db.loadCartData(user_email)
+        .then((cartData) => {
+            let cartPizza = cartData[0].pizza;
+            let cartBurgers = cartData[0].burgers;
+            let cartBeverages = cartData[0].beverages;
+
+            if (cartPizza.length == 0 && cartBurgers.length == 0 && cartBeverages.length == 0) {
+                response.send("No items in cart!")
+            } else {
+                for (let i = 0; i < cartPizza.length; i++) {
+                    db.loadItem(cartPizza[i].id)
+                        .then((res) => {
+                            let item = res.item;
+                            cart.push({
+                                id: item.pr_id,
+                                name: item.pr_name,
+                                info: item.pr_info,
+                                price: loadPrice(cartPizza, item.pr_price, i),
+                                img: item.pr_img
+                            });
+
+                        }).catch((err) => console.log("LoadCartData LN-155 first \'then\' throwing error!\n", err))
+                        .then(() => {
+                            // After loading pizza now load burgers
+                            for (let i = 0; i < cartBurgers.length; i++) {
+                                db.loadItem(cartBurgers[i].id)
+                                    .then((res) => {
+                                        let item = res.item;
+                                        cart.push({
+                                            id: item.pr_id,
+                                            name: item.pr_name,
+                                            info: item.pr_info,
+                                            price: item.pr_price,
+                                            img: item.pr_img
+                                        })
+                                    });
+                            }
+                        }).catch((err) => console.log("LoadCartData LN-174 second \'then\' throwing error!\n", err))
+                        .then(() => {
+                            // After loading burgers load beverages
+                            for (let i = 0; i < cartBeverages.length; i++) {
+                                db.loadItem(cartBeverages[i].id)
+                                    .then((res) => {
+                                        let item = res.item;                                        
+                                        cart.push({
+                                            id: item.pr_id,
+                                            name: item.pr_name,
+                                            info: item.pr_info,
+                                            price: item.pr_price,
+                                            img: item.pr_img
+                                        })
+
+                                        if (i == cartBeverages.length - 1) {                                            
+                                            response.render('cartpage/home', {
+                                                logStatus,
+                                                userName,
+                                                cart
+                                            });
+                                        }
+
+                                    })
+                            }
+                        });
+                }
+                // response.send("hi");
+            }
+
+
+        })
 }

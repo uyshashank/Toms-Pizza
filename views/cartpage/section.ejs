@@ -1,0 +1,57 @@
+<%
+let imgPath = [];
+
+let category = [];
+for(let i=0;i<=cart.length - 1; i++){
+    let id = cart[i].id.split('0')[0];
+    if(id =='pza')
+        category.push('pizza');
+    else if(id == 'bgr')
+        category.push('burgers');
+    else if(id == 'bvg')
+        category.push('beverages');
+}
+for(let i=0;i<=cart.length -1 ; i++)
+    imgPath.push("../../products/images/" + category[i] + "/" + cart[i].img);
+%>
+
+<div class="container">
+    <!-- Cart items -->
+    <!-- Full screen row -->
+    <div class="row">
+        <div class="col-md-9">
+            <h4 class="text-center mt-3">
+                <img src="../../images/itemsInYourCart.png" class="img-fluid" style="width: 30px;">
+                <span class="heading">Items in your Cart</span>
+            </h4>
+            <div class="row justify-content-center">
+                <!-- Complete item group in middle -->
+                <div class="col-md-9">
+                    <% for(let i=0;i <= cart.length - 1;i++){ %>
+                    <!-- Individual item row start -->
+                    <a href="/find/<%= cart[i].id %>" style="text-decoration: none; color: black;">
+                        <div class="row border my-3 bg-white">
+                            <div class="col-4 border-right imgDiv text-center">
+                                <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid cartItemImg">
+                            </div>
+                            <div class="col-8 mt-3">
+                                <div>
+                                    <h6> <%= (cart[i].name).toUpperCase() %> </h6>
+                                    <p class="para"> <%= cart[i].info %> </p>
+                                    <p> <strong>Price: </strong>₹<%= cart[i].price %> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Individual item row end -->
+                    <% }%>
+                </div>
+            </div>
+        </div>
+
+        <!-- Col for bill -->
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>

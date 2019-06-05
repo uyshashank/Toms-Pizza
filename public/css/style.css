@@ -46,7 +46,12 @@ a:hover {
     height: 100%;
     vertical-align: middle;
 }
-
+.cartItemImg {
+    display: inline-block;
+    height: 100%;
+    /* width: 200px; */
+    vertical-align: middle;
+}
 .itemCard {
     background-color: white;
     border: 2px solid #f0f0f0;

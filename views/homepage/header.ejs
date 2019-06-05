@@ -40,9 +40,6 @@
             <p class="d-inline text-danger">Hi, <%=userName%></p>
             <a href="/cart">
                 | <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge badge-danger cartBadgeLrg">
-                    <%= cartLength %>
-                </span>
             </a>
             <a href="/logout" class="text-danger">
                 | Logout
@@ -88,9 +85,6 @@
             <a href="/beverages" class="mx-2 text-white dropdown-toggle" data-toggle="dropdown">
                 <img src="../../images/accountImg.png" width="48px" class="d-none d-lg-flex">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="badge badge-danger cartBadge">
-                    <%= cartLength %>
-                </span>
             </a>
             <ul class="dropdown-menu pl-3">
                 <a href="/cart" class="">
@@ -112,8 +106,7 @@
         <a href="/signup" class="mx-2 text-white">
             <i class="fas fa-user-plus"></i>
         </a>
-        <%}%>    
-            
+        <%}%>              
                 
             </div>
     </nav>
