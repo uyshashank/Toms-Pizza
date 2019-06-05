@@ -44,6 +44,8 @@ app.get('/cart', HP.loadCart);
 app.get('/pizza', HP.loadPizza);
 app.get('/burgers', HP.loadBurgers);
 app.get('/beverages', HP.loadBeverages);
+app.get('/checkout', HP.loadCheckoutpage);
+app.get('/orderPlaced', HP.loadFinalPage);
 
 
 // Post Routes

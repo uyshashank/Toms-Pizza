@@ -77,8 +77,18 @@ for(let i=0;i<=cart.length -1 ; i++)
                         <strong>Your Total</strong>
                     </td>
                     <td>
-                            ₹<%=cartTotal%>                
+                            ₹<%=cartTotal%>
+                </td>
+                </tr>
+                <tr class="w-100">
+                    <td colspan="3">
+                        <a class="btn btn-lg btn-warning text-light w-100" href="/checkout">
+                            Proceed to Checkout <i class="fas fa-sign-out-alt"></i>
+                        </a>
                     </td>
+                </tr>
+                <tr class="w-100">
+                    <td colspan="3" id="warningPlaceOrder"></td>
                 </tr>
             </table>
         </div>

@@ -232,7 +232,7 @@ exports.loadPizza = (req, res) => {
             let data = fullData[0].pizza;
             data.push({
                 "heading": "Delicious Pizza",
-                "category":"pizza"
+                "category": "pizza"
             });
             res.render('categorypage/home', {
                 logStatus,
@@ -254,7 +254,7 @@ exports.loadBurgers = (req, res) => {
             let data = fullData[1].burgers;
             data.push({
                 "heading": "Crispy Burgers",
-                "category":"burgers"
+                "category": "burgers"
             });
             res.render('categorypage/home', {
                 logStatus,
@@ -276,7 +276,7 @@ exports.loadBeverages = (req, res) => {
             let data = fullData[2].beverages;
             data.push({
                 "heading": "Cool Beverages",
-                "category":"beverages"
+                "category": "beverages"
             });
             res.render('categorypage/home', {
                 logStatus,
@@ -287,4 +287,22 @@ exports.loadBeverages = (req, res) => {
         .catch((err) => {
             console.log("Error at LoadBeverages function near LN-260 in homepage.js file\n", err);
         });
+}
+
+exports.loadCheckoutpage = (req, res) => {
+    const logStatus = req.session.logStatus;
+    const userName = req.session.userName;
+    res.render('checkoutpage/home', {
+        logStatus,
+        userName
+    });
+}
+
+exports.loadFinalPage = (req, res) => {
+    const logStatus = req.session.logStatus;
+    const userName = req.session.userName;
+    res.render('checkoutpage/finalPageHandler', {
+        logStatus,
+        userName
+    });
 }
