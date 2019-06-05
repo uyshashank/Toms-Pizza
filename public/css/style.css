@@ -22,7 +22,6 @@ a:hover {
 .hero:hover {
     transform: scale(1.01);
     transition: 0.1s;
-    cursor: pointer;
 }
 
 .heading {
