@@ -195,7 +195,7 @@ exports.loadCart = (req, response) => {
                             for (let i = 0; i < cartBeverages.length; i++) {
                                 db.loadItem(cartBeverages[i].id)
                                     .then((res) => {
-                                        let item = res.item;                                        
+                                        let item = res.item;
                                         cart.push({
                                             id: item.pr_id,
                                             name: item.pr_name,
@@ -204,7 +204,7 @@ exports.loadCart = (req, response) => {
                                             img: item.pr_img
                                         })
 
-                                        if (i == cartBeverages.length - 1) {                                            
+                                        if (i == cartBeverages.length - 1) {
                                             response.render('cartpage/home', {
                                                 logStatus,
                                                 userName,
@@ -227,28 +227,64 @@ exports.loadPizza = (req, res) => {
     const logStatus = req.session.logStatus;
     const userName = req.session.userName;
 
-    res.render('categorypage/pizza/home', {
-        logStatus,
-        userName
-    });
+    db.loadCategoryItem()
+        .then((fullData) => {
+            let data = fullData[0].pizza;
+            data.push({
+                "heading": "Delicious Pizza",
+                "category":"pizza"
+            });
+            res.render('categorypage/home', {
+                logStatus,
+                userName,
+                data
+            });
+        })
+        .catch((err) => {
+            console.log("Error at LoadPizza function near LN-226 in homepage.js file\n", err);
+        });
 }
 
 exports.loadBurgers = (req, res) => {
     const logStatus = req.session.logStatus;
     const userName = req.session.userName;
 
-    res.render('categorypage/burgers/home', {
-        logStatus,
-        userName
-    });
+    db.loadCategoryItem()
+        .then((fullData) => {
+            let data = fullData[1].burgers;
+            data.push({
+                "heading": "Crispy Burgers",
+                "category":"burgers"
+            });
+            res.render('categorypage/home', {
+                logStatus,
+                userName,
+                data
+            });
+        })
+        .catch((err) => {
+            console.log("Error at LoadBurgers function near LN-243 in homepage.js file\n", err);
+        });
 }
 
 exports.loadBeverages = (req, res) => {
     const logStatus = req.session.logStatus;
     const userName = req.session.userName;
 
-    res.render('categorypage/beverages/home', {
-        logStatus,
-        userName
-    });
+    db.loadCategoryItem()
+        .then((fullData) => {
+            let data = fullData[2].beverages;
+            data.push({
+                "heading": "Cool Beverages",
+                "category":"beverages"
+            });
+            res.render('categorypage/home', {
+                logStatus,
+                userName,
+                data
+            });
+        })
+        .catch((err) => {
+            console.log("Error at LoadBeverages function near LN-260 in homepage.js file\n", err);
+        });
 }

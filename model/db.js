@@ -275,9 +275,14 @@ exports.fillCart = (data, itemNum, userID) => {
             })
     }
 }
-
 exports.loadCartData = (userID)=>{
     let db = client.db('cart');
     let collection_name = String(userID);
     return db.collection(collection_name).find().toArray();   
+}
+
+exports.loadCategoryItem = () => {    
+    let db = client.db('products');
+    let collection_name = String('foodItems');
+    return db.collection(collection_name).find().toArray();
 }

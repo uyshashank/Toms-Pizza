@@ -1,0 +1,60 @@
+<%
+let imgPath = [];
+for(let i=0;i<=data.length-2;i++)
+    imgPath.push("../../products/images/" + data[10].category + "/" + data[i].pr_img);
+
+%>
+
+<div class="container">
+    <!-- Recommended items -->
+    <!-- Full screen row -->
+    <h4 class="text-center mt-3">
+        <img src="../../images/pzIcon.png" class="img-fluid" style="width: 30px;">
+        <span class="heading">
+            <%= data[10].heading %>
+        </span>
+    </h4>
+    <div class="row justify-content-center">
+        <!-- Complete item group in middle -->
+        <div class="col-md-6">
+            <% for(let i=0;i <= data.length - 2;i++){ %>
+            <!-- Individual item row start -->
+            <a href="/find/<%= data[i].pr_id %>" style="text-decoration: none; color: black;">
+                <div class="row border my-3 bg-white">
+                    <div class="col-4 border-right imgDiv text-center">
+                        <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid recImg">
+                    </div>
+                    <div class="col-8 mt-3">
+                        <div>
+                            <h6> <%= (data[i].pr_name).toUpperCase() %> </h6>
+                            <p class="para"> <%= data[i].pr_info %> </p>
+
+                            <% if(typeof data[i].pr_price == 'object'){ %>
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Reg</th>
+                                        <th>Med</th>
+                                        <th>Lrg</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>₹<%= data[i].pr_price.size_reg %></td>
+                                        <td>₹<%= data[i].pr_price.size_med %></td>
+                                        <td>₹<%= data[i].pr_price.size_lrg %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <% } else {%>
+                            <p> <strong>Price: </strong>₹<%= data[i].pr_price %> </p>
+                            <% }%>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <!-- Individual item row end -->
+            <% }%>
+        </div>
+    </div>
+</div>
