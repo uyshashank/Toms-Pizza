@@ -1,6 +1,6 @@
 <%
 let imgPath = [];
-
+let cartTotal = 0;
 let category = [];
 for(let i=0;i<=cart.length - 1; i++){
     let id = cart[i].id.split('0')[0];
@@ -13,6 +13,9 @@ for(let i=0;i<=cart.length - 1; i++){
 }
 for(let i=0;i<=cart.length -1 ; i++)
     imgPath.push("../../products/images/" + category[i] + "/" + cart[i].img);
+
+for(let i=0;i<=cart.length -1 ; i++)
+    cartTotal += parseInt(cart[i].price);
 %>
 
 <div class="container">
@@ -38,7 +41,8 @@ for(let i=0;i<=cart.length -1 ; i++)
                                 <div>
                                     <h6> <%= (cart[i].name).toUpperCase() %> </h6>
                                     <p class="para"> <%= cart[i].info %> </p>
-                                    <p> <strong>Price: </strong>₹<%= cart[i].price %> </p>
+                                    <p class="d-inline"> <strong>Price: </strong>₹<%= cart[i].price %> </p>
+                                    <span class="float-right"><i class="far fa-trash-alt"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +55,32 @@ for(let i=0;i<=cart.length -1 ; i++)
 
         <!-- Col for bill -->
         <div class="col-md-3">
-
+            <table class="table">
+                <tr>
+                    <h4 class="text-center mt-3">
+                        <img src="../../images/rupee.jpg" class="img-fluid" style="width: 30px;">
+                        <span class="heading">Account Summary</span>
+                    </h4>
+                </tr>
+                <% for(let i = 0; i<=cart.length - 1;i++) {%>
+                <tr>
+                    <td>
+                        Item <%=i+1%>
+                    </td>
+                    <td>
+                        ₹<%=cart[i].price%>
+                    </td>
+                </tr>
+                <%}%>
+                <tr>
+                    <td>
+                        <strong>Your Total</strong>
+                    </td>
+                    <td>
+                            ₹<%=cartTotal%>                
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

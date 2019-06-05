@@ -31,7 +31,6 @@ app.use(session({
     store: store
 }));
 
-
 app.set('view engine', 'ejs');
 
 // Get Routes
