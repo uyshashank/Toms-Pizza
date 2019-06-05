@@ -57,13 +57,13 @@ function sendATCrequest(itemID, pzaNum = 0) {
             },            
             body: JSON.stringify(data)
         }).then(function (response) {
-            // console.log("text = ", response.text());
+            console.log("Response text = ", response.text());
             return response.text();
             
         })
         .then((text) => {
-            // return text;
-            // console.log("text = ", text);
+            console.log("text = ", text);
+            return text;            
         })
 }
 

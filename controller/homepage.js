@@ -30,8 +30,6 @@ exports.getLogin = (req, res) => {
 }
 // Handling login page data // Authenticating user
 exports.postLogin = (req, res) => {
-    console.log("Post login request\n");
-    console.log(req);
     let userInfo = req.body;
     db.authenticateUser(userInfo)
         .then((userData) => {
@@ -56,7 +54,7 @@ exports.postLogin = (req, res) => {
             res.send("Sorry! It's not you, it's us. Something went wrong on our side. Please try after sometime!");
             console.log("Something went wrong in postLogin function in homepage.js file\n" + err);
         })
-        // console.log(req);
+    // console.log(req);
 }
 // Logging out
 exports.logout = (req, res) => {
@@ -68,8 +66,7 @@ exports.getSignup = (req, res) => {
     res.render('userAccounts/signupPage');
 }
 // Handling signup page data 
-exports.postSignup = (req, res) => {
-    
+exports.postSignup = (req, res) => {    
     let userInfo = {};
     userInfo.user_fname = req.body.fname;
     userInfo.user_lname = req.body.lname;
@@ -83,6 +80,7 @@ exports.postSignup = (req, res) => {
                     .then(() => {
                         req.session.logStatus = 'true';
                         req.session.userName = userInfo.user_fname;
+                        req.session.userEmail = userInfo.user_email;
                         res.redirect('/');
                     })
                     .catch((err) => {
@@ -104,55 +102,36 @@ exports.whatIsLogStatus = (req, res) => {
 }
 
 exports.ATC_Handler = (req, res) => {
-    // console.log("Before setting = ");
-    console.log(req.session.NickName);
-req.session.NickName = 'Harry';
-// console.log(req);
-    // console.log("After setting = ");
-    // console.log(req.session.NickName);
-    
-    //     const keys = Object.keys(req.body);
-    //     const data = JSON.parse(keys[0]);
-    //     const sessionCart = req.session.cart;
-    // console.log("sessionCart = " + sessionCart + "\n");
-    //     if (req.session.cart == undefined) {
-    //         console.log("Inside if undefined");
-    //         let cart = {
-    //             pizza: [],
-    //             burgers: [],
-    //             beverages: []
-    //         };
-    //         if (typeof data == 'object') {
-    //             cart.pizza.push({
-    //                 id: data.itemID,
-    //                 size: data.pzaNum
-    //             });            
-    //             req.session.cart = cart;
-    //         } else {
-    //             let category = data.split('0')[0];
-    //             if (category == 'bgr') {
-    //                 cart.burgers.push({
-    //                     id: data
-    //                 })
-    //                 req.session.cart = cart;
-    //             } else {
-    //                 cart.beverages.push({
-    //                     id: data
-    //                 })
-    //                 req.session.cart = cart;
-    //             }
-    //         }        
-    //         console.log("Inside if => ");
-    //         console.log(cart);
-    //     }else{
-    //         let cart = req.session.cart;
-    //         console.log("Inside else = " + cart);
-    //     }
+    const keys = Object.keys(req.body);
+    const data = JSON.parse(keys[0]);
+    const userID = req.session.userEmail.split('@')[0];
 
-    // Inserting data into cart
-    // console.log(cart);
-
-    // req.session.cartItem = {
-
-    // }
+    let cart = {
+        pizza: [],
+        burgers: [],
+        beverages: []
+    };
+    // Performing check whether the item is pizza or not
+    if (typeof data == 'object') {
+        cart.pizza.push({
+            id: data.itemID,
+            size: data.pzaNum
+        });
+        db.fillCart(cart, 1, userID);
+    } else {
+        let category = data.split('0')[0];
+        //Burger or Beverages?
+        if (category == 'bgr') {
+            cart.burgers.push({
+                id: data
+            });
+            db.fillCart(cart, 2, userID);
+        } else {
+            cart.beverages.push({
+                id: data
+            });
+            db.fillCart(cart, 3, userID);
+        }
+    }
+    // res.send('Working!');
 }

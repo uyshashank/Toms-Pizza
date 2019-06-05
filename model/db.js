@@ -1,5 +1,6 @@
 const {
-    MongoClient
+    MongoClient,
+    ObjectID
 } = require('mongodb');
 const url = 'mongodb+srv://shashank:pass1997@tomspizza-5i4uk.mongodb.net/';
 let client;
@@ -186,6 +187,91 @@ exports.checkUserExistence = (userInfo) => {
 }
 // Inserting new user
 exports.insertUser = (userInfo) => {
+    let collection_name = String(userInfo.user_email.split('@')[0]);
+    let cartData = {
+        pizza: [],
+        burgers: [],
+        beverages: []
+    }
+    let cartDB = client.db('cart');
     let db = client.db('accounts');
+    cartDB.collection(collection_name).insertOne(cartData);
     return db.collection('users').insertOne(userInfo);
+}
+exports.fillCart = (data, itemNum, userID) => {
+    let db = client.db('cart');
+    let collection_name = String(userID);
+
+    if (itemNum == 1) {
+        db.collection(collection_name).find().toArray()
+            .then((dbCart) => {
+                let array = dbCart[0];
+                let id = dbCart[0]._id;
+
+                db.collection(collection_name).deleteOne({
+                        _id: id
+                    })
+                    .then(() => {
+                        array.pizza.push(data.pizza[0]);
+
+                        db.collection(collection_name).insertOne(array)
+                            .then((rsp) => {
+                                // console.log(rsp);
+                            })
+                            .catch((rsp) => {
+                                // console.log(rsp);
+                            })
+                    })
+                    .catch((rsp) => {
+                        // console.log(rsp);
+                    })
+            })
+    } else if (itemNum == 2) {
+        db.collection(collection_name).find().toArray()
+        .then((dbCart) => {
+            let array = dbCart[0];
+            let id = dbCart[0]._id;
+
+            db.collection(collection_name).deleteOne({
+                    _id: id
+                })
+                .then(() => {
+                    array.burgers.push(data.burgers[0]);
+                    db.collection(collection_name).insertOne(array)
+                        .then((rsp) => {
+                            // console.log(rsp);
+                        })
+                        .catch((rsp) => {
+                            // console.log(rsp);
+                        })
+                })
+                .catch((rsp) => {
+                    // console.log(rsp);
+                })
+        })
+    } else if (itemNum == 3) {
+        db.collection(collection_name).find().toArray()
+        .then((dbCart) => {
+            let array = dbCart[0];
+            let id = dbCart[0]._id;
+
+            db.collection(collection_name).deleteOne({
+                    _id: id
+                })
+                .then(() => {
+                    array.beverages.push(data.beverages[0]);
+
+                    db.collection(collection_name).insertOne(array)
+                        .then((rsp) => {
+                            // console.log(rsp);
+                        })
+                        .catch((rsp) => {
+                            // console.log(rsp);
+                        })
+                })
+                .catch((rsp) => {
+                    // console.log(rsp);
+                })
+        })
+    }
 }
