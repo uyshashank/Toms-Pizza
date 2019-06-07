@@ -88,3 +88,30 @@ function activate(btn1, btn2, btn3) {
 
         });
 }
+
+function deleteCartItem(id) {
+    event.preventDefault();
+    let ID = id.attributes[2].value;
+    let PRICE = id.attributes[3].value;
+    let response = sendDeleteReq(ID, PRICE);    
+}
+
+function sendDeleteReq(ID, PRICE) {
+    let url = '/delete/' + ID + '/' + PRICE;
+    console.log(url);
+    fetch(url, {
+        method: "DELETE",
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}

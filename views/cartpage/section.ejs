@@ -42,7 +42,9 @@ for(let i=0;i<=cart.length -1 ; i++)
                                     <h6> <%= (cart[i].name).toUpperCase() %> </h6>
                                     <p class="para"> <%= cart[i].info %> </p>
                                     <p class="d-inline"> <strong>Price: </strong>₹<%= cart[i].price %> </p>
-                                    <span class="float-right"><i class="far fa-trash-alt"></i></span>
+                                    <span class="float-right" onclick="deleteCartItem(this)" id="<%= cart[i].id %>" price="<%= cart[i].price%>"">
+                                        <i class="far fa-trash-alt"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>

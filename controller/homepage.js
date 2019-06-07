@@ -173,8 +173,8 @@ exports.loadCart = (req, response) => {
                                     price: loadPrice(cartPizza, item.pr_price, i),
                                     img: item.pr_img
                                 });
-                                console.log("Talking from cartPizza loop\n");
-                                console.log(cart);
+                                // console.log("Talking from cartPizza loop\n");
+                                // console.log(cart);
                             }).catch((err) => {
                                 console.log("LoadCartData LN-155 first \'then\' throwing error!\n", err)
                             })
@@ -193,8 +193,8 @@ exports.loadCart = (req, response) => {
                                     price: item.pr_price,
                                     img: item.pr_img
                                 })
-                                console.log("Talking from cartBurgers loop\n");
-                                console.log(cart);
+                                // console.log("Talking from cartBurgers loop\n");
+                                // console.log(cart);
                             });
                     } //End of loop of cartBurgers                    
                 }
@@ -210,12 +210,19 @@ exports.loadCart = (req, response) => {
                                     price: item.pr_price,
                                     img: item.pr_img
                                 });
-                                console.log("Talking from cartBeverages loop\n");
-                                console.log(cart);
+                                // console.log("Talking from cartBeverages loop\n");
+                                // console.log(cart);
                                 // console.log();                                
                             })
                     } //End of for loop of bev
                 }
+                setTimeout(() => {
+                    response.render('cartpage/home', {
+                        logStatus,
+                        userName,
+                        cart
+                    });
+                }, 1000);
             } //End of main else
 
         })

@@ -12,6 +12,7 @@ const store = new MongoDBStore({
 // Custom modules
 const HP = require('./controller/homepage');
 const IP = require('./controller/itempage');
+const CP = require('./controller/cartpage');
 
 // Middlewares
 app.use(bodyParser.urlencoded({
@@ -46,6 +47,9 @@ app.get('/burgers', HP.loadBurgers);
 app.get('/beverages', HP.loadBeverages);
 app.get('/checkout', HP.loadCheckoutpage);
 app.get('/orderPlaced', HP.loadFinalPage);
+
+// Delete Routes
+app.delete('/delete/:id/:price', CP.deleteCartItem);
 
 
 // Post Routes
