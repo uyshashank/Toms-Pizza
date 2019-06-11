@@ -171,7 +171,8 @@ exports.loadCart = (req, response) => {
                                     name: item.pr_name,
                                     info: item.pr_info,
                                     price: loadPrice(cartPizza, item.pr_price, i),
-                                    img: item.pr_img
+                                    img: item.pr_img,
+                                    size: cartPizza[i].size
                                 });
                                 // console.log("Talking from cartPizza loop\n");
                                 // console.log(cart);

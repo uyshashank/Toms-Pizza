@@ -92,26 +92,32 @@ function activate(btn1, btn2, btn3) {
 function deleteCartItem(id) {
     event.preventDefault();
     let ID = id.attributes[2].value;
-    let PRICE = id.attributes[3].value;
-    let response = sendDeleteReq(ID, PRICE);    
+    let SIZE = id.attributes[4].value;
+    console.log(id.attributes);
+    let response = sendDeleteReq(ID, SIZE);
 }
 
-function sendDeleteReq(ID, PRICE) {
-    let url = '/delete/' + ID + '/' + PRICE;
-    console.log(url);
+function sendDeleteReq(ID, SIZE) {
+    let url;
+    console.log(ID, SIZE);
+    if (SIZE == undefined)
+        url = '/delete/' + ID;
+    else
+        url = '/delete/' + ID + '/' + SIZE;
+console.log(url);
     fetch(url, {
-        method: "DELETE",
-        credentials: 'same-origin',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
-        }
-    })
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+            method: "DELETE",
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
+        .then((res) => {
+            // console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }

@@ -275,14 +275,67 @@ exports.fillCart = (data, itemNum, userID) => {
             })
     }
 }
-exports.loadCartData = (userID)=>{
+exports.loadCartData = (userID) => {
     let db = client.db('cart');
     let collection_name = String(userID);
-    return db.collection(collection_name).find().toArray();   
+    return db.collection(collection_name).find().toArray();
 }
 
-exports.loadCategoryItem = () => {    
+exports.loadCategoryItem = () => {
     let db = client.db('products');
     let collection_name = String('foodItems');
     return db.collection(collection_name).find().toArray();
+}
+
+// Delete item from cart
+
+exports.deleteCartItem = (id, size, user) => {
+    let collection_name = String(user);
+    let category = String(id.split('0')[0]);
+    let db = client.db('cart');
+    console.log(id);
+    if (category == 'pza') {
+        db.collection(collection_name).updateOne({
+            "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
+        }, {
+            $pull: {
+                "pizza": {
+                    "id": id,
+                    "size": Number(size)
+                }
+            }
+        }, (err, res) => {
+            if (err)
+                console.log(err);
+        });
+    } else if (category == 'bgr') {
+        console.log("Inside bgr if")
+        db.collection(collection_name).updateOne({
+            "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
+        }, {
+            $pull: {
+                "burgers": {
+                    "id": id
+                }
+            }
+        }, (err, res) => {
+            if (err)
+                console.log(err);            
+        });
+    } else if (category == 'bvg') {
+        db.collection(collection_name).updateOne({
+            "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
+        }, {
+            $pull: {
+                "beverages": {
+                    "id": id
+                }
+            }
+        }, (err, res) => {
+            if (err)
+                console.log(err);
+        });
+    }
+
+
 }

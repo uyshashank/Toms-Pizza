@@ -49,7 +49,8 @@ app.get('/checkout', HP.loadCheckoutpage);
 app.get('/orderPlaced', HP.loadFinalPage);
 
 // Delete Routes
-app.delete('/delete/:id/:price', CP.deleteCartItem);
+app.delete('/delete/:id/:size', CP.deleteCartItem);
+app.delete('/delete/:id', CP.deleteCartItem);
 
 
 // Post Routes
