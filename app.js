@@ -5,7 +5,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const PORT = process.env.PORT || 3000;
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://shashank:pass1997@tomspizza-5i4uk.mongodb.net/sessions',
+    uri: 'mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/sessions',
     collection: 'sessions'
 });
 
