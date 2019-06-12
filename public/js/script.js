@@ -6,10 +6,9 @@ function whatIsLogStatus() {
         .then((text) => {
             return text;
         });
-
 }
 // ATC functionality starts
-function addToCart(id) {
+function addToCart(id) {    
     whatIsLogStatus()
         .then((logStatus) => {
             if (logStatus == 'true') {
@@ -20,10 +19,10 @@ function addToCart(id) {
                     if (WPB == undefined) {
                         alert('Please select the size of pizza!');
                     } else {
-                        sendATCrequest(itemID, WPB);
+                        sendATCrequest(itemID, WPB);                        
                     }
                 } else {
-                    sendATCrequest(itemID);
+                    sendATCrequest(itemID);                    
                 }
             } else {
                 alert('Please login first');
@@ -38,7 +37,6 @@ function isItPizza(id) {
     else
         return false;
 }
-
 function sendATCrequest(itemID, pzaNum = 0) {
     let data = {};
     if (pzaNum == 0) {
@@ -104,7 +102,7 @@ function sendDeleteReq(ID, SIZE) {
         url = '/delete/' + ID;
     else
         url = '/delete/' + ID + '/' + SIZE;
-console.log(url);
+
     fetch(url, {
             method: "DELETE",
             credentials: 'same-origin',
