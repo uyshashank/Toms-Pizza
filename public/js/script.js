@@ -19,10 +19,10 @@ function addToCart(id) {
                     if (WPB == undefined) {
                         alert('Please select the size of pizza!');
                     } else {
-                        sendATCrequest(itemID, WPB);                        
+                        sendATCrequest(itemID, WPB);
                     }
                 } else {
-                    sendATCrequest(itemID);                    
+                    sendATCrequest(itemID);
                 }
             } else {
                 alert('Please login first');
@@ -55,14 +55,15 @@ function sendATCrequest(itemID, pzaNum = 0) {
             },
             body: JSON.stringify(data)
         }).then(function (response) {
-            console.log("Response text = ", response.text());
-            return response.text();
-
+            // console.log("Response text = ", response.text());
+            
+            // return response.text();
         })
         .then((text) => {
-            console.log("text = ", text);
-            return text;
-        })
+            // console.log("text = ", text);
+            console.log('document.cookie');
+            // return text;
+        });
 }
 
 function whichPriceBtn(price_button) {
@@ -97,7 +98,7 @@ function deleteCartItem(id) {
 
 function sendDeleteReq(ID, SIZE) {
     let url;
-    console.log(ID, SIZE);
+    
     if (SIZE == undefined)
         url = '/delete/' + ID;
     else
@@ -113,7 +114,8 @@ function sendDeleteReq(ID, SIZE) {
             }
         })
         .then((res) => {
-            // console.log(res);
+            // This code runs after successfully deleting item from 
+            //cart in database.
         })
         .catch((err) => {
             console.log(err);

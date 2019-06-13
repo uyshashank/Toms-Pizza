@@ -101,11 +101,11 @@ exports.whatIsLogStatus = (req, res) => {
     res.send(req.session.logStatus);
 }
 
-exports.ATC_Handler = (req, res) => {
+exports.ATC_Handler = (req, res) => {    
     const keys = Object.keys(req.body);
     const data = JSON.parse(keys[0]);
     const userID = req.session.userEmail.split('@')[0];
-
+    
     let cart = {
         pizza: [],
         burgers: [],

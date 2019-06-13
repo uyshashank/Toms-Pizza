@@ -293,7 +293,7 @@ exports.deleteCartItem = (id, size, user) => {
     let collection_name = String(user);
     let category = String(id.split('0')[0]);
     let db = client.db('cart');
-    console.log(id);
+    
     if (category == 'pza') {
         db.collection(collection_name).updateOne({
             "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
@@ -309,7 +309,6 @@ exports.deleteCartItem = (id, size, user) => {
                 console.log(err);
         });
     } else if (category == 'bgr') {
-        console.log("Inside bgr if")
         db.collection(collection_name).updateOne({
             "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
         }, {
