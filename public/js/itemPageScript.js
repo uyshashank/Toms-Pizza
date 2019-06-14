@@ -36,6 +36,7 @@ function changeButton() {
 function activeButton(size) {
     let pb = document.querySelectorAll('.price_button');
     pb[size-1].classList.add('active');
+    pb[size-1].style.color = "white";
 }
 
 function warning() {

@@ -18,6 +18,10 @@ for(let i=0;i<=cart.length -1 ; i++)
     cartTotal += parseInt(cart[i].price);
 %>
 
+<script src="../../js/classie.js"></script>
+<script src="../../js/modernizr.custom.js"></script>
+<link rel="stylesheet" href="../../css/component.css">
+<link rel="stylesheet" href="../../css/default.css">
 <div class="container">
     <!-- Cart items -->
     <!-- Full screen row -->
@@ -42,8 +46,9 @@ for(let i=0;i<=cart.length -1 ; i++)
                                     <h6> <%= (cart[i].name).toUpperCase() %> </h6>
                                     <p class="para"> <%= cart[i].info %> </p>
                                     <p class="d-inline"> <strong>Price: </strong>₹<%= cart[i].price %> </p>
-                                    <span class="float-right" onclick="deleteCartItem(this)" id="<%= cart[i].id %>" price="<%= cart[i].price%>" size="<%= cart[i].size%>">
-                                        <i class="far fa-trash-alt"></i>
+                                    <span class="float-right" onclick="deleteCartItem(this)" id="<%= cart[i].id %>"
+                                        price="<%= cart[i].price%>" size="<%= cart[i].size%>">
+                                        <i class="far fa-trash-alt" id="delIcon" onclick="effect()"></i>
                                     </span>
                                 </div>
                             </div>
