@@ -7,8 +7,62 @@ function whatIsLogStatus() {
             return text;
         });
 }
+
+function setCookie(itemID, WPB) {
+    let cookie = document.cookie;
+    if (cookie == '') {
+        let cart = {
+            pizza: [],
+            burgers: [],
+            beverages: []
+        }
+        cart = pushItems(itemID, WPB, cart);
+        document.cookie = "cart = " + JSON.stringify(cart);
+    } else {
+        let data = JSON.parse(cookie.split('=')[1]);
+        let newCart = pushItems(itemID, WPB, data);
+        document.cookie = "cart = " + JSON.stringify(newCart);
+    }
+}
+//Add to cart to added to cart 
+function changeButton() {
+    let atcBtn = document.getElementById(id);
+    let addedBtn = document.getElementById("addedBtn");
+    atcBtn.style.display = "none";
+    addedBtn.style.display = "inline-block";
+}
+
+function pushItems(itemID, WPB, data) {
+    if (WPB) {
+        data.pizza.push({
+            id: itemID,
+            size: WPB
+        });
+    } else {
+        let category = itemID.split('0')[0];
+        if (category == 'bgr') {
+            data.burgers.push({
+                id: itemID
+            });
+        } else if (category == 'bvg') {
+            data.beverages.push({
+                id: itemID
+            });
+        }
+    }
+    console.log(data);
+    return data;
+}
+// Is it pizza
+function isItPizza(id) {
+    let category = id.split('0')[0];
+    if (category == 'pza')
+        return true;
+    else
+        return false;
+}
 // ATC functionality starts
-function addToCart(id) {    
+function addToCart(id) {
     whatIsLogStatus()
         .then((logStatus) => {
             if (logStatus == 'true') {
@@ -20,23 +74,20 @@ function addToCart(id) {
                         alert('Please select the size of pizza!');
                     } else {
                         sendATCrequest(itemID, WPB);
+                        setCookie(itemID, WPB);
+                        changeButton();
                     }
                 } else {
                     sendATCrequest(itemID);
+                    setCookie(itemID);
+                    changeButton();
                 }
             } else {
                 alert('Please login first');
             }
         });
 }
-// Is it pizza
-function isItPizza(id) {
-    let category = id.split('0')[0];
-    if (category == 'pza')
-        return true;
-    else
-        return false;
-}
+
 function sendATCrequest(itemID, pzaNum = 0) {
     let data = {};
     if (pzaNum == 0) {
@@ -54,14 +105,13 @@ function sendATCrequest(itemID, pzaNum = 0) {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data)
-        }).then(function (response) {
+        }).then(function () {
             // console.log("Response text = ", response.text());
-            
+
             // return response.text();
         })
-        .then((text) => {
+        .then(() => {
             // console.log("text = ", text);
-            console.log('document.cookie');
             // return text;
         });
 }
@@ -98,7 +148,7 @@ function deleteCartItem(id) {
 
 function sendDeleteReq(ID, SIZE) {
     let url;
-    
+
     if (SIZE == undefined)
         url = '/delete/' + ID;
     else

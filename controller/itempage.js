@@ -9,8 +9,7 @@ exports.IPDriver = (req, res) => {
             res.render('itempage/home', {
                 itemDoc,
                 logStatus,
-                userName,
-                inCartExist
+                userName
             });
         })
         .catch(err => console.log(err));

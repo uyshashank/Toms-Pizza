@@ -19,6 +19,7 @@ let type1 = typeof itemDoc.recommended[0].pr_price;
 let type2 = typeof itemDoc.recommended[2].pr_price;
 %>
 
+
 <div class="container">
     <!-- A row for item image and its features -->
     <div class="row justify-content-center mt-3">
@@ -34,7 +35,7 @@ let type2 = typeof itemDoc.recommended[2].pr_price;
                     <button class="btn btn-outline-warning price_button" id="reg" onclick="activate('reg','med','lrg')">
                         Reg: ₹<%= pzaReg %>
                     </button>
-        </div>
+                </div>
                 <div class="col-4">
                     <button class="btn btn-outline-warning price_button" id="med" onclick="activate('med','reg','lrg')">
                         Med: ₹<%= pzaMed %>
@@ -49,10 +50,13 @@ let type2 = typeof itemDoc.recommended[2].pr_price;
             <% } else {%>
             <p> <strong>Price: </strong>₹<%= itemPrice %> </p>
             <% }%>
-            <button class="mt-1 text-white w-50 btn btn-warning ATCBtn" onclick="addToCart(this)"
-                id="<%=itemId%>">
+            <button class="mt-1 text-white w-50 btn btn-warning" onclick="addToCart(this)" id="<%=itemId%>">
                 Add to Cart
                 <i class="fas fa-shopping-cart"></i>
+            </button>
+            <button class="mt-1 text-white w-50 btn btn-warning" onclick="warning()" id="addedBtn" style="display:none;">
+                Added to Cart
+                <i class="fas fa-check-circle"></i>
             </button>
         </div>
     </div>
@@ -106,3 +110,4 @@ let type2 = typeof itemDoc.recommended[2].pr_price;
         </div>
     </div>
 </div>
+<script src="../../js/itemPageScript.js"></script>
