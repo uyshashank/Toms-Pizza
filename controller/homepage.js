@@ -133,7 +133,7 @@ exports.ATC_Handler = (req, res) => {
             db.fillCart(cart, 3, userID);
         }
     }
-    res.text("Success");
+    res.send("hi");
 }
 // Loading price for any one selected size of pizza
 function loadPrice(pza, price, i) {

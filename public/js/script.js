@@ -17,11 +17,11 @@ function setCookie(itemID, WPB) {
             beverages: []
         }
         cart = pushItems(itemID, WPB, cart);
-        document.cookie = "cart = " + JSON.stringify(cart);
+        document.cookie = "cart = " + JSON.stringify(cart) + ";path=/";
     } else {
         let data = JSON.parse(cookie.split('=')[1]);
         let newCart = pushItems(itemID, WPB, data);
-        document.cookie = "cart = " + JSON.stringify(newCart);
+        document.cookie = "cart = " + JSON.stringify(newCart) + ";path=/";
     }
 }
 //Add to cart to added to cart 
@@ -50,7 +50,6 @@ function pushItems(itemID, WPB, data) {
             });
         }
     }
-    console.log(data);
     return data;
 }
 // Is it pizza
@@ -97,23 +96,15 @@ function sendATCrequest(itemID, pzaNum = 0) {
         data.pzaNum = pzaNum;
     }
     fetch('/atc', {
-            method: "POST",
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify(data)
-        }).then(function () {
-            // console.log("Response text = ", response.text());
-
-            // return response.text();
-        })
-        .then(() => {
-            // console.log("text = ", text);
-            // return text;
-        });
+        method: "POST",
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data)
+    });
 }
 
 function whichPriceBtn(price_button) {
@@ -137,17 +128,48 @@ function activate(btn1, btn2, btn3) {
 
         });
 }
-function deleteItem(data){
-    let id = 'item' + data.attributes[2].value;
-    document.getElementById(id).style.display = "none";
-    // updateCookie(data);    
-}
+
 function deleteCartItem(id) {
     event.preventDefault();
     let ID = id.attributes[2].value;
     let SIZE = id.attributes[4].value;
     sendDeleteReq(ID, SIZE);
     deleteItem(id);
+}
+
+function deleteItem(data) {
+    let id = 'item' + data.attributes[2].value;
+    document.getElementById(id).style.display = "none";
+    updateCookie(data);
+}
+
+function updateCookie(data) {
+    let cookie = JSON.parse(document.cookie.split('=')[1]);
+    let id = data.attributes[2].value;
+    let price = data.attributes[4].value;
+    let category = id.split('0')[0];
+    if (price) {
+        for (let i = 0; i < cookie.pizza.length; i++) {
+            if (cookie.pizza[i].id == id && cookie.pizza[i].size == price) {
+                cookie.pizza.pop(i);
+            }
+        }
+    } else {
+        if (category == 'bgr') {
+            for (let i = 0; i < cookie.burgers.length; i++) {
+                if (cookie.burgers[i].id == id) {
+                    cookie.burgers.pop(i);
+                }
+            }
+        } else {
+            for (let i = 0; i < cookie.beverages.length; i++) {
+                if (cookie.beverages[i].id == id) {
+                    cookie.beverages.pop(i);
+                }
+            }
+        }
+    }
+    document.cookie = "cart = " + JSON.stringify(cookie) + ";path=/";
 }
 
 function sendDeleteReq(ID, SIZE) {
@@ -159,20 +181,12 @@ function sendDeleteReq(ID, SIZE) {
         url = '/delete/' + ID + '/' + SIZE;
 
     fetch(url, {
-            method: "DELETE",
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        })
-        .then((res) => {
-            // This code runs after successfully deleting item from 
-            //cart in database.
-            
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        method: "DELETE",
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    });
 }
