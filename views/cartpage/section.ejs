@@ -16,12 +16,9 @@ for(let i=0;i<=cart.length -1 ; i++)
 
 for(let i=0;i<=cart.length -1 ; i++)
     cartTotal += parseInt(cart[i].price);
+
 %>
 
-<script src="../../js/classie.js"></script>
-<script src="../../js/modernizr.custom.js"></script>
-<link rel="stylesheet" href="../../css/component.css">
-<link rel="stylesheet" href="../../css/default.css">
 <div class="container">
     <!-- Cart items -->
     <!-- Full screen row -->
@@ -36,7 +33,7 @@ for(let i=0;i<=cart.length -1 ; i++)
                 <div class="col-md-9">
                     <% for(let i=0;i <= cart.length - 1;i++){ %>
                     <!-- Individual item row Start -->
-                    <a href="/find/<%= cart[i].id %>" style="text-decoration: none; color: black;">
+                    <a href="/find/<%= cart[i].id %>" style="text-decoration: none; color: black;" id="item<%=cart[i].id%>">
                         <div class="row border my-3 bg-white">
                             <div class="col-4 border-right imgDiv text-center">
                                 <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid cartItemImg">
@@ -48,7 +45,7 @@ for(let i=0;i<=cart.length -1 ; i++)
                                     <p class="d-inline"> <strong>Price: </strong>₹<%= cart[i].price %> </p>
                                     <span class="float-right" onclick="deleteCartItem(this)" id="<%= cart[i].id %>"
                                         price="<%= cart[i].price%>" size="<%= cart[i].size%>">
-                                        <i class="far fa-trash-alt" id="delIcon" onclick="effect()"></i>
+                                        <i class="far fa-trash-alt" id="delIcon"></i>
                                     </span>
                                 </div>
                             </div>

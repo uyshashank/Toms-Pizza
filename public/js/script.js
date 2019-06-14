@@ -137,13 +137,17 @@ function activate(btn1, btn2, btn3) {
 
         });
 }
-
+function deleteItem(data){
+    let id = 'item' + data.attributes[2].value;
+    document.getElementById(id).style.display = "none";
+    // updateCookie(data);    
+}
 function deleteCartItem(id) {
     event.preventDefault();
     let ID = id.attributes[2].value;
     let SIZE = id.attributes[4].value;
-    console.log(id.attributes);
-    let response = sendDeleteReq(ID, SIZE);
+    sendDeleteReq(ID, SIZE);
+    deleteItem(id);
 }
 
 function sendDeleteReq(ID, SIZE) {
@@ -166,6 +170,7 @@ function sendDeleteReq(ID, SIZE) {
         .then((res) => {
             // This code runs after successfully deleting item from 
             //cart in database.
+            
         })
         .catch((err) => {
             console.log(err);
