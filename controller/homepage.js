@@ -1,4 +1,5 @@
 const db = require('../model/db');
+const lc = require('./submodules');
 let referer = '/';
 exports.HPDriver = (req, res) => {
     const logStatus = req.session.logStatus;
@@ -101,11 +102,11 @@ exports.whatIsLogStatus = (req, res) => {
     res.send(req.session.logStatus);
 }
 
-exports.ATC_Handler = (req, res) => {    
+exports.ATC_Handler = (req, res) => {
     const keys = Object.keys(req.body);
     const data = JSON.parse(keys[0]);
     const userID = req.session.userEmail.split('@')[0];
-    
+
     let cart = {
         pizza: [],
         burgers: [],
@@ -135,100 +136,212 @@ exports.ATC_Handler = (req, res) => {
     }
     res.send("hi");
 }
-// Loading price for any one selected size of pizza
-function loadPrice(pza, price, i) {
-    if (pza[i].size == 1) {
-        return price.size_reg;
-    } else if (pza[i].size == 2) {
-        return price.size_med;
-    } else if (pza[i].size == 3) {
-        return price.size_lrg;
-    }
-}
 
-exports.loadCart = (req, response) => {
-    const logStatus = req.session.logStatus;
-    const userName = req.session.userName;
-    const user_email = String(req.session.userEmail.split('@')[0]);
 
-    let cart = [];
+// exports.loadCart = (req, response) => {
+//     const logStatus = req.session.logStatus;
+//     const userName = req.session.userName;
+//     const user_email = String(req.session.userEmail.split('@')[0]);
+
+//     let cart = [];
+
+//     db.loadCartData(user_email)
+//         .then((cartData) => {
+//             let cartPizza = cartData[0].pizza;
+//             let cartBurgers = cartData[0].burgers;
+//             let cartBeverages = cartData[0].beverages;
+//             if (cartPizza.length == 0 && cartBurgers.length == 0 && cartBeverages.length == 0) {
+//                 response.send("No items in cart!")
+//             } else {
+
+//                 if (cartPizza.length) { //Will only execute if there is any item in pizza array.                    
+//                     for (let i = 0; i < cartPizza.length; i++) {
+//                         db.loadItem(cartPizza[i].id)
+//                             .then((res) => {
+//                                 let item = res.item;
+//                                 cart.push({
+//                                     id: item.pr_id,
+//                                     name: item.pr_name,
+//                                     info: item.pr_info,
+//                                     price: loadPrice(cartPizza, item.pr_price, i),
+//                                     img: item.pr_img,
+//                                     size: cartPizza[i].size
+//                                 });
+//                                 // console.log("Talking from cartPizza loop\n");
+//                                 // console.log(cart);
+//                             }).catch((err) => {
+//                                 console.log("LoadCartData LN-155 first \'then\' throwing error!\n", err)
+//                             })
+//                     } //End of for loop for pizza
+//                 }
+
+//                 if (cartBurgers.length) {
+//                     for (let i = 0; i < cartBurgers.length; i++) {
+//                         db.loadItem(cartBurgers[i].id)
+//                             .then((res) => {
+//                                 let item = res.item;
+//                                 cart.push({
+//                                     id: item.pr_id,
+//                                     name: item.pr_name,
+//                                     info: item.pr_info,
+//                                     price: item.pr_price,
+//                                     img: item.pr_img
+//                                 })
+//                                 // console.log("Talking from cartBurgers loop\n");
+//                                 // console.log(cart);
+//                             });
+//                     } //End of loop of cartBurgers                    
+//                 }
+//                 if (cartBeverages.length) {
+//                     for (let i = 0; i < cartBeverages.length; i++) {
+//                         db.loadItem(cartBeverages[i].id)
+//                             .then((res) => {
+//                                 let item = res.item;
+//                                 cart.push({
+//                                     id: item.pr_id,
+//                                     name: item.pr_name,
+//                                     info: item.pr_info,
+//                                     price: item.pr_price,
+//                                     img: item.pr_img
+//                                 });                              
+//                             })
+//                     } //End of for loop of bev
+//                 }
+//                 setTimeout(() => {
+//                     response.render('cartpage/home', {
+//                         logStatus,
+//                         userName,
+//                         cart
+//                     });
+//                 }, 1000);
+//             } //End of main else
+
+//         })
+// }
+
+exports.loadCart = (request, response) => {
+    const logStatus = request.session.logStatus;
+    const userName = request.session.userName;
+    const user_email = String(request.session.userEmail.split('@')[0]);
+
+
 
     db.loadCartData(user_email)
         .then((cartData) => {
             let cartPizza = cartData[0].pizza;
             let cartBurgers = cartData[0].burgers;
             let cartBeverages = cartData[0].beverages;
+
             if (cartPizza.length == 0 && cartBurgers.length == 0 && cartBeverages.length == 0) {
                 response.send("No items in cart!")
             } else {
 
-                if (cartPizza.length) { //Will only execute if there is any item in pizza array.                    
-                    for (let i = 0; i < cartPizza.length; i++) {
-                        db.loadItem(cartPizza[i].id)
-                            .then((res) => {
-                                let item = res.item;
-                                cart.push({
-                                    id: item.pr_id,
-                                    name: item.pr_name,
-                                    info: item.pr_info,
-                                    price: loadPrice(cartPizza, item.pr_price, i),
-                                    img: item.pr_img,
-                                    size: cartPizza[i].size
-                                });
-                                // console.log("Talking from cartPizza loop\n");
-                                // console.log(cart);
-                            }).catch((err) => {
-                                console.log("LoadCartData LN-155 first \'then\' throwing error!\n", err)
-                            })
-                    } //End of for loop for pizza
+                if (cartPizza.length) {
+                    // fetch pizza
+                    let cart = [];
+                    lc.fetchPizza(cartPizza)
+                        .then((pza_cart) => {
+                            if (cartBurgers.length) {
+                                lc.fetchBurgers(cartBurgers)
+                                    .then((bgr_cart) => {
+                                        if (cartBeverages.length) {
+                                            lc.fetchBeverages(cartBeverages)
+                                                .then((bvg_cart) => {
+                                                    cart = pza_cart.concat(bgr_cart).concat(bvg_cart);
+                                                    response.render('cartpage/home', {
+                                                        logStatus,
+                                                        userName,
+                                                        cart
+                                                    });
+                                                })
+                                        } else {
+                                            cart = pza_cart.concat(bgr_cart);
+                                            response.render('cartpage/home', {
+                                                logStatus,
+                                                userName,
+                                                cart
+                                            });
+                                        }
+                                    })
+                            } else {
+                                if (cartBeverages.length) {
+                                    lc.fetchBeverages(cartBeverages)
+                                        .then((bvg_cart) => {
+                                            cart = pza_cart.concat(bvg_cart);
+                                            response.render('cartpage/home', {
+                                                logStatus,
+                                                userName,
+                                                cart
+                                            });
+                                        })
+                                } else {
+                                    cart = pza_cart;
+                                    response.render('cartpage/home', {
+                                        logStatus,
+                                        userName,
+                                        cart
+                                    });
+                                }
+                            }
+                        });
+                } else {
+                    if (cartBurgers.length) {
+                        lc.fetchBurgers(cartBurgers)
+                            .then((bgr_cart) => {
+                                if (cartBeverages.length) {
+                                    lc.fetchBeverages(cartBeverages)
+                                        .then((bvg_cart) => {
+                                            cart = bgr_cart.concat(bvg_cart);
+                                            response.render('cartpage/home', {
+                                                logStatus,
+                                                userName,
+                                                cart
+                                            });
+                                        })
+                                } else {
+                                    cart = bgr_cart;
+                                    response.render('cartpage/home', {
+                                        logStatus,
+                                        userName,
+                                        cart
+                                    });
+                                }
+                            });
+                    } else {
+                        if (cartBeverages.length) {
+                            lc.fetchBeverages(cartBeverages)
+                                .then((bvg_cart) => {
+                                    cart = bvg_cart;
+                                    response.render('cartpage/home', {
+                                        logStatus,
+                                        userName,
+                                        cart
+                                    });
+                                })
+                        } else {
+                            response.send("No items in cart!");
+                            // response.render('cartpage/home', {
+                            //     logStatus,
+                            //     userName,
+                            //     cart
+                            // });
+                        }
+                    }
                 }
 
-                if (cartBurgers.length) {
-                    for (let i = 0; i < cartBurgers.length; i++) {
-                        db.loadItem(cartBurgers[i].id)
-                            .then((res) => {
-                                let item = res.item;
-                                cart.push({
-                                    id: item.pr_id,
-                                    name: item.pr_name,
-                                    info: item.pr_info,
-                                    price: item.pr_price,
-                                    img: item.pr_img
-                                })
-                                // console.log("Talking from cartBurgers loop\n");
-                                // console.log(cart);
-                            });
-                    } //End of loop of cartBurgers                    
-                }
-                if (cartBeverages.length) {
-                    for (let i = 0; i < cartBeverages.length; i++) {
-                        db.loadItem(cartBeverages[i].id)
-                            .then((res) => {
-                                let item = res.item;
-                                cart.push({
-                                    id: item.pr_id,
-                                    name: item.pr_name,
-                                    info: item.pr_info,
-                                    price: item.pr_price,
-                                    img: item.pr_img
-                                });
-                                // console.log("Talking from cartBeverages loop\n");
-                                // console.log(cart);
-                                // console.log();                                
-                            })
-                    } //End of for loop of bev
-                }
-                setTimeout(() => {
-                    response.render('cartpage/home', {
-                        logStatus,
-                        userName,
-                        cart
-                    });
-                }, 1000);
+                // if (cartBeverages.length) {
+                //     // fetch beverages
+                //     cart = lc.fetchBeverages(cartBeverages);
+                // }
+
+
+
             } //End of main else
 
         })
 }
+
+
 
 exports.loadPizza = (req, res) => {
     const logStatus = req.session.logStatus;
