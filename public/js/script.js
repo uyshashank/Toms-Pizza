@@ -1,3 +1,18 @@
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
 function whatIsLogStatus() {
     return fetch('/logStatus')
         .then(function (response) {
@@ -8,32 +23,19 @@ function whatIsLogStatus() {
         });
 }
 
+
 function setCookie(itemID, WPB) {
-    document.cookie.name = "shashank";
-    console.log(document.cookie.name);
-    let cookie = document.cookie;
-    let username = cookie.split('@')[0];
-    let check = cookie.split(username + "cart=")[1];
-    let cartExist = false;
-
-    if (check)
-        cartExist = false;
-    else
-        cartExist = true;
-
-    if (cartExist) {
-        let cart = {
-            pizza: [],
-            burgers: [],
-            beverages: []
-        }
-        cart = pushItems(itemID, WPB, cart);
-        document.cookie = username + "cart=" + JSON.stringify(cart) + ";path=/";
+    let userID = getCookie('username');
+    let cookie = getCookie(userID);
+    if (cookie) {        
+        let userCookie = JSON.parse(cookie); //Fetching out the user obj        
+        let username = userCookie.email.split('@')[0];
+        userCookie = pushItems(itemID, WPB, userCookie);
+        document.cookie = username + "=" + JSON.stringify(userCookie) + ";path=/";
     } else {
-        let data = JSON.parse(cookie.split('=')[1]);
-        let newCart = pushItems(itemID, WPB, data);
-        document.cookie = username + "cart=" + JSON.stringify(newCart) + ";path=/";
+        alert("Cookie does not exist!");
     }
+
 }
 //Add to cart to added to cart 
 function changeButton() {
@@ -98,8 +100,7 @@ function addToCart(id) {
         });
 }
 
-function sendATCrequest(itemID, pzaNum = 0) {
-    console.log("Inside sendatc");
+function sendATCrequest(itemID, pzaNum = 0) {    
     let data = {};
     if (pzaNum == 0) {
         data = itemID;
@@ -143,7 +144,6 @@ function activate(btn1, btn2, btn3) {
 
 function deleteCartItem(id) {
     event.preventDefault();
-    console.log("Inside delte cai");
     let ID = id.attributes[2].value;
     let SIZE = id.attributes[4].value;
     sendDeleteReq(ID, SIZE);
@@ -157,39 +157,44 @@ function deleteItem(data) {
 }
 
 function updateCookie(data) {
-    let username = cookie.split('@')[0];
-    console.log("Update" + username);
-    // let cookie = JSON.parse(document.cookie.split('=')[1]);    
-    // let id = data.attributes[2].value;
-    // let price = data.attributes[4].value;
-    // let category = id.split('0')[0];
-    // if (price) {
-    //     for (let i = 0; i < cookie.pizza.length; i++) {
-    //         if (cookie.pizza[i].id == id && cookie.pizza[i].size == price) {
-    //             cookie.pizza.pop(i);
-    //         }
-    //     }
-    // } else {
-    //     if (category == 'bgr') {
-    //         for (let i = 0; i < cookie.burgers.length; i++) {
-    //             if (cookie.burgers[i].id == id) {
-    //                 cookie.burgers.pop(i);
-    //             }
-    //         }
-    //     } else {
-    //         for (let i = 0; i < cookie.beverages.length; i++) {
-    //             if (cookie.beverages[i].id == id) {
-    //                 cookie.beverages.pop(i);
-    //             }
-    //         }
-    //     }
-    // }
-    // document.cookie = "cart = " + JSON.stringify(cookie) + ";path=/";
+    let userID = getCookie('username');
+    let currentCookie = getCookie(userID);
+    if (currentCookie) {        
+        let cookie = JSON.parse(currentCookie);
+        let id = data.attributes[2].value;
+        let price = data.attributes[4].value;
+        let category = id.split('0')[0];
+        let username = cookie.email.split('@')[0];
+
+        if (price) {
+            for (let i = 0; i < cookie.pizza.length; i++) {
+                if (cookie.pizza[i].id == id && cookie.pizza[i].size == price) {
+                    cookie.pizza.pop(i);
+                }
+            }
+        } else {
+            if (category == 'bgr') {
+                for (let i = 0; i < cookie.burgers.length; i++) {
+                    if (cookie.burgers[i].id == id) {
+                        cookie.burgers.pop(i);
+                    }
+                }
+            } else {
+                for (let i = 0; i < cookie.beverages.length; i++) {
+                    if (cookie.beverages[i].id == id) {
+                        cookie.beverages.pop(i);
+                    }
+                }
+            }
+        }
+        document.cookie = username + "=" + JSON.stringify(cookie) + ";path=/";
+    } else {
+        alert("Cookie doesnt exist! script.js LN - 175 error");
+    }
 }
 
 function sendDeleteReq(ID, SIZE) {
     let url;
-    console.log("Inside send del req");
     if (SIZE == undefined)
         url = '/delete/' + ID;
     else

@@ -7,7 +7,7 @@ exports.HPDriver = (req, res) => {
     db.connect()
         .then((localclient) => {
             db.loadData(localclient)
-                .then((data) => {                    
+                .then((data) => {
                     res.render('homepage/home', {
                         data,
                         logStatus,
@@ -42,7 +42,8 @@ exports.postLogin = (req, res) => {
                         req.session.logStatus = "true";
                         req.session.userName = userData[0].user_fname;
                         req.session.userEmail = userData[0].user_email;
-                        res.setHeader('Set-Cookie', ["user=" + userData[0].user_email] + ";path=/");
+                        let username = userData[0].user_email.split('@')[0];
+                        res.setHeader('Set-Cookie', ["username=" + username]);
                         res.redirect(referer);
                     } else {
                         res.send("Invalid password");
@@ -83,7 +84,14 @@ exports.postSignup = (req, res) => {
                         req.session.logStatus = 'true';
                         req.session.userName = userInfo.user_fname;
                         req.session.userEmail = userInfo.user_email;
-                        res.setHeader('Set-Cookie', ["user=" + userInfo.user_email] + ";path=/");
+                        let username = userInfo.user_email.split('@')[0];
+                        let usersCookieArray = {
+                            pizza: [],
+                            burgers: [],
+                            beverages: [],
+                            email: userInfo.user_email
+                        }
+                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";path=/;username=" + username]);
                         res.redirect('/');
                     })
                     .catch((err) => {
@@ -139,94 +147,10 @@ exports.ATC_Handler = (req, res) => {
     res.send("hi");
 }
 
-
-// exports.loadCart = (req, response) => {
-//     const logStatus = req.session.logStatus;
-//     const userName = req.session.userName;
-//     const user_email = String(req.session.userEmail.split('@')[0]);
-
-//     let cart = [];
-
-//     db.loadCartData(user_email)
-//         .then((cartData) => {
-//             let cartPizza = cartData[0].pizza;
-//             let cartBurgers = cartData[0].burgers;
-//             let cartBeverages = cartData[0].beverages;
-//             if (cartPizza.length == 0 && cartBurgers.length == 0 && cartBeverages.length == 0) {
-//                 response.send("No items in cart!")
-//             } else {
-
-//                 if (cartPizza.length) { //Will only execute if there is any item in pizza array.                    
-//                     for (let i = 0; i < cartPizza.length; i++) {
-//                         db.loadItem(cartPizza[i].id)
-//                             .then((res) => {
-//                                 let item = res.item;
-//                                 cart.push({
-//                                     id: item.pr_id,
-//                                     name: item.pr_name,
-//                                     info: item.pr_info,
-//                                     price: loadPrice(cartPizza, item.pr_price, i),
-//                                     img: item.pr_img,
-//                                     size: cartPizza[i].size
-//                                 });
-//                                 // console.log("Talking from cartPizza loop\n");
-//                                 // console.log(cart);
-//                             }).catch((err) => {
-//                                 console.log("LoadCartData LN-155 first \'then\' throwing error!\n", err)
-//                             })
-//                     } //End of for loop for pizza
-//                 }
-
-//                 if (cartBurgers.length) {
-//                     for (let i = 0; i < cartBurgers.length; i++) {
-//                         db.loadItem(cartBurgers[i].id)
-//                             .then((res) => {
-//                                 let item = res.item;
-//                                 cart.push({
-//                                     id: item.pr_id,
-//                                     name: item.pr_name,
-//                                     info: item.pr_info,
-//                                     price: item.pr_price,
-//                                     img: item.pr_img
-//                                 })
-//                                 // console.log("Talking from cartBurgers loop\n");
-//                                 // console.log(cart);
-//                             });
-//                     } //End of loop of cartBurgers                    
-//                 }
-//                 if (cartBeverages.length) {
-//                     for (let i = 0; i < cartBeverages.length; i++) {
-//                         db.loadItem(cartBeverages[i].id)
-//                             .then((res) => {
-//                                 let item = res.item;
-//                                 cart.push({
-//                                     id: item.pr_id,
-//                                     name: item.pr_name,
-//                                     info: item.pr_info,
-//                                     price: item.pr_price,
-//                                     img: item.pr_img
-//                                 });                              
-//                             })
-//                     } //End of for loop of bev
-//                 }
-//                 setTimeout(() => {
-//                     response.render('cartpage/home', {
-//                         logStatus,
-//                         userName,
-//                         cart
-//                     });
-//                 }, 1000);
-//             } //End of main else
-
-//         })
-// }
-
 exports.loadCart = (request, response) => {
     const logStatus = request.session.logStatus;
     const userName = request.session.userName;
     const user_email = String(request.session.userEmail.split('@')[0]);
-
-
 
     db.loadCartData(user_email)
         .then((cartData) => {
