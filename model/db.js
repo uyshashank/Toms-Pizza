@@ -189,6 +189,7 @@ exports.checkUserExistence = (userInfo) => {
 exports.insertUser = (userInfo) => {
     let collection_name = String(userInfo.user_email.split('@')[0]);
     let cartData = {
+        id:collection_name,
         pizza: [],
         burgers: [],
         beverages: []
@@ -289,14 +290,14 @@ exports.loadCategoryItem = () => {
 
 // Delete item from cart
 
-exports.deleteCartItem = (id, size, user) => {
-    let collection_name = String(user);
+exports.deleteCartItem = (id, size, user) => {    
+    let collection_name = String(user);    
     let category = String(id.split('0')[0]);
     let db = client.db('cart');
     
     if (category == 'pza') {
         db.collection(collection_name).updateOne({
-            "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
+            "id": collection_name
         }, {
             $pull: {
                 "pizza": {
@@ -305,12 +306,13 @@ exports.deleteCartItem = (id, size, user) => {
                 }
             }
         }, (err, res) => {
+            // console.log(res);
             if (err)
                 console.log(err);
         });
     } else if (category == 'bgr') {
         db.collection(collection_name).updateOne({
-            "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
+            "id": collection_name
         }, {
             $pull: {
                 "burgers": {
@@ -323,7 +325,7 @@ exports.deleteCartItem = (id, size, user) => {
         });
     } else if (category == 'bvg') {
         db.collection(collection_name).updateOne({
-            "_id": ObjectID('5cf94d5c412c8d05ac2e17eb')
+            "id": collection_name
         }, {
             $pull: {
                 "beverages": {

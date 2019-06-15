@@ -1,9 +1,18 @@
 let cookie = document.cookie;
+let username = cookie.split('@')[0];
+let check = cookie.split(username + "cart=")[1];
+let cartExist = false;
+
+if (check)
+    cartExist = false;
+else
+    cartExist = true;
+
 let id = window.location.pathname.split('find/')[1];
 let result;
 
-if (cookie) {
-    let data = JSON.parse(cookie.split('=')[1]);
+if (cartExist) {
+    let data = JSON.parse(cookie.split(username + 'cart=')[1]);
     let category = id.split('0')[0];
     if (category == 'pza') {
         result = data.pizza.find((item) => {

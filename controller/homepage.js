@@ -7,7 +7,7 @@ exports.HPDriver = (req, res) => {
     db.connect()
         .then((localclient) => {
             db.loadData(localclient)
-                .then((data) => {
+                .then((data) => {                    
                     res.render('homepage/home', {
                         data,
                         logStatus,
@@ -42,6 +42,7 @@ exports.postLogin = (req, res) => {
                         req.session.logStatus = "true";
                         req.session.userName = userData[0].user_fname;
                         req.session.userEmail = userData[0].user_email;
+                        res.setHeader('Set-Cookie', ["user=" + userData[0].user_email] + ";path=/");
                         res.redirect(referer);
                     } else {
                         res.send("Invalid password");
@@ -82,6 +83,7 @@ exports.postSignup = (req, res) => {
                         req.session.logStatus = 'true';
                         req.session.userName = userInfo.user_fname;
                         req.session.userEmail = userInfo.user_email;
+                        res.setHeader('Set-Cookie', ["user=" + userInfo.user_email] + ";path=/");
                         res.redirect('/');
                     })
                     .catch((err) => {
