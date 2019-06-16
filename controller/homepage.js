@@ -49,8 +49,21 @@ exports.postLogin = (req, res) => {
                         req.session.userName = userData[0].user_fname;
                         req.session.userEmail = userData[0].user_email;
                         let username = userData[0].user_email.split('@')[0];
-                        res.setHeader('Set-Cookie', ["username=" + username]);
-                        res.redirect(referer);
+                        db.loadCartData(username)
+                            .then((data) => {                                
+                                delete data[0]._id;
+                                delete data[0].id;
+                                data[0].email = userData[0].user_email;
+                                res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(data[0]) + ";path=/"]);
+                                res.cookie("id" , username);
+                                res.redirect(referer);
+                            })
+                            .catch((err) => {
+                                console.log("Error at postlogin\n");
+                                console.log(err);
+                                res.send("Sorry, Something went wrong!");
+                            })
+
                     } else {
                         res.send("Invalid password");
                     }
@@ -96,9 +109,9 @@ exports.postSignup = (req, res) => {
                             burgers: [],
                             beverages: [],
                             email: userInfo.user_email
-                        }                 
-                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";path=/"]);                        
-                        res.cookie("id", userID);                        
+                        }
+                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";path=/"]);
+                        res.cookie("id", userID);
                         res.redirect('/');
                     })
                     .catch((err) => {

@@ -17,8 +17,6 @@ let userID = getCookie('id');
 let cookie = getCookie(userID);
 let userCookie = JSON.parse(cookie); //Fetching out the user obj
 
-let username = userCookie.email.split('@')[0];
-
 let id = window.location.pathname.split('find/')[1];
 let result;
 let category = id.split('0')[0];

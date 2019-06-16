@@ -37,10 +37,10 @@
 
         <%if(logStatus == 'true'){%>
         <div class="accounts mr-3">
-            <img src="../../images/accountImg.png" width="48px">
+            <!-- <img src="../../images/accountImg.png" width="48px"> -->
             <p class="d-inline text-danger">Hi, <%=userName%></p>
             <a href="/cart">
-                | <i class="fas fa-shopping-cart text-primary"></i>
+                | <img src="../../images/itemsInYourCart.png" width="40px">
             </a>
             <a href="/logout" class="text-danger">
                 | Logout
@@ -69,32 +69,32 @@
     <!-- Secondary navbar -->
     <nav class="justify-content-center navbar navbar-light text-white nav2 sticky-top">
             <div class="accounts">                
-                <a href="/" class="mx-2 text-white">
+                <a href="/" class="mx-2 text-white itemLink">
                      <i class="fas fa-home text-white"></i>
                 </a>
                 <a href="/pizza" class="mx-2 text-white">
                     Pizza
                 </a>
-                <a href="/burgers" class="mx-2 text-white">
+                <a href="/burgers" class="mx-2 text-white itemLink">
                     Burgers
                 </a>
-                <a href="/beverages" class="mx-2 text-white">
+                <a href="/beverages" class="mx-2 text-white itemLink">
                     Beverages
                 </a>
                 <%if(logStatus == 'true'){%>
         <span class="dropdown d-md-none">
-            <a href="/beverages" class="mx-2 text-white dropdown-toggle" data-toggle="dropdown">
+            <a href="/beverages" class="mx-2 text-white dropdown-toggle itemLink" data-toggle="dropdown">
                 <img src="../../images/accountImg.png" width="48px" class="d-none d-lg-flex">
                 <i class="fas fa-shopping-cart"></i>
             </a>
-            <ul class="dropdown-menu pl-3">
-                <a href="/cart" class="">
-                    <li>
+            <ul class="dropdown-menu">
+                <a href="/cart">
+                    <li class="listItem">
                         View Cart
                     </li>
                 </a>
-                <a href="/logout" class="">
-                    <li>
+                <a href="/logout">
+                    <li class="listItem">
                         Logout
                     </li>
                 </a>
