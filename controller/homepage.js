@@ -15,7 +15,9 @@ exports.HPDriver = (req, res) => {
                     });
                 })
                 .catch((err) => {
-                    res.send("Something went wrong!");
+                    console.log("HPDriver function homepage.js");
+                    console.log(err);
+                    res.send("Error, See logs");
                 })
         })
 }
