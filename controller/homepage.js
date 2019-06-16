@@ -91,7 +91,7 @@ exports.postSignup = (req, res) => {
                             beverages: [],
                             email: userInfo.user_email
                         }
-                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";path=/;username=" + username]);
+                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";username=" + username +";path=/"]);
                         res.redirect('/');
                     })
                     .catch((err) => {
