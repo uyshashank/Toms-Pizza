@@ -25,7 +25,7 @@ function whatIsLogStatus() {
 
 
 function setCookie(itemID, WPB) {
-    let userID = getCookie('username');
+    let userID = getCookie('id');
     let cookie = getCookie(userID);
     if (cookie) {        
         let userCookie = JSON.parse(cookie); //Fetching out the user obj        
@@ -157,7 +157,7 @@ function deleteItem(data) {
 }
 
 function updateCookie(data) {
-    let userID = getCookie('username');
+    let userID = getCookie('id');
     let currentCookie = getCookie(userID);
     if (currentCookie) {        
         let cookie = JSON.parse(currentCookie);

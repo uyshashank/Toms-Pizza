@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const PORT = process.env.PORT || 3000;
+var cookieParser = require('cookie-parser')
 const store = new MongoDBStore({
     uri: 'mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/sessions',
     collection: 'sessions'
@@ -31,7 +32,7 @@ app.use(session({
     saveUninitialized: false,
     store: store
 }));
-
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // Get Routes

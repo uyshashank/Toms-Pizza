@@ -13,10 +13,8 @@ function getCookie(cname) {
     return "";
 }
 
-let userID = getCookie('username');
-
+let userID = getCookie('id');
 let cookie = getCookie(userID);
-console.log(cookie);
 let userCookie = JSON.parse(cookie); //Fetching out the user obj
 
 let username = userCookie.email.split('@')[0];

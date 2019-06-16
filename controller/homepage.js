@@ -85,13 +85,15 @@ exports.postSignup = (req, res) => {
                         req.session.userName = userInfo.user_fname;
                         req.session.userEmail = userInfo.user_email;
                         let username = userInfo.user_email.split('@')[0];
+                        let userID = username;
                         let usersCookieArray = {
                             pizza: [],
                             burgers: [],
                             beverages: [],
                             email: userInfo.user_email
-                        }
-                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";username=" + username +";path=/"]);
+                        }                 
+                        res.setHeader('Set-Cookie', [username + "=" + JSON.stringify(usersCookieArray) + ";path=/"]);                        
+                        res.cookie("id", userID);                        
                         res.redirect('/');
                     })
                     .catch((err) => {
