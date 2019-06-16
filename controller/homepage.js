@@ -22,10 +22,14 @@ exports.HPDriver = (req, res) => {
 // Rendering login page
 exports.getLogin = (req, res) => {
     referer = req.headers.referer;
-    let host = req.headers.host;
-    let route = referer.split(host)[1];
-    if (referer == null || undefined || route == '/signup' || route == '/login') {
+    if (referer == null || referer == undefined) {
         referer = '/';
+    } else {
+        let host = req.headers.host;
+        let route = referer.split(host)[1];
+        if (route == '/signup' || route == '/login') {
+            referer = '/';
+        }
     }
     res.render('userAccounts/loginPage');
 }
@@ -57,7 +61,6 @@ exports.postLogin = (req, res) => {
             res.send("Sorry! It's not you, it's us. Something went wrong on our side. Please try after sometime!");
             console.log("Something went wrong in postLogin function in homepage.js file\n" + err);
         })
-    // console.log(req);
 }
 // Logging out
 exports.logout = (req, res) => {

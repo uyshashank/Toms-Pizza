@@ -95,7 +95,7 @@ function addToCart(id) {
                     changeButton();
                 }
             } else {
-                alert('Please login first');
+                window.location.href = "/login";
             }
         });
 }
@@ -136,7 +136,7 @@ function activate(btn1, btn2, btn3) {
                 document.getElementById(btn2).classList.remove('active');
                 document.getElementById(btn3).classList.remove('active');
             } else {
-                alert('Please login first');
+                window.location.href = "/login";
             }
 
         });
@@ -144,7 +144,6 @@ function activate(btn1, btn2, btn3) {
 
 function deleteCartItem(id) {
     event.preventDefault();
-    console.dir(id);
     let ID = id.attributes[2].value;
     let PRICE = id.attributes[3].value;
     let SIZE = id.attributes[4].value;
@@ -164,10 +163,6 @@ function deleteItem(data, price, roll) {
     
     document.getElementById(row).style.display = "none";
     total.innerText = "₹".concat(String(prevTotal - parseInt(price)));
-    
-    // if(isCartEmpty() || false){
-        
-    // }    
 }
 
 function updateCookie(data) {

@@ -14,18 +14,21 @@ const store = new MongoDBStore({
 const HP = require('./controller/homepage');
 const IP = require('./controller/itempage');
 const CP = require('./controller/cartpage');
+const isAuth = require('./middleware/isLoggedin');
 
 // Middlewares
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");    
     next();
 });
-app.use(express.static(__dirname + '/public'));
+
 app.use(session({
     secret: 'Jai Hind',
     resave: false,
@@ -33,7 +36,7 @@ app.use(session({
     store: store
 }));
 app.use(cookieParser());
-app.set('view engine', 'ejs');
+
 
 // Get Routes
 app.get('/', HP.HPDriver);
@@ -42,12 +45,12 @@ app.get('/login', HP.getLogin);
 app.get('/logout', HP.logout);
 app.get('/signup', HP.getSignup);
 app.get('/logStatus', HP.whatIsLogStatus);
-app.get('/cart', HP.loadCart);
+app.get('/cart',isAuth.isLoggedIn, HP.loadCart);
 app.get('/pizza', HP.loadPizza);
 app.get('/burgers', HP.loadBurgers);
 app.get('/beverages', HP.loadBeverages);
-app.get('/checkout', HP.loadCheckoutpage);
-app.get('/orderPlaced', HP.loadFinalPage);
+app.get('/checkout',isAuth.isLoggedIn, HP.loadCheckoutpage);
+app.get('/orderPlaced',isAuth.isLoggedIn, HP.loadFinalPage);
 
 // Delete Routes
 app.delete('/delete/:id/:size', CP.deleteCartItem);
