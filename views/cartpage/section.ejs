@@ -16,14 +16,23 @@ for(let i=0;i<=cart.length -1 ; i++)
 
 for(let i=0;i<=cart.length -1 ; i++)
     cartTotal += parseInt(cart[i].price);
-
 %>
 
 <div class="container">
+    <% if(cart.length == 0){ %>
+    <div class="row text-center mt-5 mb-3" id="emptyCartWindow">
+        <div class="col-12">
+            <img src="../../images/emptyCart.png" alt="Your cart is empty" class="img-fluid">
+        </div>
+        <div class="col-12 text-center mt-3">
+            <a href="/" class="btn btn-warning text-light">Shop Now</a>
+        </div>
+    </div>
+    <%} else{%>
     <!-- Cart items -->
     <!-- Full screen row -->
-    <div class="row">
-        <div class="col-md-9">
+    <div class="row" id="cartItems">
+        <div class="col-md-8">
             <h4 class="text-center mt-3">
                 <img src="../../images/itemsInYourCart.png" class="img-fluid" style="width: 30px;">
                 <span class="heading">Items in your Cart</span>
@@ -32,69 +41,70 @@ for(let i=0;i<=cart.length -1 ; i++)
                 <!-- Complete item group in Middle -->
                 <div class="col-md-9">
                     <% for(let i=0;i <= cart.length - 1;i++){ %>
-                    <!-- Individual item row Start -->
-                    <a href="/find/<%= cart[i].id %>" style="text-decoration: none; color: black;" id="item<%=cart[i].id%>">
-                        <div class="row border my-3 bg-white">
-                            <div class="col-4 border-right imgDiv text-center">
-                                <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid cartItemImg">
-                            </div>
-                            <div class="col-8 mt-3">
-                                <div>
-                                    <h6> <%= (cart[i].name).toUpperCase() %> </h6>
-                                    <p class="para"> <%= cart[i].info %> </p>
-                                    <p class="d-inline"> <strong>Price: </strong>₹<%= cart[i].price %> </p>
-                                    <span class="float-right" onclick="deleteCartItem(this)" id="<%= cart[i].id %>"
-                                        price="<%= cart[i].price%>" size="<%= cart[i].size%>">
-                                        <i class="far fa-trash-alt" id="delIcon"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- Individual item row end -->
-                    <% }%>
+    <!-- Individual item row Start -->
+    <a href="/find/<%= cart[i].id %>" style="text-decoration: none; color: black;" id="item<%=cart[i].id%>">
+        <div class="row border my-3 bg-white">
+            <div class="col-4 border-right imgDiv text-center">
+                <img src="<%= imgPath[i] %>" alt="No-img" class="img-fluid cartItemImg">
+            </div>
+            <div class="col-8 mt-3">
+                <div>
+                    <h6> <%= (cart[i].name).toUpperCase() %> </h6>
+                    <p class="para"> <%= cart[i].info %> </p>
+                    <p class="d-inline"> <strong>Price: </strong>₹<%= cart[i].price %> </p>
+                    <span class="float-right" onclick="deleteCartItem(this)" id="<%= cart[i].id %>"
+                        price="<%= cart[i].price%>" size="<%= cart[i].size%>" roll="<%=i%>">
+                        <i class="far fa-trash-alt" id="delIcon"></i>
+                    </span>
                 </div>
             </div>
         </div>
+    </a>
+    <!-- Individual item row end -->
+    <% }%>
+</div>
+</div>
+</div>
 
-        <!-- Col for bill -->
-        <div class="col-md-3">
-            <table class="table">
-                <tr>
-                    <h4 class="text-center mt-3">
-                        <img src="../../images/rupee.jpg" class="img-fluid" style="width: 30px;">
-                        <span class="heading">Account Summary</span>
-                    </h4>
-                </tr>
-                <% for(let i = 0; i<=cart.length - 1;i++) {%>
-                <tr>
-                    <td>
-                        Item <%=i+1%>
-                    </td>
-                    <td>
-                        ₹<%=cart[i].price%>
-                    </td>
-                </tr>
-                <%}%>
+<!-- Col for bill -->
+<div class="col-md-4">
+    <table class="table">
+        <tr>
+            <h4 class="text-center mt-3">
+                <img src="../../images/rupee.jpg" class="img-fluid" style="width: 30px;">
+                <span class="heading">Account Summary</span>
+            </h4>
+        </tr>
+        <% for(let i = 0; i<=cart.length - 1;i++) {%>
+        <tr id="row<%=i%>">
+            <td>
+                <%= (cart[i].name).toUpperCase() %>
+            </td>
+            <td>
+                ₹<%=cart[i].price%>
+            </td>
+        </tr>
+        <%}%>
                 <tr>
                     <td>
                         <strong>Your Total</strong>
                     </td>
-                    <td>
+                    <td id="total">
                             ₹<%=cartTotal%>
-                </td>
-                </tr>
-                <tr class="w-100">
-                    <td colspan="3">
-                        <a class="btn btn-lg btn-warning text-light w-100" href="/checkout">
-                            Proceed to Checkout <i class="fas fa-sign-out-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr class="w-100">
-                    <td colspan="3" id="warningPlaceOrder"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
+        </td>
+        </tr>
+        <tr class="w-100">
+            <td colspan="3">
+                <a class="btn btn-lg btn-warning text-light w-100" href="/checkout">
+                    Proceed to Checkout <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </td>
+        </tr>
+        <tr class="w-100">
+            <td colspan="3" id="warningPlaceOrder"></td>
+        </tr>
+    </table>
+</div>
+</div>
+<% } %>
 </div>

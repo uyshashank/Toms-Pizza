@@ -159,14 +159,17 @@ exports.loadCart = (request, response) => {
             let cartPizza = cartData[0].pizza;
             let cartBurgers = cartData[0].burgers;
             let cartBeverages = cartData[0].beverages;
-
+            let cart = [];
             if (cartPizza.length == 0 && cartBurgers.length == 0 && cartBeverages.length == 0) {
-                response.send("No items in cart!")
+                response.render('cartpage/home', {
+                    logStatus,
+                    userName,
+                    cart
+                });
             } else {
 
                 if (cartPizza.length) {
-                    // fetch pizza
-                    let cart = [];
+                    // fetch pizza                    
                     lc.fetchPizza(cartPizza)
                         .then((pza_cart) => {
                             if (cartBurgers.length) {
@@ -247,12 +250,12 @@ exports.loadCart = (request, response) => {
                                     });
                                 })
                         } else {
-                            response.send("No items in cart!");
-                            // response.render('cartpage/home', {
-                            //     logStatus,
-                            //     userName,
-                            //     cart
-                            // });
+                            // response.send("No items in cart!");
+                            response.render('cartpage/home', {
+                                logStatus,
+                                userName,
+                                cart
+                            });
                         }
                     }
                 }

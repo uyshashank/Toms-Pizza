@@ -144,16 +144,30 @@ function activate(btn1, btn2, btn3) {
 
 function deleteCartItem(id) {
     event.preventDefault();
+    console.dir(id);
     let ID = id.attributes[2].value;
+    let PRICE = id.attributes[3].value;
     let SIZE = id.attributes[4].value;
-    sendDeleteReq(ID, SIZE);
-    deleteItem(id);
+    let ROLL = id.attributes[5].value;
+    sendDeleteReq(ID, SIZE);    
+    deleteItem(id, PRICE, ROLL);
 }
 
-function deleteItem(data) {
-    let id = 'item' + data.attributes[2].value;
+function deleteItem(data, price, roll) {
+    let id = 'item' + data.attributes[2].value;    
+    let row = "row"+roll;
+    let total = document.getElementById('total');
+    let prevTotal = parseInt(total.innerText.split('₹')[1]);
+    
     document.getElementById(id).style.display = "none";
     updateCookie(data);
+    
+    document.getElementById(row).style.display = "none";
+    total.innerText = "₹".concat(String(prevTotal - parseInt(price)));
+    
+    // if(isCartEmpty() || false){
+        
+    // }    
 }
 
 function updateCookie(data) {
@@ -189,7 +203,7 @@ function updateCookie(data) {
         }
         document.cookie = username + "=" + JSON.stringify(cookie) + ";path=/";
     } else {
-        alert("Cookie doesnt exist! script.js LN - 175 error");
+        alert("Cookie doesnt exist! script.js updatecookie fn error");
     }
 }
 
