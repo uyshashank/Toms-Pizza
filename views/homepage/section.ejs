@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container mt-2 p-0">
     <!-- HERO -->
-    <div class="heroDiv text-center">
+    <div class="heroDiv text-center w-100">
         <img src="../../images/2.png" class="img-fluid mt-3 hero d-md-none">
         <img class="mt-1 img-fluid d-none d-md-flex hero" src="../../images/superhero.png">
     </div>
+</div>
 
+<div class="container">
     <!-- Delicious Pizza Heading START -->
     <div class="pizza mt-3">
         <h4 class="text-center">
@@ -21,7 +23,7 @@
                 <div class="row">
                     <div class="col-6 py-2">
                         <a href="/find/<%= data[0].pizza[i].pr_id %>">
-                            <div class="text-center itemCard" name="<%=i%>"                                >
+                            <div class="text-center itemCard" name="<%=i%>">
 
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/pizza/<%= data[0].pizza[i].pr_img %>">
@@ -56,7 +58,7 @@
                     <!-- Pizza panel second row start -->
                     <div class="col-6 py-2">
                         <a href="/find/<%= data[0].pizza[i+1].pr_id %>">
-                            <div class="text-center itemCard" name="<%=i+1%>"                                >
+                            <div class="text-center itemCard" name="<%=i+1%>">
 
                                 <img class="my-2 cardImg cardImg<%=i+1%>"
                                     src="../../products/images/pizza/<%= data[0].pizza[i+1].pr_img %>">
@@ -107,7 +109,7 @@
                 <div class="row">
                     <div class="col-6 py-2">
                         <a href="/find/<%= data[1].burgers[i].pr_id %>">
-                            <div class="text-center itemCard" name="<%=4*(j)%>"                                >
+                            <div class="text-center itemCard" name="<%=4*(j)%>">
 
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/burgers/<%= data[1].burgers[i].pr_img %>">
@@ -124,7 +126,7 @@
                     <!-- burgers panel second row start -->
                     <div class="col-6 py-2">
                         <a href="/find/<%= data[1].burgers[i+1].pr_id %>">
-                            <div class="text-center itemCard" name="<%=4*(j+1)%>"                                >
+                            <div class="text-center itemCard" name="<%=4*(j+1)%>">
 
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/burgers/<%= data[1].burgers[i+1].pr_img %>">
@@ -161,7 +163,7 @@
                 <div class="row">
                     <div class="col-6 py-2">
                         <a href="/find/<%= data[2].beverages[i].pr_id %>">
-                            <div class="text-center itemCard" name="<%=4*(j)%>"                                >
+                            <div class="text-center itemCard" name="<%=4*(j)%>">
 
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/beverages/<%= data[2].beverages[i].pr_img %>">
@@ -179,7 +181,7 @@
                     <!-- Beverages panel second row start -->
                     <div class="col-6 py-2">
                         <a href="/find/<%= data[2].beverages[i+1].pr_id %>">
-                            <div class="text-center itemCard" name="<%=4*(j+1)%>"                                >
+                            <div class="text-center itemCard" name="<%=4*(j+1)%>">
 
                                 <img class="my-2 cardImg cardImg<%=i%>"
                                     src="../../products/images/beverages/<%= data[2].beverages[i+1].pr_img %>">
