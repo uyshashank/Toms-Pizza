@@ -37,22 +37,22 @@
 
         <%if(logStatus == 'true'){%>
         <div class="accounts mr-3">
-            <!-- <img src="../../images/accountImg.png" width="48px"> -->
+            <!--  <img src="../../images/accountImg.png" width="48px">  -->
             <p class="d-inline text-danger">Hi, <%=userName%></p>
             <a href="/cart">
                 | <img src="../../images/itemsInYourCart.png" width="40px">
             </a>
-            <a href="/logout" class="text-danger">
-                | Logout
+            <a href="/logout" class="btn text-white" style="background-color: orange">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </div>
         <%} else {%>
         <div class="accounts mr-3">
             <a href="/login" class="btn text-white" style="background-color: orange">
-                Login
+                <i class="fas fa-sign-in-alt"></i> Login
             </a>
             <a href="/signup" class="btn text-white" style="background-color: orange">
-                Signup
+                <i class="fas fa-user-plus"></i> Signup
             </a>
         </div>
         <%}%>
@@ -90,12 +90,12 @@
             <ul class="dropdown-menu">
                 <a href="/cart">
                     <li class="listItem">
-                        View Cart
+                        <i class="fas fa-cart-plus"></i> View Cart
                     </li>
                 </a>
                 <a href="/logout">
                     <li class="listItem">
-                        Logout
+                         <i class="fas fa-sign-out-alt ml-1"></i> Logout
                     </li>
                 </a>
             </ul>
