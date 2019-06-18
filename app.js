@@ -52,6 +52,7 @@ app.get('/beverages', HP.loadBeverages);
 app.get('/checkout',isAuth.isLoggedIn, HP.loadCheckoutpage);
 app.get('/orderPlaced',isAuth.isLoggedIn, HP.loadFinalPage);
 
+
 // Delete Routes
 app.delete('/delete/:id/:size', CP.deleteCartItem);
 app.delete('/delete/:id', CP.deleteCartItem);
@@ -61,6 +62,7 @@ app.delete('/delete/:id', CP.deleteCartItem);
 app.post('/login', HP.postLogin);
 app.post('/signup', HP.postSignup);
 app.post('/atc', HP.ATC_Handler);
+app.post('/emptyCart',CP.emptyCart);
 // Starting server
 app.listen(PORT, () => {
     console.log(`Server is up at ${PORT}`)

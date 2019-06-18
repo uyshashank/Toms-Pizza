@@ -1,14 +1,14 @@
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
 }
@@ -27,7 +27,7 @@ function whatIsLogStatus() {
 function setCookie(itemID, WPB) {
     let userID = getCookie('id');
     let cookie = getCookie(userID);
-    if (cookie) {        
+    if (cookie) {
         let userCookie = JSON.parse(cookie); //Fetching out the user obj        
         let username = userCookie.email.split('@')[0];
         userCookie = pushItems(itemID, WPB, userCookie);
@@ -100,7 +100,7 @@ function addToCart(id) {
         });
 }
 
-function sendATCrequest(itemID, pzaNum = 0) {    
+function sendATCrequest(itemID, pzaNum = 0) {
     let data = {};
     if (pzaNum == 0) {
         data = itemID;
@@ -148,19 +148,19 @@ function deleteCartItem(id) {
     let PRICE = id.attributes[3].value;
     let SIZE = id.attributes[4].value;
     let ROLL = id.attributes[5].value;
-    sendDeleteReq(ID, SIZE);    
+    sendDeleteReq(ID, SIZE);
     deleteItem(id, PRICE, ROLL);
 }
 
 function deleteItem(data, price, roll) {
-    let id = 'item' + data.attributes[2].value;    
-    let row = "row"+roll;
+    let id = 'item' + data.attributes[2].value;
+    let row = "row" + roll;
     let total = document.getElementById('total');
     let prevTotal = parseInt(total.innerText.split('₹')[1]);
-    
+
     document.getElementById(id).style.display = "none";
     updateCookie(data);
-    
+
     document.getElementById(row).style.display = "none";
     total.innerText = "₹".concat(String(prevTotal - parseInt(price)));
 }
@@ -168,7 +168,7 @@ function deleteItem(data, price, roll) {
 function updateCookie(data) {
     let userID = getCookie('id');
     let currentCookie = getCookie(userID);
-    if (currentCookie) {        
+    if (currentCookie) {
         let cookie = JSON.parse(currentCookie);
         let id = data.attributes[2].value;
         let price = data.attributes[4].value;
@@ -218,4 +218,50 @@ function sendDeleteReq(ID, SIZE) {
             'Content-Type': 'application/x-www-form-urlencoded',
         }
     });
+}
+
+function postPlaceOrderFunctions() {
+    let userID = getCookie('id');
+    let currentCookie = getCookie(userID);
+    let email = JSON.parse(currentCookie).email;
+    // Clear all the data from users cookie
+    clearCookie();
+    // Clear all the data from cart from db
+    emptyCart(email);
+}
+
+function clearCookie() {
+    let userID = getCookie('id');
+    let currentCookie = getCookie(userID);
+    let email = JSON.parse(currentCookie).email;
+    let username = email.split('@')[0];
+
+    if (currentCookie) {
+        let usersCookieArray = {
+            pizza: [],
+            burgers: [],
+            beverages: [],
+            email: email
+        }
+        document.cookie = username + "=" + JSON.stringify(usersCookieArray) + ";path=/";
+    }
+}
+
+function emptyCart(email) {
+    fetch('/emptyCart', {
+            method: "POST",
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: email
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }

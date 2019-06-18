@@ -9,3 +9,7 @@ exports.deleteCartItem = (req, res) => {
         "Message": "Success"
     });
 }
+exports.emptyCart = (req, res) => {
+    let email = req.body;
+    db.emptyCart(email);
+}

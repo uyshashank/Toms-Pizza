@@ -2,7 +2,7 @@ const {
     MongoClient,
     ObjectID
 } = require('mongodb');
-const url ='mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/'
+const url = 'mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/'
 let client;
 
 exports.connect = () => {
@@ -189,7 +189,7 @@ exports.checkUserExistence = (userInfo) => {
 exports.insertUser = (userInfo) => {
     let collection_name = String(userInfo.user_email.split('@')[0]);
     let cartData = {
-        id:collection_name,
+        id: collection_name,
         pizza: [],
         burgers: [],
         beverages: []
@@ -290,11 +290,11 @@ exports.loadCategoryItem = () => {
 
 // Delete item from cart
 
-exports.deleteCartItem = (id, size, user) => {    
-    let collection_name = String(user);    
+exports.deleteCartItem = (id, size, user) => {
+    let collection_name = String(user);
     let category = String(id.split('0')[0]);
     let db = client.db('cart');
-    
+
     if (category == 'pza') {
         db.collection(collection_name).updateOne({
             "id": collection_name
@@ -321,7 +321,7 @@ exports.deleteCartItem = (id, size, user) => {
             }
         }, (err, res) => {
             if (err)
-                console.log(err);            
+                console.log(err);
         });
     } else if (category == 'bvg') {
         db.collection(collection_name).updateOne({
@@ -337,6 +337,28 @@ exports.deleteCartItem = (id, size, user) => {
                 console.log(err);
         });
     }
+}
+exports.emptyCart = (emailObj) => {
+    const email = Object.keys(emailObj)[0].split('@')[0];
+    let collection_name = String(email);
+    let db = client.db('cart');
 
+    db.collection(collection_name).find().toArray()
+        .then((existingData)=>{
+            let objID = existingData[0].id;
+            db.collection(collection_name).deleteOne({id:objID})
+                .then((res)=>{
+                    db.collection(collection_name).insertOne({
+                        id: collection_name,
+                        pizza: [],
+                        burgers: [],
+                        beverages: []
+                    })
+                })
+                .catch(err => console.log(err));
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 
 }
