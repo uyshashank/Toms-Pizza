@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const PORT = process.env.PORT || 3000;
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const {check} = require("express-validator");
+
 const store = new MongoDBStore({
     uri: 'mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/sessions',
     collection: 'sessions'
@@ -60,7 +62,7 @@ app.delete('/delete/:id', CP.deleteCartItem);
 
 // Post Routes
 app.post('/login', HP.postLogin);
-app.post('/signup', HP.postSignup);
+app.post('/signup',check('email').isEmail(), HP.postSignup);
 app.post('/atc', HP.ATC_Handler);
 app.post('/emptyCart',CP.emptyCart);
 // Starting server

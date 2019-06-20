@@ -1,5 +1,7 @@
 const db = require('../model/db');
 const lc = require('./submodules');
+const { validationResult } = require("express-validator");
+
 let referer = '/';
 exports.HPDriver = (req, res) => {
     db.connect()
@@ -89,6 +91,10 @@ exports.getSignup = (req, res) => {
 // Handling signup page data 
 exports.postSignup = (req, res) => {
     let userInfo = {};
+    let errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.send(errors.array());
+    }
     userInfo.user_fname = req.body.fname;
     userInfo.user_lname = req.body.lname;
     userInfo.user_email = req.body.email;
