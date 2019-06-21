@@ -1,6 +1,8 @@
 const db = require('../model/db');
 const lc = require('./submodules');
-const { validationResult } = require("express-validator");
+const {
+    validationResult
+} = require("express-validator");
 
 let referer = '/';
 exports.HPDriver = (req, res) => {
@@ -35,15 +37,24 @@ exports.getLogin = (req, res) => {
             referer = '/';
         }
     }
-    res.render('userAccounts/loginPage');
+    let errorEmail, errorPassword;
+    res.render('userAccounts/loginPage', {
+        errorEmail,
+        errorPassword
+    });
 }
 // Handling login page data // Authenticating user
 exports.postLogin = (req, res) => {
+    let errorEmail, errorPassword;
     let userInfo = req.body;
     db.authenticateUser(userInfo)
         .then((userData) => {
             if (userData.length == 0) {
-                res.send("An account with this email id does not exist!");
+                let errorEmail = "Account with this email-id does not exist!";
+                res.render('userAccounts/loginPage', {
+                    errorEmail,
+                    errorPassword
+                });          
             } else {
                 if (userInfo.email == userData[0].user_email) {
                     if (userInfo.password == userData[0].user_password) {
@@ -67,10 +78,18 @@ exports.postLogin = (req, res) => {
                             })
 
                     } else {
-                        res.send("Invalid password");
+                        errorPassword = "Wrong Password";                        
+                        res.render('userAccounts/loginPage', {
+                            errorPassword,
+                            errorEmail
+                        });
                     }
                 } else {
-                    res.send("An account with this email id does not exist!");
+                    errorEmail = "An account with this email id does not exist!";                    
+                    res.render('userAccounts/loginPage', {
+                        errorEmail,
+                        errorPassword
+                    });
                 }
             }
         })
@@ -92,7 +111,7 @@ exports.getSignup = (req, res) => {
 exports.postSignup = (req, res) => {
     let userInfo = {};
     let errors = validationResult(req);
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         return res.send(errors.array());
     }
     userInfo.user_fname = req.body.fname;
@@ -125,7 +144,11 @@ exports.postSignup = (req, res) => {
                         console.log("Something went wrong in postSignup function in homepage.js file\n" + err);
                     });
             } else {
-                res.send("An account with this email id already exist!");
+                console.log("Post signup");
+                let error = "An account with this email id already exist.\n Please Login to continue!";
+                res.render("userAccounts/loginPage",{
+                    error
+                });
             }
         })
         .catch((err) => {

@@ -265,3 +265,13 @@ function emptyCart(email) {
             console.log(err);
         })
 }
+
+// Input on change for email after login error.
+function hidePassAlert(){
+    let alert = document.getElementById('wrongPassAlert');
+    alert.style.display = "none";
+}
+function hideEmailAlert(){
+    let alert = document.getElementById('wrongEmailAlert');
+    alert.style.display = "none";
+}
