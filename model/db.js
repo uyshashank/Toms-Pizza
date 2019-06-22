@@ -2,7 +2,7 @@ const {
     MongoClient,
     ObjectID
 } = require('mongodb');
-const url = 'mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/'
+const url = 'URL STRING GOES HERE'
 let client;
 
 exports.connect = () => {

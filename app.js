@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const {check} = require("express-validator");
 
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://shashank:mypass1997@tomspizza-5i4uk.mongodb.net/sessions',
+    uri: 'URL FOR SESSION DATABASE GOES HERE',
     collection: 'sessions'
 });
 
@@ -32,7 +32,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(session({
-    secret: 'Jai Hind',
+    secret: 'SECRET',
     resave: false,
     saveUninitialized: false,
     store: store
