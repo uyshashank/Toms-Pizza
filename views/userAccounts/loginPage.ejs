@@ -14,8 +14,8 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap" rel="stylesheet">
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="/css/login.css">
   <script src="../../js/script.js"></script>
@@ -25,10 +25,10 @@
   <form class="form-signin" action="/login" method="POST">
     <img class="mb-4" src="../../images/tomspizza_login_logo.jpg" alt="" width="200px" height="">
     <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
-    <input name="email" type="email" id="inputEmail" class="my-2 form-control" placeholder="Email address" required
-      autofocus onclick="hideEmailAlert();">
-    
-      <%if(errorEmail){%>
+    <input name="email" type="email" id="inputEmail" class="my-2 form-control" placeholder="Email address"
+      value="<%= (errorEmail || errorPassword)?email:'' %>" onclick="hideEmailAlert();">
+
+    <%if(errorEmail){%>
     <script>
       let inputEmail = document.getElementById('inputEmail');
       inputEmail.style.border = '1px solid red';

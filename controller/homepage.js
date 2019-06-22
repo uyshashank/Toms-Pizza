@@ -47,13 +47,15 @@ exports.getLogin = (req, res) => {
 exports.postLogin = (req, res) => {
     let errorEmail, errorPassword;
     let userInfo = req.body;
+    let email = userInfo.email;
     db.authenticateUser(userInfo)
         .then((userData) => {
             if (userData.length == 0) {
                 let errorEmail = "Account with this email-id does not exist!";
                 res.render('userAccounts/loginPage', {
                     errorEmail,
-                    errorPassword
+                    errorPassword,
+                    email
                 });          
             } else {
                 if (userInfo.email == userData[0].user_email) {
@@ -81,14 +83,16 @@ exports.postLogin = (req, res) => {
                         errorPassword = "Wrong Password";                        
                         res.render('userAccounts/loginPage', {
                             errorPassword,
-                            errorEmail
+                            errorEmail,
+                            email
                         });
                     }
                 } else {
                     errorEmail = "An account with this email id does not exist!";                    
                     res.render('userAccounts/loginPage', {
                         errorEmail,
-                        errorPassword
+                        errorPassword,
+                        email
                     });
                 }
             }
